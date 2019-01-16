@@ -16,7 +16,7 @@
     ?>
 </head>
 <body class="<?php Icarus_Page::printBodyColumnClass(); ?>">
-    <?php $this->need('component/navbar.php'); ?>
+    <?php Icarus_Widget::show('Navbar'); ?>
     <section class="section">
         <div class="container">
             <div class="columns">

@@ -1,4 +1,8 @@
-<?php if (!defined('__TYPECHO_ROOT_DIR__')) exit;
+<?php
+class Icarus_Widget_Donate
+{
+    public static function output()
+    {
 /*//const services = has_config('donate') ? get_config('donate') : []; ?>
 <?php if (!$services.length > 0) { ?>
 <div class="card">
@@ -14,4 +18,6 @@
         </div>
     </div>
 </div>
-<?php }*/ ?>
+<?php }*/
+    }
+}

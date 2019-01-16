@@ -3,7 +3,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 class Icarus_Widget
 {
     private static $_columnCount = 0; // 1 / 2 / 3
-    private static $_widgetList = array('Aside', 'Post');
+    private static $_widgetList = array('Aside', 'Post', 'Comments', 'Donate', 'Navbar', 'Share');
     private static $_widgetLoaded = array();
 
     public static $typechoWidget = null;
@@ -32,8 +32,6 @@ class Icarus_Widget
 
     public static function show($name)
     {
-        if (!in_array($name, self::$_widgetList))
-            return false;
         if (!self::load($name))
             return;
         $params = func_get_args();

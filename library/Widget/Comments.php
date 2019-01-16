@@ -1,5 +1,8 @@
-<?php 
-if (!defined('__TYPECHO_ROOT_DIR__')) exit;
+<?php
+class Icarus_Widget_Comments
+{
+    public static function output()
+    {
 /*if (!$isIndex && has_config('comment.type')) { ?>
 <div class="card">
     <div class="card-content">
@@ -7,4 +10,6 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
         <?php echo partial('comment/' + get_config('comment.type')) ?>
     </div>
 </div>
-<?php }*/ ?>
+<?php }*/
+    }
+}

@@ -22,7 +22,7 @@ class Icarus_Page
 
     public static function printHeader()
     {
-
+        
     }
 
     public static function printBodyColumnClass()
@@ -40,5 +40,11 @@ class Icarus_Page
             case 3:
                 echo 'is-8-tablet is-8-desktop is-6-widescreen';
         }
+    }
+
+    public static function config($form)
+    {
+        $form->packTitle('head');
+        $form->packInput('head_favicon', 'img/favicon.svg');
     }
 }

@@ -119,25 +119,24 @@ class Icarus_Widget_Post
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="<?php $this->post->permalink(); ?>#more"><?php _e('article.more'); ?></a>
+                <a class="button is-size-7 is-light" href="<?php $this->post->permalink(); ?>#more"><?php _IcTp('article.more'); ?></a>
                 </div>
             </div>
         </div>
-        <?php 
-        endif; 
-        $this->post->need('component/share.php');
-        ?>
+        <?php endif; ?>
+        <?php Icarus_Widget::show('Share'); ?>
         
     </div>
 </div>
 
-<?php 
-$this->post->need('component/donate.php');
+<?php  Icarus_Widget::show('Donate'); ?>
+
+<?php
 $prevPost = $this->getPrev();
 $nextPost = $this->getNext();
-?>
 
-<?php if (!$isIndex && ($prevPost || $nextPost)): ?>
+if (!$isIndex && ($prevPost || $nextPost)): 
+?>
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
         <?php if ($prevPost): ?>
@@ -162,6 +161,6 @@ $nextPost = $this->getNext();
 </div>
 <?php
 endif; 
-$this->post->need('component/comments.php');
+Icarus_Widget::show('Comments');
     }
 }

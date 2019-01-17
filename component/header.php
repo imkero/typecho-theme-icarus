@@ -9,7 +9,9 @@
     <title><?php Icarus_Page::printPageTitle(); ?></title>
     
     <?php 
-    Icarus_Assets::printThirdPartyCss('bulma');
+    Icarus_Assets::cdn('css', 'bulma', '0.7.2', 'css/bulma.css');
+    Icarus_Assets::cdn('css', 'icon');
+    Icarus_Assets::cdn('css', 'font', 'Ubuntu:400,600|Source+Code+Pro');
     Icarus_Assets::printThemeCss('style.css');
     $this->header(); 
     Icarus_Page::printHeader();

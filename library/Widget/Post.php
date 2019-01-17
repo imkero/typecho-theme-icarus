@@ -9,6 +9,19 @@ class Icarus_Widget_Post
         $this->post = $post;
     }
 
+    public static function config($form)
+    {
+        $form->packTitle('post');
+
+        $form->packRadio('post_toc', array('0', '1'), 0);
+    }
+
+    public static function tocEnabled()
+    {
+        // dummy
+        return true;
+    }
+
     public function getPrev()
     {
         $content = Typecho_Db::get()->fetchRow($this->post->select()->where('table.contents.created < ?', $this->post->created)

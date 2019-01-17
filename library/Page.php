@@ -5,7 +5,7 @@ class Icarus_Page
     public static function printPageTitle()
     {
         // todo: i18n
-        Icarus_Widget::$typechoWidget->archiveTitle(array(
+        Icarus_Util::$widget->archiveTitle(array(
             'category' => _t('分类 %s 下的文章'),
             'search' => _t('包含关键字 %s 的文章'),
             'tag' => _t('标签 %s 下的文章'),
@@ -22,7 +22,10 @@ class Icarus_Page
 
     public static function printHeader()
     {
-        
+        Icarus_Config::callback('head_favicon', function ($faviconUrl)
+        {
+            echo '<link rel="icon" href="', Icarus_Assets::getUrlForAssets($faviconUrl),'" />', PHP_EOL;
+        });
     }
 
     public static function printBodyColumnClass()
@@ -40,6 +43,11 @@ class Icarus_Page
             case 3:
                 echo 'is-8-tablet is-8-desktop is-6-widescreen';
         }
+    }
+
+    public static function is($archiveType, $archiveSlug = NULL)
+    {
+        return Icarus_Util::$widget->is($archiveType, $archiveSlug);
     }
 
     public static function config($form)

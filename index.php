@@ -13,9 +13,10 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 $this->need('component/header.php');
 
 Icarus_Widget::load('Post');
+$post = new Icarus_Widget_Post($this);
 while ($this->next()) 
 {
-	Icarus_Widget_Post::output($this);
+	$post->doOutput();
 }
 
 $this->need('component/paginator.php');

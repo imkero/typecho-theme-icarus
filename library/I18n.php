@@ -1,4 +1,5 @@
 <?php
+if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 class Icarus_I18n
 {
     private static $_instance = null;
@@ -54,7 +55,11 @@ class Icarus_I18n
     public function getTranslation($key)
     {
         if ($this->hasTranslation($key)) {
-            return $this->_data[$key];
+            $translation = $this->_data[$key];
+            if ($translation[0] == '@')
+                return $this->getTranslation(substr($translation, 1));
+            else
+                return $translation;
         } else {
             return null;
         }

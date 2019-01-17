@@ -1,4 +1,5 @@
 <?php
+if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 class Icarus_Widget_Navbar
 {
     public static function config($form)
@@ -8,56 +9,109 @@ class Icarus_Widget_Navbar
         $form->packInput('logo_text', '');
         $form->packInput('logo_img', '');
 
-        $form->showTitle(_IcT('setting.navbar.title'));
+        $form->packTitle('navbar');
+
+        $form->packTextarea('navbar_menu');
+        $form->packTextarea('navbar_icon');
+    }
+
+    private static function getMenu()
+    {
+        $result = array();
+        $menu = Icarus_Config::get('navbar_menu');
+        if (!empty($menu))
+        {
+            $menu = explode("\n", $menu);
+            foreach ($menu as $menuItem)
+            {
+                $menuItem = trim($menuItem);
+                if (!empty($menuItem))
+                {
+                    $menuItem = explode(',', $menuItem, 2);
+                    if (count($menuItem) == 2)
+                    {
+                        $result[] = $menuItem;
+                    }
+                }
+            }
+        }
+        return $result;
+    }
+
+    private static function getIcon()
+    {
+        $result = array();
+        $icon = Icarus_Config::get('navbar_icon');
+        if (!empty($icon))
+        {
+            $icon = explode("\n", $icon);
+            foreach ($icon as $iconItem)
+            {
+                $iconItem = trim($iconItem);
+                if (!empty($iconItem))
+                {
+                    $iconItem = explode(',', $iconItem, 3);
+                    if (count($iconItem) == 3)
+                    {
+                        $result[] = $iconItem;
+                    }
+                }
+            }
+        }
+        return $result;
+    }
+
+    private static function isCurLink($uri)
+    {
+        return Icarus_Util::request()->getRequestUri() == $uri;
     }
 
     public static function output()
     {
+        Icarus_Widget::load('Post');
 ?>
 <nav class="navbar navbar-main">
     <div class="container">
         <div class="navbar-brand is-flex-center">
-            <a class="navbar-item navbar-logo" href="<%- url_for('/') %>">
-            <% if (has_config('logo.text') && get_config('logo.text')) { %>
-                <%= get_config('logo.text') %>
-            <% } else { %>
-                <img src="<%- url_for(get_config('logo')) %>" alt="<%= get_config('title') %>" height="28">
-            <% } %>
+            <a class="navbar-item navbar-logo" href="<?php Icarus_Util::$options->index(); ?>">
+            <?php if (Icarus_Config::tryGet('logo_img', $logo_img)): ?>
+                <img src="<?php echo $logo_img; ?>" alt="<?php Icarus_Util::$options->title(); ?>" height="28">
+            <?php else: ?>
+                <?php echo Icarus_Config::get('logo_text', Icarus_Util::$options->title); ?>
+            <?php endif; ?>
             </a>
         </div>
         <div class="navbar-menu">
-            <% if (has_config('navbar.menu')) { %>
+            <?php if (Icarus_Config::has('navbar_menu')): $menu = self::getMenu(); ?>
             <div class="navbar-start">
-                <% for (let i in get_config('navbar.menu')) { let menu = get_config('navbar.menu')[i]; %>
-                <a class="navbar-item<% if (typeof(page.path) !== 'undefined' && is_same_link(menu, page.path)) { %> is-active<% } %>"
-                href="<%- url_for(menu) %>"><%= i %></a>
-                <% } %>
+                <?php foreach ($menu as $menuItem): ?>
+                <a class="navbar-item<?php if (self::isCurLink($menuItem[1])) { ?> is-active<?php } ?>"
+                href="<?php echo $menuItem[1]; ?>"><?php echo $menuItem[0]; ?></a>
+                <?php endforeach; ?>
             </div>
-            <% } %>
+            <?php endif; ?>
             <div class="navbar-end">
-                <% if (has_config('navbar.links')) { %>
-                    <% let links = get_config('navbar.links'); %>
-                    <% for (let name in links) {
-                            let link = links[name]; %>
-                    <a class="navbar-item" target="_blank" title="<%= name %>" href="<%= url_for(typeof(link) === 'string' ? link : link.url) %>">
-                        <% if (typeof(link) === 'string') { %>
-                        <%= name %>
-                        <% } else { %>
-                        <i class="<%= link.icon %>"></i>
-                        <% } %>
-                    </a>
-                    <% } %>
-                <% } %>
-                <% if (get_config('toc') === true && has_widget('toc') && (page.layout === 'page' || page.layout === 'post')) { %>
-                <a class="navbar-item is-hidden-tablet catalogue" title="<%= _p('widget.catalogue', Infinity) %>" href="javascript:;">
+            <?php if (Icarus_Config::has('navbar_icon')): $icon = self::getIcon(); ?>
+                <?php foreach ($icon as $iconItem): ?>
+                <a class="navbar-item" target="_blank" title="<?php echo $iconItem[0]; ?>" href="<?php echo $iconItem[2]; ?>">
+                    <?php if (empty($iconItem[1])): ?>
+                    <?php echo $iconItem[0]; ?>
+                    <?php else: ?>
+                    <i class="fab <?php echo $iconItem[1]; ?>"></i>
+                    <?php endif; ?>
+                </a>
+                <?php endforeach; ?>
+            <?php endif; ?>
+            <?php if (Icarus_Config::get('post_toc') == true && Icarus_Widget_Post::tocEnabled() && (Icarus_Page::is('archive') || Icarus_Page::is('single'))): ?>
+                <a class="navbar-item is-hidden-tablet catalogue" title="<?php _IcTp('general.catalog'); ?>" href="javascript:;">
                     <i class="fas fa-list-ul"></i>
                 </a>
-                <% } %>
-                <% if (has_config('search.type')) { %>
-                <a class="navbar-item search" title="<%= __('search.search') %>" href="javascript:;">
+            <?php endif; ?>
+            <?php if (Icarus_Widget::enabled('Search')): ?>
+                <a class="navbar-item search" title="<?php _IcTp('search.search'); ?>" href="javascript:;">
                     <i class="fas fa-search"></i>
                 </a>
-                <% } %>
+            <?php endif; ?>
             </div>
         </div>
     </div>

@@ -25,6 +25,7 @@ function themeConfig($form)
     require __ICARUS_ROOT__ . 'library/I18n.php';
     require __ICARUS_ROOT__ . 'library/Widget.php';
     require __ICARUS_ROOT__ . 'library/Config.php';
+    require __ICARUS_ROOT__ . 'library/Page.php';
 
     Icarus_Util::init();
     Icarus_I18n::init();
@@ -36,6 +37,7 @@ function themeConfig($form)
     $iForm->showTitle(_IcT('setting.general.title'));
     $iForm->makeHtml(sprintf(_IcT('setting.general.desc'), Icarus_Util::$options->theme));
 
+    Icarus_Page::config($form);
     Icarus_Widget_Navbar::config($iForm);
 }
 

@@ -4,13 +4,20 @@ class Icarus_Widget
 {
     private static $_columnCount = 1; // 1 / 2 / 3
     private static $_widgetList = array('Aside', 'Post', 'Comments', 'Donate', 'Navbar', 'Share', 'Search', 'Profile');
-    private static $_widgetAsideList = array('Aside', 'Post', 'Comments', 'Donate', 'Navbar', 'Share', 'Search', 'Profile');
     private static $_widgetLoaded = array();
+
+    public static $widgetLeft = null;
+    public static $widgetRight = null;
     
     public static function init()
     {
-        // dummy
-        self::$_columnCount = 3;
+        self::$_columnCount = 1;
+        
+        self::load('Aside');
+        self::$widgetLeft = new Icarus_Widget_Aside(false);
+        self::$widgetRight = new Icarus_Widget_Aside(true);
+        self::$_columnCount += self::$widgetLeft->count() > 0;
+        self::$_columnCount += self::$widgetRight->count() > 0;
     }
 
     public static function getColumnCount()

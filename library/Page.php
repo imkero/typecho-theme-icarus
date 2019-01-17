@@ -38,10 +38,13 @@ class Icarus_Page
         switch (Icarus_Widget::getColumnCount()) {
             case 1:
                 echo 'is-12';
+                break;
             case 2:
                 echo 'is-8-tablet is-8-desktop is-8-widescreen';
+                break;
             case 3:
                 echo 'is-8-tablet is-8-desktop is-6-widescreen';
+                break;
         }
     }
 

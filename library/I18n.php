@@ -2,7 +2,7 @@
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 class Icarus_I18n
 {
-    private static $_instance = null;
+    private static $_instance = NULL;
 
     private $_lang;
     private $_data;
@@ -61,7 +61,7 @@ class Icarus_I18n
             else
                 return $translation;
         } else {
-            return null;
+            return NULL;
         }
     }
 

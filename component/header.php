@@ -19,8 +19,7 @@
 </head>
 <body class="<?php Icarus_Page::printBodyColumnClass(); ?>">
     <?php Icarus_Widget::show('Navbar'); ?>
-    <section class="section">
-        <div class="container">
-            <div class="columns">
-                <div class="column <?php Icarus_Page::printContainerColumnClass(); ?> has-order-2 column-main">
+    <div class="container after-nav">
+        <div class="columns">
+            <main class="column <?php Icarus_Page::printContainerColumnClass(); ?> has-order-2 column-main">
     

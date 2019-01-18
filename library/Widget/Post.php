@@ -18,8 +18,7 @@ class Icarus_Widget_Post
 
     public static function tocEnabled()
     {
-        // dummy
-        return true;
+        return Icarus_Widget::enabled('Toc');
     }
 
     public function getPrev()
@@ -54,7 +53,7 @@ class Icarus_Widget_Post
     public function hasThumbnail()
     {
         // dummy
-        return true;
+        return TRUE;
     }
 
     public function getThumbnail()

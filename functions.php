@@ -27,12 +27,13 @@ function themeConfig($form)
     require __ICARUS_ROOT__ . 'library/Assets.php';
     require __ICARUS_ROOT__ . 'library/Config.php';
 
-    Icarus_Util::init(null);
+    Icarus_Util::init(NULL);
     Icarus_I18n::init();
 
     Icarus_Widget::load('Navbar');
     Icarus_Widget::load('Post');
     Icarus_Widget::load('Search');
+    Icarus_Widget::load('Aside');
 
     $iForm = new Icarus_Config($form);
 
@@ -43,6 +44,7 @@ function themeConfig($form)
     Icarus_Widget_Navbar::config($iForm);
     Icarus_Widget_Post::config($iForm);
     Icarus_Widget_Search::config($iForm);
+    Icarus_Widget_Aside::config($iForm);
     Icarus_Assets::config($iForm);
 }
 

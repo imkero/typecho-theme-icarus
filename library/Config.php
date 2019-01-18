@@ -9,6 +9,7 @@ class Icarus_Config
     public function __construct($form)
     {
         $this->_form = $form;
+        $this->makeHtml('<style>.icarus-config-title{margin-top: 2em; margin-bottom: 0.2em; border-bottom: 1px solid #D9D9D6; padding-bottom: 0.2em;} .icarus-description{color: #999; font-size: .92857em;}</style>');
     }
 
     public static function prefixKey($key)
@@ -25,66 +26,87 @@ class Icarus_Config
         }
         else
         {
-            return null;
+            return NULL;
         }
+    }
+
+    private static function cfgNameToI18n($cfgName)
+    {
+        $dashIndex = strpos($cfgName, '_');
+        if ($dashIndex !== FALSE)
+        {
+            $cfgName[$dashIndex] = '.';
+        }
+        return 'setting.' . $cfgName;
     }
 
     public function makeHtml($html)
     {
-        $this->_form->addItem((new Typecho_Widget_Helper_Layout())->html($html));
+        $layout = new Typecho_Widget_Helper_Layout();
+        $layout->setTagName(NULL);
+        $layout->html($html);
+        $this->_form->addItem($layout);
     }
 
-    public function showBlock($content)
+    public function showDesc($content)
     {
-        $this->makeHtml('<div>' . $content . '</div>');
+        $layout = new Typecho_Widget_Helper_Layout();
+        $layout->setTagName('div');
+        $layout->html($content);
+        $layout->class = 'icarus-description';
+        $this->_form->addItem($layout);
     }
 
     public function showTitle($title)
     {
-        $this->makeHtml('<h2>' . $title . '</h2>');
+        $layout = new Typecho_Widget_Helper_Layout();
+        $layout->setTagName('h2');
+        $layout->html($title);
+        $layout->class = 'icarus-config-title';
+        $this->_form->addItem($layout);
     }
 
     public function packTitle($name)
     {
-        $langStr = 'setting.' . $name;
+        $langStr = self::cfgNameToI18n($name);
         $this->showTitle(_IcT($langStr . '.title'));
         if (Icarus_I18n::has($langStr . '.desc'))
         {
-            $this->showBlock(_IcT($langStr . '.desc'));
+            $this->showDesc(_IcT($langStr . '.desc'));
         }
     }
 
-    public function makeInput($name, $title, $desc, $default = null)
+    public function makeInput($name, $title, $desc, $default = NULL)
     {
         $this->_form->addInput(new Typecho_Widget_Helper_Form_Element_Text(
-            self::prefixKey($name), null, $default, 
+            self::prefixKey($name), NULL, $default, 
             $title, 
             $desc
         ));
     }
 
-    public function packInput($name, $default = null)
+    public function packInput($name, $default = NULL)
     {
-        $langStr = 'setting.' . str_replace('_', '.', $name);
-        self::makeInput($name, _IcT($langStr . '.title'), self::optionalDesc($langStr), $default);
+        $langStr = self::cfgNameToI18n($name);
+        $this->makeInput($name, _IcT($langStr . '.title'), self::optionalDesc($langStr), $default);
     }
 
-    public function makeTextarea($name, $title, $desc, $default = null)
+    public function makeTextarea($name, $title, $desc, $default = NULL)
     {
         $this->_form->addInput(new Typecho_Widget_Helper_Form_Element_Textarea(
-            self::prefixKey($name), null, $default, 
+            self::prefixKey($name), NULL, $default, 
             $title, 
             $desc
         ));
     }
 
-    public function packTextarea($name, $default = null)
+    public function packTextarea($name, $default = NULL)
     {
-        $langStr = 'setting.' . str_replace('_', '.', $name);
-        self::makeTextarea($name, _IcT($langStr . '.title'), self::optionalDesc($langStr), $default);
+        $langStr = self::cfgNameToI18n($name);
+        $this->makeTextarea($name, _IcT($langStr . '.title'), self::optionalDesc($langStr), $default);
     }
 
-    public function makeRadio($name, $title, $desc, array $options, $default = null)
+    public function makeRadio($name, $title, $desc, array $options, $default = NULL)
     {
         $this->_form->addInput(new Typecho_Widget_Helper_Form_Element_Radio(
             self::prefixKey($name), $options, $default, 
@@ -93,15 +115,15 @@ class Icarus_Config
         ));
     }
 
-    public function packRadio($name, array $options, $default = null)
+    public function packRadio($name, array $options, $default = NULL)
     {
-        $langStr = 'setting.' . str_replace('_', '.', $name);
+        $langStr = self::cfgNameToI18n($name);
         $optionsReal = array();
         foreach ($options as $option)
         {
             $optionsReal[$option] = _IcT($langStr . '.options.' . $option);
         }
-        self::makeRadio($name, _IcT($langStr . '.title'), self::optionalDesc($langStr), $optionsReal, $default);
+        $this->makeRadio($name, _IcT($langStr . '.title'), self::optionalDesc($langStr), $optionsReal, $default);
     }
 
     private static function configPreFilter($key)
@@ -109,7 +131,7 @@ class Icarus_Config
         return self::prefixKey($key);
     }
 
-    public static function get($key, $default = null)
+    public static function get($key, $default = NULL)
     {
         return self::tryGet($key, $result) ? $result: $default;
     }

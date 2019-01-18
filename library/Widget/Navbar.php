@@ -4,61 +4,20 @@ class Icarus_Widget_Navbar
 {
     public static function config($form)
     {
-        $form->packTitle('logo');
-
-        $form->packInput('logo_text', '');
-        $form->packInput('logo_img', '');
-
         $form->packTitle('navbar');
 
-        $form->packTextarea('navbar_menu');
-        $form->packTextarea('navbar_icon');
+        $form->packTextarea('navbar_menu', "首页,/\n归档,/archive.html");
+        $form->packTextarea('navbar_icon', "Download on GitHub,fa-github,http://github.com/ppoffice/hexo-theme-icarus");
     }
 
     private static function getMenu()
     {
-        $result = array();
-        $menu = Icarus_Config::get('navbar_menu');
-        if (!empty($menu))
-        {
-            $menu = explode("\n", $menu);
-            foreach ($menu as $menuItem)
-            {
-                $menuItem = trim($menuItem);
-                if (!empty($menuItem))
-                {
-                    $menuItem = explode(',', $menuItem, 2);
-                    if (count($menuItem) == 2)
-                    {
-                        $result[] = $menuItem;
-                    }
-                }
-            }
-        }
-        return $result;
+        return Icarus_Util::parseMultilineData(Icarus_Config::get('navbar_menu'), 2);
     }
 
     private static function getIcon()
     {
-        $result = array();
-        $icon = Icarus_Config::get('navbar_icon');
-        if (!empty($icon))
-        {
-            $icon = explode("\n", $icon);
-            foreach ($icon as $iconItem)
-            {
-                $iconItem = trim($iconItem);
-                if (!empty($iconItem))
-                {
-                    $iconItem = explode(',', $iconItem, 3);
-                    if (count($iconItem) == 3)
-                    {
-                        $result[] = $iconItem;
-                    }
-                }
-            }
-        }
-        return $result;
+        return Icarus_Util::parseMultilineData(Icarus_Config::get('navbar_icon'), 3);
     }
 
     private static function isCurLink($uri)
@@ -75,7 +34,7 @@ class Icarus_Widget_Navbar
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="<?php Icarus_Util::$options->index(); ?>">
             <?php if (Icarus_Config::tryGet('logo_img', $logo_img)): ?>
-                <img src="<?php echo $logo_img; ?>" alt="<?php Icarus_Util::$options->title(); ?>" height="28">
+                <img src="<?php echo Icarus_Assets::getUrlForAssets($logo_img); ?>" alt="<?php Icarus_Util::$options->title(); ?>" height="28">
             <?php else: ?>
                 <?php echo Icarus_Config::get('logo_text', Icarus_Util::$options->title); ?>
             <?php endif; ?>
@@ -102,7 +61,7 @@ class Icarus_Widget_Navbar
                 </a>
                 <?php endforeach; ?>
             <?php endif; ?>
-            <?php if (Icarus_Config::get('post_toc') == true && Icarus_Widget_Post::tocEnabled() && (Icarus_Page::is('archive') || Icarus_Page::is('single'))): ?>
+            <?php if (Icarus_Config::get('post_toc', false) && Icarus_Widget_Post::tocEnabled() && (Icarus_Page::is('archive') || Icarus_Page::is('single'))): ?>
                 <a class="navbar-item is-hidden-tablet catalogue" title="<?php _IcTp('general.catalog'); ?>" href="javascript:;">
                     <i class="fas fa-list-ul"></i>
                 </a>

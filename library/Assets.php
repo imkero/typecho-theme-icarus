@@ -72,7 +72,7 @@ class Icarus_Assets
         echo '<link rel="stylesheet" href="', $cssUrl, '" />', PHP_EOL;
     }
 
-    public static function printJsTag($jsUrl, $defer = false)
+    public static function printJsTag($jsUrl, $defer = FALSE)
     {
         if ($defer)
             echo '<script src="', $jsUrl, '"></script>', PHP_EOL;
@@ -85,7 +85,7 @@ class Icarus_Assets
         self::printCssTag(self::getUrlForAssets("css/" . $name));
     }
 
-    public static function printThemeJs($name, $defer = false)
+    public static function printThemeJs($name, $defer = FALSE)
     {
         self::printJsTag(self::getUrlForAssets("js/" . $name), $defer);
     }

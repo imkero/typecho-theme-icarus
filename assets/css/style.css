@@ -126,6 +126,9 @@ img.thumbnail {
 .footer .field .button {
   background: transparent;
 }
+.after-nav {
+  padding: 3rem 1.5rem;
+}
 .widget .media {
   border: none;
 }

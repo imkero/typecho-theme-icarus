@@ -57,5 +57,10 @@ class Icarus_Page
     {
         $form->packTitle('head');
         $form->packInput('head_favicon', 'img/favicon.svg');
+
+        $form->packTitle('logo');
+
+        $form->packInput('logo_text', '');
+        $form->packInput('logo_img', 'img/logo.svg');
     }
 }

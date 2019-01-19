@@ -8,7 +8,7 @@ class Icarus_Widget_Aside
     
     private $_widgets = array();
     
-    private static $_asideWidgets = array('Profile', 'Archive');
+    private static $_asideWidgets = array('Profile', 'Archive', 'Category');
 
     public function __construct($position)
     {
@@ -102,7 +102,7 @@ foreach ($this->_widgets as $widgetName) {
 }
 if (!$this->_position): 
 ?>
-    <div class="column-right-shadow is-hidden-widescreen <?php $this->printStickyByPos(self::RIGHT); ?>">
+    <div class="column-right-shadow is-hidden-widescreen <?php $this->printStickyClassByPos(self::RIGHT); ?>">
 <?php
 foreach (Icarus_Widget::$widgetRight->_widgets as $widgetName) {
     Icarus_Widget::show($widgetName);

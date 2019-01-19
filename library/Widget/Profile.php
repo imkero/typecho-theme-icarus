@@ -66,7 +66,7 @@ class Icarus_Widget_Profile
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        <?php _IcTp('general.post'); ?>
+                        <?php _IcTp('general.posts'); ?>
                     </p>
                     <p class="title has-text-weight-normal">
                         <?php echo Icarus_Util::stat()->publishedPostsNum(); ?>
@@ -76,7 +76,7 @@ class Icarus_Widget_Profile
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        <?php _IcTp('general.category'); ?>
+                        <?php _IcTp('general.categories'); ?>
                     </p>
                     <p class="title has-text-weight-normal">
                         <?php echo Icarus_Util::stat()->categoriesNum(); ?>

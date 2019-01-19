@@ -3,7 +3,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 class Icarus_Widget
 {
     private static $_columnCount = 1; // 1 / 2 / 3
-    private static $_widgetList = array('Aside', 'Post', 'Comments', 'Donate', 'Navbar', 'Share', 'Search', 'Profile', 'Archive');
+    private static $_widgetList = array('Aside', 'Post', 'Comments', 'Donate', 'Navbar', 'Share', 'Search', 'Profile', 'Archive', 'Category');
     private static $_widgetLoaded = array();
 
     public static $widgetLeft = NULL;

@@ -177,6 +177,10 @@ return array(
         'archive' => array(
             'title' => '归档 Widget',
             'desc' => '显示按月份列出的归档链接。',
-        )
+        ),
+        'category' => array(
+            'title' => '分类 Widget',
+            'desc' => '列出各个分类及其子分类。',
+        ),
     ),
 );

@@ -1,6 +1,6 @@
 <?php
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
-class Icarus_Widget_Archive
+class Icarus_Module_Archive
 {
     public static function output()
     {
@@ -36,6 +36,6 @@ Typecho_Widget::widget('Widget_Contents_Post_Date', 'type=month&format=' . _IcT(
     
     public static function config($form)
     {
-        Icarus_Widget_Aside::basicConfig($form, 'archive', '1', 'right', '1');
+        Icarus_Aside::basicConfig($form, 'archive', '1', 'right', '1');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
-class Icarus_Widget_Navbar
+class Icarus_Module_Navbar
 {
     public static function config($form)
     {
@@ -27,7 +27,7 @@ class Icarus_Widget_Navbar
 
     public static function output()
     {
-        Icarus_Widget::load('Post');
+        Icarus_Module::load('Post');
 ?>
 <nav class="navbar navbar-main">
     <div class="container">
@@ -61,12 +61,12 @@ class Icarus_Widget_Navbar
                 </a>
                 <?php endforeach; ?>
             <?php endif; ?>
-            <?php if (Icarus_Config::get('post_toc', false) && Icarus_Widget_Post::tocEnabled() && (Icarus_Page::is('archive') || Icarus_Page::is('single'))): ?>
+            <?php if (Icarus_Config::get('post_toc', false) && Icarus_Module_Post::tocEnabled() && (Icarus_Page::is('archive') || Icarus_Page::is('single'))): ?>
                 <a class="navbar-item is-hidden-tablet catalogue" title="<?php _IcTp('general.catalog'); ?>" href="javascript:;">
                     <i class="fas fa-list-ul"></i>
                 </a>
             <?php endif; ?>
-            <?php if (Icarus_Widget::enabled('Search')): ?>
+            <?php if (Icarus_Module::enabled('Search')): ?>
                 <a class="navbar-item search" title="<?php _IcTp('search.search'); ?>" href="javascript:;">
                     <i class="fas fa-search"></i>
                 </a>

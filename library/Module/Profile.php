@@ -1,9 +1,9 @@
 <?php
-class Icarus_Widget_Profile
+class Icarus_Module_Profile
 {
     public static function config($form)
     {
-        Icarus_Widget_Aside::basicConfig($form, 'profile', '1', 'left', '0');
+        Icarus_Aside::basicConfig($form, 'profile', '1', 'left', '0');
         $form->packInput('profile_author', Typecho_Widget::widget('Widget_User')->screenName);
         $form->packInput('profile_author_title', '');
         $form->packInput('profile_location', '');

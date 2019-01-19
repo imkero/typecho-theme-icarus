@@ -85,7 +85,7 @@ return array(
                 ),
             ),
         ),
-        'widget' => array(
+        'aside_common' => array(
             'enable' => array(
                 'title' => 'Widget 开关',
                 'desc' => '只有启用的 Widget 才会显示在页面中。',

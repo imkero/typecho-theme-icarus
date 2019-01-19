@@ -1,6 +1,6 @@
 <?php
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
-class Icarus_Widget_Category
+class Icarus_Module_Category
 {
     public static function output()
     {
@@ -22,7 +22,7 @@ Typecho_Widget::widget('Widget_Metas_Category_List')->listCategories('wrapTag=ul
     
     public static function config($form)
     {
-        Icarus_Widget_Aside::basicConfig($form, 'category', '1', 'left', '1');
+        Icarus_Aside::basicConfig($form, 'category', '1', 'left', '1');
     }
 }
 

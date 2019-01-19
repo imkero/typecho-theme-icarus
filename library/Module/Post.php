@@ -1,6 +1,6 @@
 <?php
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
-class Icarus_Widget_Post
+class Icarus_Module_Post
 {
     private $post;
 
@@ -18,7 +18,7 @@ class Icarus_Widget_Post
 
     public static function tocEnabled()
     {
-        return Icarus_Widget::enabled('Toc');
+        return Icarus_Module::enabled('Toc');
     }
 
     public function getPrev()
@@ -64,7 +64,7 @@ class Icarus_Widget_Post
 
     public static function output($post)
     {
-        return (new Icarus_Widget_Post($post))->doOutput();
+        return (new Icarus_Module_Post($post))->doOutput();
     }
 
     public function doOutput()
@@ -136,12 +136,12 @@ class Icarus_Widget_Post
             </div>
         </div>
         <?php endif; ?>
-        <?php Icarus_Widget::show('Share'); ?>
+        <?php Icarus_Module::show('Share'); ?>
         
     </div>
 </div>
 
-<?php  Icarus_Widget::show('Donate'); ?>
+<?php  Icarus_Module::show('Donate'); ?>
 
 <?php
 $prevPost = $this->getPrev();
@@ -173,6 +173,6 @@ if (!$isIndex && ($prevPost || $nextPost)):
 </div>
 <?php
 endif; 
-Icarus_Widget::show('Comments');
+Icarus_Module::show('Comments');
     }
 }

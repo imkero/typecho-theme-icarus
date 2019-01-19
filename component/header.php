@@ -18,7 +18,7 @@
     ?>
 </head>
 <body class="<?php Icarus_Page::printBodyColumnClass(); ?>">
-    <?php Icarus_Widget::show('Navbar'); ?>
+    <?php Icarus_Module::show('Navbar'); ?>
     <div class="container after-nav">
         <div class="columns">
             <main class="column <?php Icarus_Page::printContainerColumnClass(); ?> has-order-2 column-main">

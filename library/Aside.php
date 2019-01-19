@@ -1,14 +1,30 @@
 <?php
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
-class Icarus_Widget_Aside
+class Icarus_Aside
 {
     const LEFT = 0;
     const RIGHT = 1;
+
     private $_position;
-    
     private $_widgets = array();
     
     private static $_asideWidgets = array('Profile', 'Archive', 'Category');
+
+    public static $asideLeft = NULL;
+    public static $asideRight = NULL;
+
+    private static $_columnCount = 1; // 1 or 2 or 3
+    
+    public static function init()
+    {
+        self::$_columnCount = 1;
+        
+        self::$asideLeft = new self(self::LEFT);
+        self::$asideRight = new self(self::RIGHT);
+
+        self::$_columnCount += self::$asideLeft->count() > 0;
+        self::$_columnCount += self::$asideRight->count() > 0;
+    }
 
     public function __construct($position)
     {
@@ -16,7 +32,7 @@ class Icarus_Widget_Aside
         $seqMap = array();
         foreach (self::$_asideWidgets as $widgetName)
         {
-            if (Icarus_Widget::enabled($widgetName) && self::getWidgetPosition($widgetName) == $position)
+            if (Icarus_Module::enabled($widgetName) && self::getWidgetPosition($widgetName) == $position)
             {
                 $this->_widgets[] = $widgetName;
                 $seqMap[$widgetName] = self::getWidgetSeq($widgetName);
@@ -32,6 +48,11 @@ class Icarus_Widget_Aside
             }
             return $seqA < $seqB ? -1 : 1;
         });
+    }
+
+    public static function getColumnCount()
+    {
+        return self::$_columnCount;
     }
 
     public function clear()
@@ -51,7 +72,7 @@ class Icarus_Widget_Aside
 
     public static function printSideColumnClass()
     {
-        switch (Icarus_Widget::getColumnCount()) {
+        switch (self::getColumnCount()) {
             case 2:
                 echo 'is-4-tablet is-4-desktop is-4-widescreen';
                 break;
@@ -62,7 +83,7 @@ class Icarus_Widget_Aside
     }
     public function printVisibilityClass()
     {
-        if (Icarus_Widget::getColumnCount() === 3 && $this->_position == self::RIGHT) {
+        if (self::getColumnCount() === 3 && $this->_position == self::RIGHT) {
             echo 'is-hidden-touch is-hidden-desktop-only';
         }
     }
@@ -98,14 +119,14 @@ class Icarus_Widget_Aside
 <aside class="column <?php $this->printSideColumnClass() ?> <?php $this->printVisibilityClass(); ?> <?php $this->printOrderClass(); ?> column-<?php $this->printPosition(); ?> <?php $this->printStickyClass(); ?>">
 <?php
 foreach ($this->_widgets as $widgetName) {
-    Icarus_Widget::show($widgetName);
+    Icarus_Module::show($widgetName);
 }
-if (!$this->_position): 
+if ($this->_position == self::LEFT): 
 ?>
     <div class="column-right-shadow is-hidden-widescreen <?php $this->printStickyClassByPos(self::RIGHT); ?>">
 <?php
-foreach (Icarus_Widget::$widgetRight->_widgets as $widgetName) {
-    Icarus_Widget::show($widgetName);
+foreach (self::$asideRight->_widgets as $widgetName) {
+    Icarus_Module::show($widgetName);
 }
 ?>
     </div>
@@ -125,30 +146,30 @@ foreach (Icarus_Widget::$widgetRight->_widgets as $widgetName) {
 
         $form->makeRadio(
             $widgetCfgName . '_enable', 
-            _IcT('setting.widget.enable.title'), 
-            _IcT('setting.widget.enable.desc'), 
+            _IcT('setting.aside_common.enable.title'), 
+            _IcT('setting.aside_common.enable.desc'), 
             array(
-                '0' => _IcT('setting.widget.enable.options.0'),
-                '1' => _IcT('setting.widget.enable.options.1'),
+                '0' => _IcT('setting.aside_common.enable.options.0'),
+                '1' => _IcT('setting.aside_common.enable.options.1'),
             ),
             $defaultEnable
         );
 
         $form->makeRadio(
             $widgetCfgName . '_position', 
-            _IcT('setting.widget.position.title'), 
-            _IcT('setting.widget.position.desc'), 
+            _IcT('setting.aside_common.position.title'), 
+            _IcT('setting.aside_common.position.desc'), 
             array(
-                'left' => _IcT('setting.widget.position.options.left'),
-                'right' => _IcT('setting.widget.position.options.right'),
+                'left' => _IcT('setting.aside_common.position.options.left'),
+                'right' => _IcT('setting.aside_common.position.options.right'),
             ),
             $defaultPosition
         );
 
         $form->makeInput(
             $widgetCfgName . '_seq', 
-            _IcT('setting.widget.seq.title'), 
-            _IcT('setting.widget.seq.desc'),
+            _IcT('setting.aside_common.seq.title'), 
+            _IcT('setting.aside_common.seq.desc'),
             $defaultIndex
         );
     }
@@ -162,11 +183,5 @@ foreach (Icarus_Widget::$widgetRight->_widgets as $widgetName) {
 
         $form->packRadio('aside_left_post_hide', array('0', '1'), '0');
         $form->packRadio('aside_right_post_hide', array('0', '1'), '0');
-
-        foreach (self::$_asideWidgets as $widgetName)
-        {
-            Icarus_Widget::load($widgetName);
-            call_user_func(array('Icarus_Widget_' . $widgetName, 'config'), $form);
-        }
     }
 }

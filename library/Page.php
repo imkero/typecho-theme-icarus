@@ -30,12 +30,12 @@ class Icarus_Page
 
     public static function printBodyColumnClass()
     {
-        echo 'is-', Icarus_Widget::getColumnCount(), '-column';
+        echo 'is-', Icarus_Aside::getColumnCount(), '-column';
     }
 
     public static function printContainerColumnClass()
     {
-        switch (Icarus_Widget::getColumnCount()) {
+        switch (Icarus_Aside::getColumnCount()) {
             case 1:
                 echo 'is-12';
                 break;

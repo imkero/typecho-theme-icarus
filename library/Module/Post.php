@@ -52,14 +52,12 @@ class Icarus_Module_Post
 
     public function hasThumbnail()
     {
-        // dummy
-        return TRUE;
+        return Icarus_Util::hasThumbnail($this->post);
     }
 
     public function getThumbnail()
     {
-        // dummy
-        return 'http://ppoffice.github.io/hexo-theme-icarus/gallery/preview.png';
+        return Icarus_Util::getThumbnail($this->post);
     }
 
     public static function output($post)
@@ -69,18 +67,18 @@ class Icarus_Module_Post
 
     public function doOutput()
     {
-        $isIndex = $this->post->is('index');
+        $isPost = $this->post->is('single');
 ?>
 <div class="card">
     <?php if ($this->hasThumbnail()): ?>
     <div class="card-image">
-        <?php echo $isIndex ? ('<a href="' . $this->post->permalink . '"') : '<span '; ?> class="image is-7by1">
+        <?php echo !$isPost ? ('<a href="' . $this->post->permalink . '"') : '<span '; ?> class="image is-7by1">
             <img class="thumbnail" src="<?php echo $this->getThumbnail(); ?>" alt="<?php $this->post->title(); ?>">
-        <?php echo $isIndex ? '</a>' : '</span>' ?>
+        <?php echo !$isPost ? '</a>' : '</span>' ?>
     </div>
     <?php endif; ?>
     <div class="card-content article">
-        <?php if (!$this->post->is('single')): ?>
+        <?php if (!$isPost): ?>
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
                 <time class="level-item has-text-grey" datetime="<?php $this->post->date('c'); ?>"><?php $this->post->date(); ?></time>
@@ -102,7 +100,7 @@ class Icarus_Module_Post
         </div>
         <?php endif; ?>
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            <?php if ($isIndex): ?>
+            <?php if (!$isPost): ?>
                 <a class="has-link-black-ter" href="<?php $this->post->permalink(); ?>"><?php $this->post->title(); ?></a>
             <?php else: ?>
                 <?php $this->post->title(); ?>
@@ -111,7 +109,7 @@ class Icarus_Module_Post
         <div class="content">
             <?php $this->post->content(); ?>
         </div>
-        <?php if (!$isIndex && $this->post->tags): ?>
+        <?php if ($isPost && $this->post->tags): ?>
         <div class="level is-size-7 is-uppercase">
             <div class="level-start">
                 <div class="level-item">
@@ -127,7 +125,7 @@ class Icarus_Module_Post
             </div>
         </div>
         <?php endif; ?>
-        <?php if ($isIndex): ?>
+        <?php if (!$isPost): ?>
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
@@ -147,28 +145,26 @@ class Icarus_Module_Post
 $prevPost = $this->getPrev();
 $nextPost = $this->getNext();
 
-if (!$isIndex && ($prevPost || $nextPost)): 
+if ($isPost && ($prevPost || $nextPost)): 
 ?>
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
-        <?php if ($prevPost): ?>
         <div class="level-start">
+        <?php if ($prevPost): ?>
             <a class="level level-item has-link-grey article-nav-prev" href="<?php echo $prevPost['permalink']; ?>">
                 <i class="level-item fas fa-chevron-left"></i>
                 <span class="level-item"><?php echo $prevPost['title']; ?></span>
             </a>
+        <?php endif;?> 
         </div>
-        <?php 
-        endif; 
-        if ($nextPost):
-        ?>
         <div class="level-end">
-            <a class="level level-item has-link-grey article-nav-next" href=<?php echo $nextPost['permalink']; ?>">
+        <?php if ($nextPost): ?>
+            <a class="level level-item has-link-grey article-nav-next" href="<?php echo $nextPost['permalink']; ?>">
                 <span class="level-item"><?php echo $nextPost['title']; ?></span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
-        </div>
         <?php endif; ?>
+        </div>
     </div>
 </div>
 <?php

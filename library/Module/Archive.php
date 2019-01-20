@@ -2,6 +2,11 @@
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 class Icarus_Module_Archive
 {
+    public static function config($form)
+    {
+        Icarus_Aside::basicConfig($form, 'archive', '1', 'right', '1');
+    }
+
     public static function output()
     {
 ?>
@@ -9,7 +14,7 @@ class Icarus_Module_Archive
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            <?php _IcTp('general.archive'); ?>
+            <?php _IcTp('general.archives'); ?>
         </h3>
         <ul class="menu-list">
 <?php 
@@ -32,10 +37,5 @@ Typecho_Widget::widget('Widget_Contents_Post_Date', 'type=month&format=' . _IcT(
     </div>
 </div>
 <?php
-    }
-    
-    public static function config($form)
-    {
-        Icarus_Aside::basicConfig($form, 'archive', '1', 'right', '1');
     }
 }

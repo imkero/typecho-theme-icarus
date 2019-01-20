@@ -6,13 +6,13 @@ return array(
         'disable' => '不启用',
         'catalog' => '目录',
         'posts' => '文章',
-        'post' => '文章',
-        'category' => '分类',
         'categories' => '分类',
-        'archive' => '归档',
+        'archives' => '归档',
+        'tags' => '标签',
+        'toc' => '文章目录',
     ),
     'search' => array(
-        'search' => '搜索',
+        'title' => '搜索',
     ),
     'article' => array(
         'more' => '阅读更多',
@@ -23,10 +23,16 @@ return array(
     'archive' => array(
         'date_format' => 'Y年 n月',
     ),
+    'link' => array(
+        'title' => '链接',
+    ),
+    'recentpost' => array(
+        'title' => '最新文章',
+    ),
     'setting' => array(
         'general' => array(
             'title' => '基本',
-            'desc' => '<ul><li>资源文件的相对路径是指相对于 ' . __TYPECHO_THEME_DIR__ . '/%s/assets/ 目录的相对路径。</li></ul>',
+            'desc' => '<ul><li>资源文件的相对路径是指相对于 <code>' . __TYPECHO_THEME_DIR__ . '/%s/assets/</code> 目录的相对路径。</li></ul>',
         ),
         'head' => array(
             'title' => '页头',
@@ -39,11 +45,11 @@ return array(
             'title' => '导航栏',
             'menu' => array(
                 'title' => '菜单',
-                'desc' => '导航栏菜单链接。一行一个，格式：链接文字,链接URL',
+                'desc' => '导航栏菜单链接。一行一个，格式：<code>链接文字,链接URL</code>',
             ),
-            'icon' => array(
+            'icons' => array(
                 'title' => '图标',
-                'desc' => '导航栏右上角图标链接。一行一个，格式：链接文字,链接图标,链接URL<br />链接图标请参考 <a href="https://fontawesome.com/icons?d=gallery&m=free" rel="noopener noreferrer" target="_blank">Font Awesome Icons</a>',
+                'desc' => '导航栏右上角图标链接。一行一个，格式：<code>链接文字,链接图标,链接URL</code><br />链接图标请参考 <a href="https://fontawesome.com/icons?d=gallery&m=free" rel="noopener noreferrer" target="_blank">Font Awesome Icons</a>',
             ),
         ),
         'logo' => array(
@@ -134,9 +140,9 @@ return array(
                 'title' => '「关注我」按钮链接',
                 'desc' => '留空则不显示「关注我」按钮。',
             ),
-            'social_link' => array(
+            'social_links' => array(
                 'title' => '社交网络链接',
-                'desc' => '留空则不显示。水平排列，一行一个，格式：链接文字,链接图标,链接URL<br />链接图标请参考 <a href="https://fontawesome.com/icons?d=gallery&m=free" rel="noopener noreferrer" target="_blank">Font Awesome Icons</a>',
+                'desc' => '留空则不显示。水平排列，一行一个，格式：<code>链接文字,链接图标,链接URL</code><br />链接图标请参考 <a href="https://fontawesome.com/icons?d=gallery&m=free" rel="noopener noreferrer" target="_blank">Font Awesome Icons</a>',
             ),
         ),
         'aside' => array(
@@ -181,6 +187,33 @@ return array(
         'category' => array(
             'title' => '分类 Widget',
             'desc' => '列出各个分类及其子分类。',
+        ),
+        'link' => array(
+            'title' => '链接 Widget',
+            'desc' => '显示指定链接。',
+            'links' => array(
+                'title' => '链接',
+                'desc' => '显示在 Widget 中的链接。一行一个，格式：<code>链接文字,链接URL</code>',
+            ),
+        ),
+        'recentpost' => array(
+            'title' => '最新文章 Widget',
+            'desc' => '列出指定数目的最新文章。',
+            'limit' => array(
+                'title' => '数目',
+                'desc' => '最多显示的文章数。留空或非正数则默认为显示5篇。',
+            ),
+        ),
+        'tag' => array(
+            'title' => '标签 Widget',
+            'limit' => array(
+                'title' => '数目',
+                'desc' => '最多显示的标签数。为0则显示所有标签。负数或为空默认为显示20个。',
+            ),
+        ),
+        'toc' => array(
+            'title' => 'TOC Widget',
+            'desc' => 'Table of Contents：文章目录',
         ),
     ),
 );

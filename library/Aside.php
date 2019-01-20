@@ -8,7 +8,7 @@ class Icarus_Aside
     private $_position;
     private $_widgets = array();
     
-    private static $_asideWidgets = array('Profile', 'Archive', 'Category');
+    private static $_asideWidgets = array('Profile', 'Category', 'Link', 'RecentPost', 'Archive', 'Tag', 'Toc');
 
     public static $asideLeft = NULL;
     public static $asideRight = NULL;
@@ -100,7 +100,7 @@ class Icarus_Aside
 
     public function printPosition()
     {
-        echo $this->_position ? 'right' : 'left';
+        echo ($this->_position == self::RIGHT) ? 'right' : 'left';
     }
 
     public static function printStickyClassByPos($position)

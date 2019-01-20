@@ -67,4 +67,19 @@ class Icarus_Util
         }
         return $avatar;
     }
+    public static function hasThumbnail($post)
+    {
+        // dummy
+        return FALSE;
+    }
+
+    public static function getThumbnail($post)
+    {
+        if (self::hasThumbnail($post)) {
+            // dummy
+            return 'http://ppoffice.github.io/hexo-theme-icarus/gallery/preview.png';
+        } else {
+            return Icarus_Assets::getUrlForAssets('img/thumbnail.svg');
+        }
+    }
 }

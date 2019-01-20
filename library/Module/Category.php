@@ -2,6 +2,11 @@
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 class Icarus_Module_Category
 {
+    public static function config($form)
+    {
+        Icarus_Aside::basicConfig($form, 'category', '1', 'left', '3');
+    }
+
     public static function output()
     {
 ?>
@@ -18,11 +23,6 @@ Typecho_Widget::widget('Widget_Metas_Category_List')->listCategories('wrapTag=ul
     </div>
 </div>
 <?php
-    }
-    
-    public static function config($form)
-    {
-        Icarus_Aside::basicConfig($form, 'category', '1', 'left', '1');
     }
 }
 

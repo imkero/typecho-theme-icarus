@@ -126,9 +126,6 @@ img.thumbnail {
 .footer .field .button {
   background: transparent;
 }
-.after-nav {
-  padding: 3rem 1.5rem;
-}
 .widget .media {
   border: none;
 }
@@ -153,7 +150,7 @@ img.thumbnail {
   box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 .post-navigation {
-  justify-content: space-around;
+  padding: 0 1em;
 }
 .post-navigation .level-item {
   margin-bottom: 0;
@@ -334,6 +331,9 @@ img.thumbnail {
 }
 .has-link-black-ter {
   color: #242424 !important;
+}
+.tag.is-grey {
+  background: #e7e7e7;
 }
 @media screen and (max-width: 768px) {
   .has-text-centered-mobile {

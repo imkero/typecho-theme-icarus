@@ -10,7 +10,7 @@ class Icarus_Module_Profile
         $form->packInput('profile_avatar', 'img/avatar.png');
         $form->packInput('profile_gravatar', '');
         $form->packInput('profile_follow_link', 'https://github.com/');
-        $form->packTextarea('profile_social_link', "GitHub,fa-github,https://github.com/\nTwitter,fa-twitter,https://twitter.com/,Facebook,fa-facebook,https://facebook.com/");
+        $form->packTextarea('profile_social_links', "GitHub,fa-github,https://github.com/\nTwitter,fa-twitter,https://twitter.com/,Facebook,fa-facebook,https://facebook.com/");
     }
 
     private static function printAvatarUrl()
@@ -29,7 +29,7 @@ class Icarus_Module_Profile
 
     private static function getSocialLinks()
     {
-        return Icarus_Util::parseMultilineData(Icarus_Config::get('profile_social_link'), 3);
+        return Icarus_Util::parseMultilineData(Icarus_Config::get('profile_social_links'), 3);
     }
 
     public static function output()
@@ -93,13 +93,13 @@ class Icarus_Module_Profile
         <?php $socialLinks = self::getSocialLinks(); ?>
         <?php if (!empty($socialLinks)): ?>
         <div class="level is-mobile">
-            <?php foreach ($socialLinks as $socialLink): ?>
+            <?php foreach ($socialLinks as $socialLinkItem): ?>
             <a class="level-item button is-white is-marginless" target="_blank"
-                title="<?php echo $socialLink[0]; ?>" href="<?php echo $socialLink[2]; ?>">
-                <?php if (empty($socialLink[1])): ?>
-                <?php echo $socialLink[0]; ?>
+                title="<?php echo $socialLinkItem[0]; ?>" href="<?php echo $socialLinkItem[2]; ?>">
+                <?php if (empty($socialLinkItem[1])): ?>
+                <?php echo $socialLinkItem[0]; ?>
                 <?php else: ?>
-                <i class="fab <?php echo $socialLink[1]; ?>"></i>
+                <i class="fab <?php echo $socialLinkItem[1]; ?>"></i>
                 <?php endif; ?>
             </a>
             <?php endforeach; ?>

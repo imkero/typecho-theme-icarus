@@ -7,7 +7,7 @@ class Icarus_Module_Navbar
         $form->packTitle('navbar');
 
         $form->packTextarea('navbar_menu', "首页,/\n归档,/archive.html");
-        $form->packTextarea('navbar_icon', "Download on GitHub,fa-github,http://github.com/ppoffice/hexo-theme-icarus");
+        $form->packTextarea('navbar_icons', "Download on GitHub,fa-github,http://github.com/ppoffice/hexo-theme-icarus");
     }
 
     private static function getMenu()
@@ -15,9 +15,9 @@ class Icarus_Module_Navbar
         return Icarus_Util::parseMultilineData(Icarus_Config::get('navbar_menu'), 2);
     }
 
-    private static function getIcon()
+    private static function getIcons()
     {
-        return Icarus_Util::parseMultilineData(Icarus_Config::get('navbar_icon'), 3);
+        return Icarus_Util::parseMultilineData(Icarus_Config::get('navbar_icons'), 3);
     }
 
     private static function isCurLink($uri)
@@ -50,8 +50,8 @@ class Icarus_Module_Navbar
             </div>
             <?php endif; ?>
             <div class="navbar-end">
-            <?php if (Icarus_Config::has('navbar_icon')): $icon = self::getIcon(); ?>
-                <?php foreach ($icon as $iconItem): ?>
+            <?php if (Icarus_Config::has('navbar_icon')): $icons = self::getIcons(); ?>
+                <?php foreach ($icons as $iconItem): ?>
                 <a class="navbar-item" target="_blank" title="<?php echo $iconItem[0]; ?>" href="<?php echo $iconItem[2]; ?>">
                     <?php if (empty($iconItem[1])): ?>
                     <?php echo $iconItem[0]; ?>
@@ -67,7 +67,7 @@ class Icarus_Module_Navbar
                 </a>
             <?php endif; ?>
             <?php if (Icarus_Module::enabled('Search')): ?>
-                <a class="navbar-item search" title="<?php _IcTp('search.search'); ?>" href="javascript:;">
+                <a class="navbar-item search" title="<?php _IcTp('search.title'); ?>" href="javascript:;">
                     <i class="fas fa-search"></i>
                 </a>
             <?php endif; ?>

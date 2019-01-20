@@ -2,7 +2,7 @@
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 class Icarus_Module
 {
-    private static $_moduleList = array('Post', 'Navbar', 'Profile', 'Archive', 'Category', 'Share', 'Search', 'Comments', 'Donate');
+    private static $_moduleList = array('Post', 'Navbar', 'Profile', 'Archive', 'Category', 'Link', 'RecentPost', 'Tag', 'Toc', 'Share', 'Search', 'Comments', 'Donate');
     private static $_moduleLoaded = array();
 
     public static function load($name)

@@ -7,6 +7,8 @@ class Icarus_Assets
         'assets' => array(
             'jsdelivr' => array(
                 'bulma' => 'https://cdn.jsdelivr.net/npm/bulma@{version}/{file}',
+                'jquery' => 'https://cdn.jsdelivr.net/npm/jquery@{version}/{file}',
+                'moment' => 'https://cdn.jsdelivr.net/npm/moment@{version}/{file}',
             ),
         ),
         'font' => array(
@@ -75,9 +77,9 @@ class Icarus_Assets
     public static function printJsTag($jsUrl, $defer = FALSE)
     {
         if ($defer)
-            echo '<script src="', $jsUrl, '"></script>', PHP_EOL;
-        else
             echo '<script src="', $jsUrl, '" defer></script>', PHP_EOL;
+        else
+            echo '<script src="', $jsUrl, '"></script>', PHP_EOL;
     }
 
     public static function printThemeCss($name)

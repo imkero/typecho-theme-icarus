@@ -51,6 +51,19 @@
             </div>
         </div>
     </footer>
-    <!-- scripts -->
+<?php
+// jQuery
+Icarus_Assets::cdn('js', 'jquery', '3.3.1', 'dist/jquery.min.js');
+
+// Moment.js
+Icarus_Assets::cdn('js', 'moment', '2.22.2', 'min/moment-with-locales.min.js');
+echo '<script>moment.locale("', str_replace('_', '-', Icarus_Util::$options->lang), '");</script>', PHP_EOL;
+
+// Plugins
+
+
+// Theme Script
+Icarus_Assets::printThemeJs('main.js');
+?>
 </body>
 </html>

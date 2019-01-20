@@ -19,6 +19,7 @@ return array(
     ),
     'profile' => array(
         'follow' => '关注我',
+        'run_days' => '天数',
     ),
     'archive' => array(
         'date_format' => 'Y年 n月',
@@ -32,7 +33,11 @@ return array(
     'setting' => array(
         'general' => array(
             'title' => '基本',
-            'desc' => '<ul><li>资源文件的相对路径是指相对于 <code>' . __TYPECHO_THEME_DIR__ . '/%s/assets/</code> 目录的相对路径。</li></ul>',
+            'desc' => '<ul><li>资源文件的相对路径是指相对于 <code> %s/assets/</code> 目录的相对路径。</li></ul>',
+            'install_time' => array(
+                'title' => '站点建立日期',
+                'desc' => '用于计算站点运行时间，显示 Copyright 年份等。格式：2018-12-31',
+            ), 
         ),
         'head' => array(
             'title' => '页头',
@@ -198,11 +203,7 @@ return array(
         ),
         'recentpost' => array(
             'title' => '最新文章 Widget',
-            'desc' => '列出指定数目的最新文章。',
-            'limit' => array(
-                'title' => '数目',
-                'desc' => '最多显示的文章数。留空或非正数则默认为显示5篇。',
-            ),
+            'desc' => '列出指定数目的最新文章。文章数目请在 <a href="./options-reading.php">阅读设置</a> 中指定。',
         ),
         'tag' => array(
             'title' => '标签 Widget',
@@ -214,6 +215,13 @@ return array(
         'toc' => array(
             'title' => 'TOC Widget',
             'desc' => 'Table of Contents：文章目录',
+        ),
+        'footer' => array(
+            'title' => '页脚',
+            'links' => array(
+                'title' => '链接',
+                'desc' => '显示在页脚的链接。一行一个，格式：<code>链接文字,链接图标,链接URL</code>',
+            ),
         ),
     ),
 );

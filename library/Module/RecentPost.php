@@ -5,13 +5,11 @@ class Icarus_Module_RecentPost
     public static function config($form)
     {
         Icarus_Aside::basicConfig($form, 'recentpost', '1', 'right', '1');
-
-        $form->packInput('recentpost_limit', '5');
     }
 
     private static function getLimit()
     {
-        $limit = intval(Icarus_Config::get('recentpost_limit', 5));
+        $limit = Icarus_Util::$options->postsListSize;
         if ($limit <= 0)
             $limit = 5;
         return $limit;

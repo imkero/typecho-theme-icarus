@@ -82,4 +82,15 @@ class Icarus_Util
             return Icarus_Assets::getUrlForAssets('img/thumbnail.svg');
         }
     }
+
+    public static function getSiteInstallTime()
+    {
+        $time = FALSE;
+        $typechoCfgFile = __TYPECHO_ROOT_DIR__ . '/config.inc.php';
+        if (file_exists($typechoCfgFile))
+        {
+            $time = @filemtime($typechoCfgFile);
+        }
+        return $time === FALSE ? time() : $time;
+    }
 }

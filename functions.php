@@ -33,9 +33,8 @@ function themeConfig($form)
 
     $iForm = new Icarus_Config($form);
 
-    $iForm->showTitle(_IcT('setting.general.title'));
-    $iForm->makeHtml(sprintf(_IcT('setting.general.desc'), Icarus_Util::$options->theme));
-
+    
+    Icarus_Config::config($iForm);
     Icarus_Page::config($iForm);
     Icarus_Aside::config($iForm);
     Icarus_Module::config($iForm);

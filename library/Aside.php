@@ -166,11 +166,12 @@ foreach (self::$asideRight->_widgets as $widgetName) {
             $defaultPosition
         );
 
-        $form->makeInput(
+        $form->makeIntInput(
             $widgetCfgName . '_seq', 
             _IcT('setting.aside_common.seq.title'), 
             _IcT('setting.aside_common.seq.desc'),
-            $defaultIndex
+            $defaultIndex,
+            'w-20'
         );
     }
 

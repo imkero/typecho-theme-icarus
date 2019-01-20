@@ -4,9 +4,9 @@ class Icarus_Module_Profile
     public static function config($form)
     {
         Icarus_Aside::basicConfig($form, 'profile', '1', 'left', '0');
-        $form->packInput('profile_author', Typecho_Widget::widget('Widget_User')->screenName);
-        $form->packInput('profile_author_title', '');
-        $form->packInput('profile_location', '');
+        $form->packInput('profile_author', 'Your name', 'w-40');
+        $form->packInput('profile_author_title', 'Your title', 'w-40');
+        $form->packInput('profile_location', 'Your location', 'w-40');
         $form->packInput('profile_avatar', 'img/avatar.png');
         $form->packInput('profile_gravatar', '');
         $form->packInput('profile_follow_link', 'https://github.com/');
@@ -56,7 +56,7 @@ class Icarus_Module_Profile
                     <?php if (Icarus_Config::tryGet('profile_location', $profileLocation)): ?>
                     <p class="is-size-6 is-flex is-flex-center has-text-grey">
                         <i class="fas fa-map-marker-alt has-mr-7"></i>
-                        <span><?php echo $profileLocation ?></span>
+                        <span><?php echo $profileLocation; ?></span>
                     </p>
                     <?php endif; ?>
                 </div>
@@ -80,6 +80,16 @@ class Icarus_Module_Profile
                     </p>
                     <p class="title has-text-weight-normal">
                         <?php echo Icarus_Util::stat()->categoriesNum(); ?>
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        <?php _IcTp('profile.run_days'); ?>
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        <?php echo Icarus_Config::getSiteRunDays(); ?>
                     </p>
                 </div>
             </div>

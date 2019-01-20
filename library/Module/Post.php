@@ -12,8 +12,6 @@ class Icarus_Module_Post
     public static function config($form)
     {
         $form->packTitle('post');
-
-        $form->packRadio('post_toc', array('0', '1'), 0);
     }
 
     public static function tocEnabled()
@@ -67,7 +65,7 @@ class Icarus_Module_Post
 
     public function doOutput()
     {
-        $isPost = $this->post->is('single');
+        $isPost = $this->post->is('post');
 ?>
 <div class="card">
     <?php if ($this->hasThumbnail()): ?>
@@ -135,17 +133,15 @@ class Icarus_Module_Post
         </div>
         <?php endif; ?>
         <?php Icarus_Module::show('Share'); ?>
-        
     </div>
 </div>
+<?php  
+Icarus_Module::show('Donate');
 
-<?php  Icarus_Module::show('Donate'); ?>
-
-<?php
-$prevPost = $this->getPrev();
-$nextPost = $this->getNext();
-
-if ($isPost && ($prevPost || $nextPost)): 
+if ($isPost):
+    $prevPost = $this->getPrev();
+    $nextPost = $this->getNext();
+    if ($prevPost || $nextPost): 
 ?>
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
@@ -168,6 +164,7 @@ if ($isPost && ($prevPost || $nextPost)):
     </div>
 </div>
 <?php
+    endif;
 endif; 
 Icarus_Module::show('Comments');
     }

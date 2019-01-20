@@ -6,7 +6,7 @@ class Icarus_Module_Tag
     {
         Icarus_Aside::basicConfig($form, 'tag', '1', 'right', '2');
 
-        $form->packInput('tag_limit', '20');
+        $form->packInput('tag_limit', '20', 'w-20');
     }
 
     private static function getLimit()

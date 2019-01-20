@@ -56,11 +56,29 @@ class Icarus_Page
     public static function config($form)
     {
         $form->packTitle('head');
+
         $form->packInput('head_favicon', 'img/favicon.svg');
 
         $form->packTitle('logo');
 
         $form->packInput('logo_text', '');
         $form->packInput('logo_img', 'img/logo.svg');
+
+        $form->packTitle('footer');
+
+        $form->packTextarea('footer_links', '');
+    }
+
+    public static function getFooterLinks()
+    {
+        $result = Icarus_Util::parseMultilineData(Icarus_Config::get('footer_links'), 3);
+        if (!empty($result))
+        {
+            foreach ($result as $k => $link)
+            {
+                $result[$k][1] = empty($link[1]) ? NULL : explode('|', $link[1]);
+            }
+        }
+        return $result;
     }
 }

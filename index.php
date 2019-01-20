@@ -19,5 +19,6 @@ while ($this->next())
 	$post->doOutput();
 }
 
-$this->need('component/paginator.php');
+Icarus_Module::show('Paginator', $this);
+
 $this->need('component/footer.php');

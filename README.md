@@ -10,6 +10,18 @@ Port of <a href="https://github.com/ppoffice">Ruipeng Zhang</a>'s Hexo theme <a 
 
 This theme project is under construction. May have bugs or lack of necessary function.
 
+## Porting Progress
+( ✔: done; 🚧 in progress; ❌ pending)
+* Basic stylesheets & scripts ✔
+* Index page ✔
+* Post ✔
+* Single Page ✔
+* Widgets ✔
+* Plugins 🚧
+* Comments ❌
+* Archive ❌
+* Typecho feature adaptation 🚧
+
 ## Preview
 
 ![Icarus](http://ppoffice.github.io/hexo-theme-icarus/gallery/preview.png?1 "Icarus Preview")

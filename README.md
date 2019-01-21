@@ -4,10 +4,13 @@
 A simple, delicate, and modern theme.
 <br>
 Port of <a href="https://github.com/ppoffice">Ruipeng Zhang</a>'s Hexo theme <a href="https://github.com/ppoffice/hexo-theme-icarus/">Icarus</a> to Typecho.
-<br>
-Working on progress...
-<br>
 </p>
+
+## Under Construction Notice
+
+This theme project is under construction. May have bugs or lack of necessary function.
+
+## Preview
 
 ![Icarus](http://ppoffice.github.io/hexo-theme-icarus/gallery/preview.png?1 "Icarus Preview")
 

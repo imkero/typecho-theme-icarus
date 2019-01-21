@@ -11,7 +11,7 @@ class Icarus_Module_Post
 
     public static function config($form)
     {
-        $form->packTitle('post');
+        $form->packTitle('Post');
     }
 
     public static function tocEnabled()
@@ -65,18 +65,20 @@ class Icarus_Module_Post
 
     public function doOutput()
     {
+        $isContent = $this->post->is('single');
+        $isPage = $this->post->is('page');
         $isPost = $this->post->is('post');
 ?>
 <div class="card">
     <?php if ($this->hasThumbnail()): ?>
     <div class="card-image">
-        <?php echo !$isPost ? ('<a href="' . $this->post->permalink . '"') : '<span '; ?> class="image is-7by1">
+        <?php echo !$isContent ? ('<a href="' . $this->post->permalink . '"') : '<span '; ?> class="image is-7by1">
             <img class="thumbnail" src="<?php echo $this->getThumbnail(); ?>" alt="<?php $this->post->title(); ?>">
-        <?php echo !$isPost ? '</a>' : '</span>' ?>
+        <?php echo !$isContent ? '</a>' : '</span>' ?>
     </div>
     <?php endif; ?>
     <div class="card-content article">
-        <?php if (!$isPost): ?>
+        <?php if (!$isPage): ?>
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
                 <time class="level-item has-text-grey" datetime="<?php $this->post->date('c'); ?>"><?php $this->post->date(); ?></time>
@@ -98,7 +100,7 @@ class Icarus_Module_Post
         </div>
         <?php endif; ?>
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            <?php if (!$isPost): ?>
+            <?php if (!$isContent): ?>
                 <a class="has-link-black-ter" href="<?php $this->post->permalink(); ?>"><?php $this->post->title(); ?></a>
             <?php else: ?>
                 <?php $this->post->title(); ?>
@@ -107,7 +109,7 @@ class Icarus_Module_Post
         <div class="content">
             <?php $this->post->content(); ?>
         </div>
-        <?php if ($isPost && $this->post->tags): ?>
+        <?php if ($isContent && $this->post->tags): ?>
         <div class="level is-size-7 is-uppercase">
             <div class="level-start">
                 <div class="level-item">
@@ -123,7 +125,7 @@ class Icarus_Module_Post
             </div>
         </div>
         <?php endif; ?>
-        <?php if (!$isPost): ?>
+        <?php if (!$isContent): ?>
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">

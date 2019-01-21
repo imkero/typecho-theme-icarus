@@ -4,7 +4,7 @@ class Icarus_Module_Archive
 {
     public static function config($form)
     {
-        Icarus_Aside::basicConfig($form, 'archive', '1', 'right', '1');
+        Icarus_Aside::basicConfig($form, 'Archive', Icarus_Aside::ENABLE, 'right', '1');
     }
 
     public static function output()

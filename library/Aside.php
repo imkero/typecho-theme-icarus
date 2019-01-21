@@ -5,6 +5,9 @@ class Icarus_Aside
     const LEFT = 0;
     const RIGHT = 1;
 
+    const ENABLE = '1';
+    const DISABLE = '0';
+
     private $_position;
     private $_widgets = array();
     
@@ -26,9 +29,36 @@ class Icarus_Aside
         self::$_columnCount += self::$asideRight->count() > 0;
     }
 
+    public static function config($form)
+    {
+        $form->packTitle('Aside');
+
+        $form->packRadio('Aside/left_sticky', array('0', '1'), '0');
+        $form->packRadio('Aside/right_sticky', array('0', '1'), '0');
+
+        $form->packRadio('Aside/left_post_hide', array('0', '1'), '0');
+        $form->packRadio('Aside/right_post_hide', array('0', '1'), '0');
+    }
+
     public function __construct($position)
     {
         $this->_position = $position;
+        if (Icarus_Util::$widget->is('single'))
+        {
+            switch ($position)
+            {
+                case self::LEFT:
+                    if (Icarus_Config::get('aside_left_post_hide', false)) {
+                        return;
+                    }
+                    break;
+                case self::RIGHT:
+                    if (Icarus_Config::get('aside_right_post_hide', false)) {
+                        return;
+                    }
+                    break;
+            }
+        }
         $seqMap = array();
         foreach (self::$_asideWidgets as $widgetName)
         {
@@ -62,12 +92,12 @@ class Icarus_Aside
     
     public static function getWidgetPosition($name)
     {
-        return Icarus_Config::get(strtolower($name) . '_position', 'left') == 'right' ? self::RIGHT : self::LEFT;
+        return Icarus_Config::get(Icarus_Util::parseName($name) . '_position', 'left') == 'right' ? self::RIGHT : self::LEFT;
     }
 
     public static function getWidgetSeq($name)
     {
-        return intval(Icarus_Config::get(strtolower($name) . '_seq', 0));
+        return intval(Icarus_Config::get(Icarus_Util::parseName($name) . '_seq', 0));
     }
 
     public static function printSideColumnClass()
@@ -140,9 +170,11 @@ foreach (self::$asideRight->_widgets as $widgetName) {
         return count($this->_widgets);
     }
 
-    public static function basicConfig($form, $widgetCfgName, $defaultEnable, $defaultPosition, $defaultIndex)
+    public static function basicConfig($form, $widgetName, $defaultEnable, $defaultPosition, $defaultIndex)
     {
-        $form->packTitle($widgetCfgName);
+        $widgetCfgName = Icarus_Util::parseName($widgetName);
+        
+        $form->packTitle($widgetName);
 
         $form->makeRadio(
             $widgetCfgName . '_enable', 
@@ -173,16 +205,5 @@ foreach (self::$asideRight->_widgets as $widgetName) {
             $defaultIndex,
             'w-20'
         );
-    }
-
-    public static function config($form)
-    {
-        $form->packTitle('aside');
-
-        $form->packRadio('aside_left_sticky', array('0', '1'), '0');
-        $form->packRadio('aside_right_sticky', array('0', '1'), '0');
-
-        $form->packRadio('aside_left_post_hide', array('0', '1'), '0');
-        $form->packRadio('aside_right_post_hide', array('0', '1'), '0');
     }
 }

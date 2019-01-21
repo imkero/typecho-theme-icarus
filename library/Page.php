@@ -26,6 +26,8 @@ class Icarus_Page
         {
             echo '<link rel="icon" href="', Icarus_Assets::getUrlForAssets($faviconUrl),'" />', PHP_EOL;
         });
+
+        // todo: open graph
     }
 
     public static function printBodyColumnClass()
@@ -55,18 +57,20 @@ class Icarus_Page
 
     public static function config($form)
     {
-        $form->packTitle('head');
+        $form->packTitle('Head');
 
-        $form->packInput('head_favicon', 'img/favicon.svg');
+        $form->packInput('Head/favicon', 'img/favicon.svg');
 
-        $form->packTitle('logo');
+        $form->packTitle('Logo');
 
-        $form->packInput('logo_text', '');
-        $form->packInput('logo_img', 'img/logo.svg');
+        $form->packInput('Logo/text', '');
+        $form->packInput('Logo/img', 'img/logo.svg');
 
-        $form->packTitle('footer');
+        $form->packTitle('Footer');
 
-        $form->packTextarea('footer_links', '');
+        $form->packTextarea('Footer/links', '');
+        $form->packTextarea('Footer/content_left', '');
+        $form->packTextarea('Footer/scripts', '');
     }
 
     public static function getFooterLinks()

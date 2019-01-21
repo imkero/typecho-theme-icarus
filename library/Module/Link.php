@@ -4,9 +4,9 @@ class Icarus_Module_Link
 {
     public static function config($form)
     {
-        Icarus_Aside::basicConfig($form, 'link', '1', 'left', '2');
+        Icarus_Aside::basicConfig($form, 'Link', Icarus_Aside::ENABLE, 'left', '2');
 
-        $form->packTextarea('link_links', "Typecho,http://typecho.org/\nGitHub,https://github.com/");
+        $form->packTextarea('Link/links', "Typecho,http://typecho.org/\nGitHub,https://github.com/");
     }
 
     private static function getUrlDomain($url)

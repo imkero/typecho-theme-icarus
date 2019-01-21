@@ -27,7 +27,7 @@ class Icarus_Module
 
     public static function enabled($name)
     {
-        return Icarus_Config::get(strtolower($name) . '_enable', FALSE) == TRUE;
+        return Icarus_Config::get(Icarus_Util::parseName($name) . '_enable', FALSE) == TRUE;
     }
 
     public static function config($form)

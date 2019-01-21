@@ -27,13 +27,16 @@ return array(
     'link' => array(
         'title' => '链接',
     ),
-    'recentpost' => array(
+    'recent_post' => array(
         'title' => '最新文章',
+    ),
+    'back_to_top' => array(
+        'title' => '返回顶部',
     ),
     'setting' => array(
         'general' => array(
             'title' => '基本',
-            'desc' => '<ul><li>资源文件的相对路径是指相对于 <code> %s/assets/</code> 目录的相对路径。</li></ul>',
+            'desc' => '<p><b>注意事项</b></p><ul><li>资源文件的相对路径是指相对于 <code> %s/assets/</code> 目录的相对路径。</li><li>更换主题会导致本主题的设置项丢失。</li></ul>',
             'install_time' => array(
                 'title' => '站点建立日期',
                 'desc' => '用于计算站点运行时间，显示 Copyright 年份等。格式：2018-12-31',
@@ -59,7 +62,7 @@ return array(
         ),
         'logo' => array(
             'title' => 'Logo',
-            'desc' => '博客的 Logo，显示在导航栏最左侧以及页脚左侧。',
+            'desc' => '站点的 Logo，显示在导航栏最左侧以及页脚左侧。',
             'text' => array(
                 'title' => 'Logo 文字',
                 'desc' => '留空则显示站点名称。',
@@ -115,6 +118,15 @@ return array(
                 'options' => array(
                     'left' => '左',
                     'right' => '右',
+                ),
+            ),
+        ),
+        'plugin_common' => array(
+            'enable' => array(
+                'title' => '插件开关',
+                'options' => array(
+                    '0' => '@general.disable',
+                    '1' => '@general.enable',
                 ),
             ),
         ),
@@ -201,7 +213,7 @@ return array(
                 'desc' => '显示在 Widget 中的链接。一行一个，格式：<code>链接文字,链接URL</code>',
             ),
         ),
-        'recentpost' => array(
+        'recent_post' => array(
             'title' => '最新文章 Widget',
             'desc' => '列出指定数目的最新文章。文章数目请在 <a href="./options-reading.php">阅读设置</a> 中指定。',
         ),
@@ -220,8 +232,39 @@ return array(
             'title' => '页脚',
             'links' => array(
                 'title' => '链接',
-                'desc' => '显示在页脚的链接。一行一个，格式：<code>链接文字,链接图标,链接URL</code>',
+                'desc' => '显示在页脚的链接。一行一个，格式：<code>链接文字,链接图标,链接URL</code><br />链接图标请参考 <a href="https://fontawesome.com/icons?d=gallery&m=free" rel="noopener noreferrer" target="_blank">Font Awesome Icons</a>',
+            ),
+            'content_left' => array(
+                'title' => '页脚左侧追加内容，显示位置在 Copyright 以后。',
+            ),
+            'scripts' => array(
+                'title' => '页末追加脚本',
+                'desc' => '用于在页面末尾追加统计脚本等不可见内容。',
             ),
         ),
+        'moment' => array(
+            'title' => 'Moment 插件',
+            'desc' => '将具体的时间（如：2018-12-31）转换为更人性化的显示格式（如：1小时前）',
+        ),
+        'animejs' => array(
+            'title' => 'Animejs 插件',
+            'desc' => '为页面添加动画效果。',
+        ),
+        'highlight' => array(
+            'title' => 'highlight.js 插件',
+            'desc' => '提供代码高亮功能。',
+            'theme' => array(
+                'title' => '主题名称',
+                'desc' => '可以选用的主题名称请参考 <a href="https://highlightjs.org/static/demo/" rel="noreferrer noopener" target="_blank">highlight.js demo</a><br />默认主题：<code>atom-one-light</code>',
+            ),
+        ),
+        'back_to_top' => array(
+            'title' => '返回顶部插件',
+            'desc' => '显示一个返回顶部的按钮。',
+        ),
+        'clipboard'  => array(
+            'title' => '剪贴板插件',
+            'desc' => '在代码块上提供一个「复制」按钮。'
+        )
     ),
 );

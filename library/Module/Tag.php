@@ -4,9 +4,9 @@ class Icarus_Module_Tag
 {
     public static function config($form)
     {
-        Icarus_Aside::basicConfig($form, 'tag', '1', 'right', '2');
+        Icarus_Aside::basicConfig($form, 'Tag', Icarus_Aside::ENABLE, 'right', '2');
 
-        $form->packInput('tag_limit', '20', 'w-20');
+        $form->packInput('Tag/limit', '20', 'w-20');
     }
 
     private static function getLimit()

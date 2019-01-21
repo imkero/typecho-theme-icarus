@@ -3,14 +3,14 @@ class Icarus_Module_Profile
 {
     public static function config($form)
     {
-        Icarus_Aside::basicConfig($form, 'profile', '1', 'left', '0');
-        $form->packInput('profile_author', 'Your name', 'w-40');
-        $form->packInput('profile_author_title', 'Your title', 'w-40');
-        $form->packInput('profile_location', 'Your location', 'w-40');
-        $form->packInput('profile_avatar', 'img/avatar.png');
-        $form->packInput('profile_gravatar', '');
-        $form->packInput('profile_follow_link', 'https://github.com/');
-        $form->packTextarea('profile_social_links', "GitHub,fa-github,https://github.com/\nTwitter,fa-twitter,https://twitter.com/,Facebook,fa-facebook,https://facebook.com/");
+        Icarus_Aside::basicConfig($form, 'profile', Icarus_Aside::ENABLE, 'left', '0');
+        $form->packInput('Profile/author', 'Your name', 'w-40');
+        $form->packInput('Profile/author_title', 'Your title', 'w-40');
+        $form->packInput('Profile/location', 'Your location', 'w-40');
+        $form->packInput('Profile/avatar', 'img/avatar.png');
+        $form->packInput('Profile/gravatar', '');
+        $form->packInput('Profile/follow_link', 'https://github.com/');
+        $form->packTextarea('Profile/social_links', "GitHub,fab fa-github,https://github.com/\nTwitter,fab fa-twitter,https://twitter.com/\nFacebook,fab fa-facebook,https://facebook.com/");
     }
 
     private static function printAvatarUrl()
@@ -109,7 +109,7 @@ class Icarus_Module_Profile
                 <?php if (empty($socialLinkItem[1])): ?>
                 <?php echo $socialLinkItem[0]; ?>
                 <?php else: ?>
-                <i class="fab <?php echo $socialLinkItem[1]; ?>"></i>
+                <i class="<?php echo $socialLinkItem[1]; ?>"></i>
                 <?php endif; ?>
             </a>
             <?php endforeach; ?>

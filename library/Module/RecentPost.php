@@ -4,7 +4,7 @@ class Icarus_Module_RecentPost
 {
     public static function config($form)
     {
-        Icarus_Aside::basicConfig($form, 'recentpost', '1', 'right', '1');
+        Icarus_Aside::basicConfig($form, 'RecentPost', Icarus_Aside::ENABLE, 'right', '1');
     }
 
     private static function getLimit()
@@ -26,7 +26,7 @@ class Icarus_Module_RecentPost
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            <?php _IcTp('recentpost.title'); ?>
+            <?php _IcTp('recent_post.title'); ?>
         </h3>
 <?php while ($posts->next()): ?>
 <div class="media">

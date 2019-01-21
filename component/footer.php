@@ -29,6 +29,7 @@
                     Powered by <a href="http://typecho.org/" target="_blank" ref="nofollow noreferrer noopener">Typecho</a> & <a
                             href="https://github.com/KeNorizon/typecho-theme-icarus">Icarus</a>
                     </p>
+                    <?php echo Icarus_Config::get('footer_content_left'); ?>
                 </div>
                 <div class="level-end">
                 <?php $footerLinks = ICarus_Page::getFooterLinks(); 
@@ -40,7 +41,7 @@
                             <?php if (empty($linkItem[1])):
                                 echo $linkItem[0];
                             else: foreach ($linkItem[1] as $iconItem): ?>
-                            <i class="fab <?php echo $iconItem; ?>"></i>
+                            <i class="<?php echo $iconItem; ?>"></i>
                             <?php endforeach; endif; ?>
                         </a>
                     </p>
@@ -52,18 +53,13 @@
         </div>
     </footer>
 <?php
-// jQuery
 Icarus_Assets::cdn('js', 'jquery', '3.3.1', 'dist/jquery.min.js');
 
-// Moment.js
-Icarus_Assets::cdn('js', 'moment', '2.22.2', 'min/moment-with-locales.min.js');
-echo '<script>moment.locale("', str_replace('_', '-', Icarus_Util::$options->lang), '");</script>', PHP_EOL;
+Icarus_Plugin::footerAll();
 
-// Plugins
+Icarus_Assets::printThemeJs('main.js', TRUE);
 
-
-// Theme Script
-Icarus_Assets::printThemeJs('main.js');
+echo Icarus_Config::get('footer_scripts');
 ?>
 </body>
 </html>

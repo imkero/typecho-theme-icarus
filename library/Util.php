@@ -93,4 +93,14 @@ class Icarus_Util
         }
         return $time === FALSE ? time() : $time;
     }
+
+    /**
+     * 字符串命名风格转换
+     * @param string $name 字符串
+     * @return string
+     */
+    public static function parseName($name)
+    {        
+        return strtolower(trim(preg_replace("/[A-Z]/", "_\\0", $name), "_"));
+    }
 }

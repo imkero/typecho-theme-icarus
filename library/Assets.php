@@ -6,9 +6,8 @@ class Icarus_Assets
     private static $_cdnProviders = array(
         'assets' => array(
             'jsdelivr' => array(
-                'bulma' => 'https://cdn.jsdelivr.net/npm/bulma@{version}/{file}',
-                'jquery' => 'https://cdn.jsdelivr.net/npm/jquery@{version}/{file}',
-                'moment' => 'https://cdn.jsdelivr.net/npm/moment@{version}/{file}',
+                '_tpl' => 'https://cdn.jsdelivr.net/npm/{package}@{version}/{file}',
+                'highlight.js' => 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@{version}/{file}'
             ),
         ),
         'font' => array(
@@ -74,12 +73,17 @@ class Icarus_Assets
         echo '<link rel="stylesheet" href="', $cssUrl, '" />', PHP_EOL;
     }
 
-    public static function printJsTag($jsUrl, $defer = FALSE)
+    public static function printJsTag($jsUrl, $defer = FALSE, $async = FALSE)
     {
+        echo '<script src="', $jsUrl, '"';
+        
         if ($defer)
-            echo '<script src="', $jsUrl, '" defer></script>', PHP_EOL;
-        else
-            echo '<script src="', $jsUrl, '"></script>', PHP_EOL;
+            echo ' defer';
+        
+        if ($async)
+            echo ' async';
+
+        echo '></script>', PHP_EOL;
     }
 
     public static function printThemeCss($name)
@@ -87,17 +91,21 @@ class Icarus_Assets
         self::printCssTag(self::getUrlForAssets("css/" . $name));
     }
 
-    public static function printThemeJs($name, $defer = FALSE)
+    public static function printThemeJs($name, $defer = FALSE, $async = FALSE)
     {
-        self::printJsTag(self::getUrlForAssets("js/" . $name), $defer);
+        self::printJsTag(self::getUrlForAssets("js/" . $name), $defer, $async);
     }
 
     public static function getCdnUrl($name, $version, $file)
     {
-        if (!array_key_exists($name, self::$_assetsCdnUrl))
+        if (array_key_exists($name, self::$_assetsCdnUrl)) {
+            $cdnUrl = self::$_assetsCdnUrl[$name];
+        } else if (array_key_exists('_tpl', self::$_assetsCdnUrl)) {
+            $cdnUrl = self::$_assetsCdnUrl['_tpl'];
+        } else {
             return;
-        $cdnUrl = self::$_assetsCdnUrl[$name];
-        return str_replace(array('{version}', '{file}'), array($version, $file), $cdnUrl);
+        }
+        return str_replace(array('{package}', '{version}', '{file}'), array($name, $version, $file), $cdnUrl);
     }
 
     public static function getFontCdnUrl($fontname, $type = 'css')
@@ -118,10 +126,11 @@ class Icarus_Assets
     public static function cdn($cssJs, $type)
     {
         $args = func_get_args();
-        
-        $defer = $cssJs == 'jsDefer';
-        if ($defer)
-            $cssJs = 'js';
+
+        $config = explode('+', $cssJs);
+        $defer = in_array('defer', $config);
+        $async = in_array('async', $config);
+        $cssJs = $config[0];
         
         $funcName = '';
         switch ($type)
@@ -150,7 +159,7 @@ class Icarus_Assets
         }
         if ($cssJs == 'js') // js tag
         {
-            self::printJsTag($url, $defer);
+            self::printJsTag($url, $defer, $async);
         }
         else // css tag
         {

@@ -11,13 +11,13 @@ class Icarus_Config
         $form->showTitle(_IcT('setting.general.title'));
         $form->makeHtml(sprintf(_IcT('setting.general.desc'), __TYPECHO_THEME_DIR__ . '/' . Icarus_Util::$options->theme));
 
-        $form->packInput('general_install_time', date('Y-m-d', Icarus_Util::getSiteInstallTime()), 'w-20');
+        $form->packInput('General/install_time', date('Y-m-d', Icarus_Util::getSiteInstallTime()), 'w-20');
     }
 
     public function __construct($form)
     {
         $this->_form = $form;
-        $this->makeHtml('<style>.icarus-config-title{margin-top: 2em; margin-bottom: 0.2em; border-bottom: 1px solid #D9D9D6; padding-bottom: 0.2em;} .icarus-description{color: #999; font-size: .92857em;}</style>');
+        $this->makeHtml('<style>form code{color: #e50833; background: #fff; padding: 2px 4px; border-radius: 3px;}.icarus-config-title{margin-top: 2em; margin-bottom: 0.2em; border-bottom: 1px solid #D9D9D6; padding-bottom: 0.2em;} .icarus-description{color: #999; font-size: .92857em;}</style>');
     }
 
     private static function prefixKey($key)
@@ -38,14 +38,22 @@ class Icarus_Config
         }
     }
 
-    private static function cfgNameToI18n($cfgName)
+    private static function cfgNameToLangKey($cfgName)
     {
-        $dashIndex = strpos($cfgName, '_');
-        if ($dashIndex !== FALSE)
+        $split = explode('/', $cfgName, 2);
+        switch (count($split))
         {
-            $cfgName[$dashIndex] = '.';
+            case 2:
+                return 'setting.' . Icarus_Util::parseName($split[0]) . '.' . $split[1];
+            case 1:
+                return 'setting.' . Icarus_Util::parseName($cfgName);
         }
-        return 'setting.' . $cfgName;
+    }
+
+    private static function cfgNameToCfgKey($cfgName)
+    {
+        $split = explode('/', $cfgName, 2);
+        return Icarus_Util::parseName($split[0]) . '_' . $split[1];
     }
 
     public function makeHtml($html)
@@ -76,7 +84,7 @@ class Icarus_Config
 
     public function packTitle($name)
     {
-        $langStr = self::cfgNameToI18n($name);
+        $langStr = self::cfgNameToLangKey($name);
         $this->showTitle(_IcT($langStr . '.title'));
         if (Icarus_I18n::has($langStr . '.desc'))
         {
@@ -108,8 +116,8 @@ class Icarus_Config
 
     public function packInput($name, $default = NULL, $classAppend = NULL)
     {
-        $langStr = self::cfgNameToI18n($name);
-        $this->makeInput($name, _IcT($langStr . '.title'), self::optionalDesc($langStr), $default, $classAppend);
+        $langStr = self::cfgNameToLangKey($name);
+        $this->makeInput(self::cfgNameToCfgKey($name), _IcT($langStr . '.title'), self::optionalDesc($langStr), $default, $classAppend);
     }
 
     public function makeTextarea($name, $title, $desc, $default = NULL)
@@ -123,8 +131,8 @@ class Icarus_Config
 
     public function packTextarea($name, $default = NULL)
     {
-        $langStr = self::cfgNameToI18n($name);
-        $this->makeTextarea($name, _IcT($langStr . '.title'), self::optionalDesc($langStr), $default);
+        $langStr = self::cfgNameToLangKey($name);
+        $this->makeTextarea(self::cfgNameToCfgKey($name), _IcT($langStr . '.title'), self::optionalDesc($langStr), $default);
     }
 
     public function makeRadio($name, $title, $desc, array $options, $default = NULL)
@@ -138,18 +146,13 @@ class Icarus_Config
 
     public function packRadio($name, array $options, $default = NULL)
     {
-        $langStr = self::cfgNameToI18n($name);
+        $langStr = self::cfgNameToLangKey($name);
         $optionsReal = array();
         foreach ($options as $option)
         {
             $optionsReal[$option] = _IcT($langStr . '.options.' . $option);
         }
-        $this->makeRadio($name, _IcT($langStr . '.title'), self::optionalDesc($langStr), $optionsReal, $default);
-    }
-
-    private static function configPreFilter($key)
-    {
-        return self::prefixKey($key);
+        $this->makeRadio(self::cfgNameToCfgKey($name), _IcT($langStr . '.title'), self::optionalDesc($langStr), $optionsReal, $default);
     }
 
     public static function get($key, $default = NULL)
@@ -172,7 +175,7 @@ class Icarus_Config
 
     public static function tryGet($key, &$result)
     {
-        $key = self::configPreFilter($key);
+        $key = self::prefixKey($key);
         $value = Icarus_Util::$options->$key;
         $exist = !is_null($value);
         if ($exist)

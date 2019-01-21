@@ -4,7 +4,7 @@ class Icarus_Module_Category
 {
     public static function config($form)
     {
-        Icarus_Aside::basicConfig($form, 'category', '1', 'left', '3');
+        Icarus_Aside::basicConfig($form, 'Category', Icarus_Aside::ENABLE, 'left', '3');
     }
 
     public static function output()

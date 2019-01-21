@@ -4,10 +4,10 @@ class Icarus_Module_Navbar
 {
     public static function config($form)
     {
-        $form->packTitle('navbar');
+        $form->packTitle('Navbar');
 
-        $form->packTextarea('navbar_menu', "首页,/\n归档,/archive.html");
-        $form->packTextarea('navbar_icons', "Download on GitHub,fa-github,http://github.com/ppoffice/hexo-theme-icarus");
+        $form->packTextarea('Navbar/menu', "首页,/\n归档,/archive.html");
+        $form->packTextarea('Navbar/icons', "Download on GitHub,fab fa-github,http://github.com/ppoffice/hexo-theme-icarus");
     }
 
     private static function getMenu()
@@ -50,13 +50,13 @@ class Icarus_Module_Navbar
             </div>
             <?php endif; ?>
             <div class="navbar-end">
-            <?php if (Icarus_Config::has('navbar_icon')): $icons = self::getIcons(); ?>
+            <?php if (Icarus_Config::has('navbar_icons')): $icons = self::getIcons(); ?>
                 <?php foreach ($icons as $iconItem): ?>
                 <a class="navbar-item" target="_blank" title="<?php echo $iconItem[0]; ?>" href="<?php echo $iconItem[2]; ?>">
                     <?php if (empty($iconItem[1])): ?>
                     <?php echo $iconItem[0]; ?>
                     <?php else: ?>
-                    <i class="fab <?php echo $iconItem[1]; ?>"></i>
+                    <i class="<?php echo $iconItem[1]; ?>"></i>
                     <?php endif; ?>
                 </a>
                 <?php endforeach; ?>

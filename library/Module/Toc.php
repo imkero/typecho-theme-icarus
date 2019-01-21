@@ -4,7 +4,7 @@ class Icarus_Module_Toc
 {
     public static function config($form)
     {
-        Icarus_Aside::basicConfig($form, 'toc', '1', 'right', '0');
+        Icarus_Aside::basicConfig($form, 'Toc', Icarus_Aside::ENABLE, 'right', '0');
     }
 
     public static function output()

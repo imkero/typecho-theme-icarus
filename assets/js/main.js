@@ -10,9 +10,14 @@
     });
 
     if (typeof(moment) === 'function') {
+        moment.locale($('html').attr('lang'));
         $('.article-meta time').each(function () {
             $(this).text(moment($(this).attr('datetime')).fromNow());
         });
+    }
+
+    if (typeof(hljs) !== 'undefined') {
+        hljs.initHighlightingOnLoad();
     }
 
     function adjustNavbar() {

@@ -267,15 +267,15 @@ return array(
             'desc' => '在代码块上提供一个「复制」按钮。',
         ),
         'gallery' => array(
-            'title' => 'Gallery 插件',
-            'desc' => '利用 lightGallery 和 Justified Gallery 实现图集显示。<br />调用方式：使用下述标签包围多张图片作为一个图集进行显示。<code>&lt;div class="justified-gallery"&gt;&lt;/div&gt;</code>',
+            'title' => 'Gallery 插件（施工中）',
+            'desc' => '利用 lightGallery 和 Justified Gallery 实现图集显示。<br />调用方式：使用下述标签包围多张图片作为一个图集进行显示。<code>[gallery][/gallery]</code>',
         ),
         'mathjax' => array(
-            'title' => 'Mathjax 插件',
+            'title' => 'Mathjax 插件（施工中）',
             'desc' => '提供数学公式显示支持。修改 <code>assets/js/mathjax.js</code> 文件以进行具体配置。',
         ),
         'outdated_browser' => array(
-            'title' => 'Outdated Browser 插件',
+            'title' => 'Outdated Browser 插件（施工中）',
             'desc' => '向使用过时的浏览器的用户显示一个友好的提示。',
         ),
         'progressbar' => array(

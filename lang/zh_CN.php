@@ -260,11 +260,27 @@ return array(
         ),
         'back_to_top' => array(
             'title' => '返回顶部插件',
-            'desc' => '显示一个返回顶部的按钮。',
+            'desc' => '显示一个「返回顶部」按钮。',
         ),
         'clipboard'  => array(
             'title' => '剪贴板插件',
-            'desc' => '在代码块上提供一个「复制」按钮。'
-        )
+            'desc' => '在代码块上提供一个「复制」按钮。',
+        ),
+        'gallery' => array(
+            'title' => 'Gallery 插件',
+            'desc' => '利用 lightGallery 和 Justified Gallery 实现图集显示。',
+        ),
+        'mathjax' => array(
+            'title' => 'Mathjax 插件',
+            'desc' => '提供数学公式显示支持。',
+        ),
+        'outdated_browser' => array(
+            'title' => 'Outdated Browser 插件',
+            'desc' => '向使用过时的浏览器的用户显示一个提示。',
+        ),
+        'progressbar' => array(
+            'title' => '进度条插件',
+            'desc' => '在页面顶部显示一个加载进度条。',
+        ),
     ),
 );

@@ -5,7 +5,14 @@ class Icarus_Plugin
     const ENABLE = '1';
     const DISABLE = '0';
 
-    private static $_pluginList = array('Moment', 'Animejs', 'Highlight', 'BackToTop', 'Clipboard');
+    private static $_pluginList = array(
+        'Moment', 
+        'Animejs', 
+        'Highlight', 
+        'BackToTop', 
+        'Clipboard', 
+        'Gallery'
+    );
     private static $_pluginLoaded = array();
 
     public static function load($name)

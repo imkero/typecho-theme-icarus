@@ -13,7 +13,8 @@ class Icarus_Plugin
         'Clipboard', 
         'Gallery',
         'Mathjax',
-        'OutdatedBrowser'
+        'OutdatedBrowser',
+        'Progressbar'
     );
     private static $_pluginLoaded = array();
 

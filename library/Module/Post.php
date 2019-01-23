@@ -14,12 +14,7 @@ class Icarus_Module_Post
         $form->packTitle('Post');
     }
 
-    public static function tocEnabled()
-    {
-        return Icarus_Module::enabled('Toc');
-    }
-
-    public function getPrev()
+    private function getPrev()
     {
         $content = Typecho_Db::get()->fetchRow($this->_post->select()->where('table.contents.created < ?', $this->_post->created)
             ->where('table.contents.status = ?', 'publish')
@@ -33,7 +28,7 @@ class Icarus_Module_Post
             return NULL;
     }
 
-    public function getNext()
+    private function getNext()
     {
         $content = Typecho_Db::get()->fetchRow($this->_post->select()->where('table.contents.created > ? AND table.contents.created < ?',
             $this->_post->created, Icarus_Util::$options->time)
@@ -48,12 +43,12 @@ class Icarus_Module_Post
             return NULL;
     }
 
-    public function hasThumbnail()
+    private function hasThumbnail()
     {
         return Icarus_Util::hasThumbnail($this->_post);
     }
 
-    public function getThumbnail()
+    private function getThumbnail()
     {
         return Icarus_Util::getThumbnail($this->_post);
     }

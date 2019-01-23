@@ -44,12 +44,20 @@ class Icarus_Module_RecentPost
             <?php if ($posts->categories): ?>
             <p class="is-size-7 is-uppercase">
             <?php 
-            $result = array();
-            foreach ($posts->categories as $category) {
-                $result[] = '<a class="has-link-grey" href="' . $category['permalink'] . '">'
-                . $category['name'] . '</a>';
+            $category = $posts->categories[0];
+            $directory = Typecho_Widget::widget('Widget_Metas_Category_List')->getAllParents($category['mid']);
+            $directory[] = $category;
+    
+            if ($directory) {
+                $result = array();
+    
+                foreach ($directory as $category) {
+                    $result[] = '<a class="has-link-grey" href="' . $category['permalink'] . '">'
+                    . $category['name'] . '</a>';
+                }
+    
+                echo implode('&nbsp;/&nbsp;', $result);
             }
-            echo implode('&nbsp;/&nbsp;', $result);
             ?>
             </p>
             <?php endif; ?>

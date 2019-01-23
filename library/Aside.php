@@ -11,7 +11,15 @@ class Icarus_Aside
     private $_position;
     private $_widgets = array();
     
-    private static $_asideWidgets = array('Profile', 'Category', 'Link', 'RecentPost', 'Archive', 'Tag', 'Toc');
+    private static $_asideWidgets = array(
+        'Profile', 
+        'Category', 
+        'Link', 
+        'RecentPost', 
+        'Archive', 
+        'Tag', 
+        'Toc'
+    );
 
     public static $asideLeft = NULL;
     public static $asideRight = NULL;

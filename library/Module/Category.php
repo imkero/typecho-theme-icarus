@@ -40,7 +40,7 @@ function treeViewCategories($widget, $categoryOptions)
     </a>
 <?php
 if ($widget->children) {
-    $this->treeViewCategories();
+    $widget->treeViewCategories();
 }
 ?>
 </li>

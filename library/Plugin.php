@@ -11,7 +11,8 @@ class Icarus_Plugin
         'Highlight', 
         'BackToTop', 
         'Clipboard', 
-        'Gallery'
+        'Gallery',
+        'Mathjax'
     );
     private static $_pluginLoaded = array();
 

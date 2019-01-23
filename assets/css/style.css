@@ -407,7 +407,7 @@ pre>code {
 pre>code>.copy {
   display: none;
   position: absolute;
-  bottom: 0;
+  top: 0;
   right: 0;
   color: #fff;
   background: rgba(0,0,0,0.5);

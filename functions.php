@@ -12,6 +12,7 @@ function themeInit($widget)
     require __ICARUS_ROOT__ . 'library/Page.php';
     require __ICARUS_ROOT__ . 'library/Assets.php';
     require __ICARUS_ROOT__ . 'library/Config.php';
+    require __ICARUS_ROOT__ . 'library/Content.php';
 
     Icarus_Util::init($widget);
     Icarus_I18n::init();

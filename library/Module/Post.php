@@ -104,14 +104,20 @@ class Icarus_Module_Post
         </div>
         <?php endif; ?>
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            <?php if (!$isContent): ?>
-                <a class="has-link-black-ter" href="<?php $this->_post->permalink(); ?>"><?php $this->_post->title(); ?></a>
-            <?php else: ?>
+            <?php if ($isContent): ?>
                 <?php $this->_post->title(); ?>
+            <?php else: ?>
+                <a class="has-link-black-ter" href="<?php $this->_post->permalink(); ?>"><?php $this->_post->title(); ?></a>
             <?php endif; ?>
         </h1>
         <div class="content">
-            <?php $this->_post->content(); ?>
+        <?php 
+        if ($isContent) {
+            echo Icarus_Content::getContent($this->_post); 
+        } else {
+            echo Icarus_Content::getExcerpt($this->_post); 
+        }
+        ?>
         </div>
         <?php if ($isContent && $this->_post->tags): ?>
         <div class="level is-size-7 is-uppercase">
@@ -133,7 +139,7 @@ class Icarus_Module_Post
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="<?php $this->_post->permalink(); ?>#more"><?php _IcTp('article.more'); ?></a>
+                <a class="button is-size-7 is-light" href="<?php $this->_post->permalink(); ?>"><?php _IcTp('article.more'); ?></a>
                 </div>
             </div>
         </div>

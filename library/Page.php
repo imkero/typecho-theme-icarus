@@ -16,8 +16,13 @@ class Icarus_Page
     
     public static function printHtmlLang()
     {
-        if (Icarus_Util::$options->lang)
-            echo 'lang="', str_replace('_', '-', Icarus_Util::$options->lang), '"';
+        $lang = Icarus_Util::$options->lang;
+        if (empty($lang))
+            $lang = 'zh-CN';
+        else
+            $lang = str_replace('_', '-', $lang);
+
+        echo 'lang="', $lang, '"';
     }
 
     public static function printHeader()

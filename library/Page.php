@@ -31,7 +31,7 @@ class Icarus_Page
         {
             echo '<link rel="icon" href="', Icarus_Assets::getUrlForAssets($faviconUrl),'" />', PHP_EOL;
         });
-
+        echo Icarus_Config::get('head_extend');
         // todo: open graph
     }
 
@@ -65,6 +65,7 @@ class Icarus_Page
         $form->packTitle('Head');
 
         $form->packInput('Head/favicon', 'img/favicon.svg');
+        $form->packTextarea('Head/extend', '');
 
         $form->packTitle('Logo');
 

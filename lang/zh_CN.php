@@ -48,6 +48,9 @@ return array(
                 'title' => 'Favicon',
                 'desc' => 'Favicon 图标的相对路径或 URL。',
             ),
+            'extend' => array(
+                'title' => '&lt;head&gt;标签内追加内容',
+            ),
         ),
         'navbar' => array(
             'title' => '导航栏',
@@ -247,7 +250,8 @@ return array(
                 'desc' => '显示在页脚的链接。一行一个，格式：<code>链接文字,链接图标,链接URL</code><br />链接图标请参考 <a href="https://fontawesome.com/icons?d=gallery&m=free" rel="noopener noreferrer" target="_blank">Font Awesome Icons</a>',
             ),
             'content_left' => array(
-                'title' => '页脚左侧追加内容，显示位置在 Copyright 以后。',
+                'title' => '页脚左侧追加内容',
+                'desc' => '显示位置在 Copyright 以后。',
             ),
             'scripts' => array(
                 'title' => '页末追加脚本',

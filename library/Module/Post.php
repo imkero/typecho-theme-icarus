@@ -58,6 +58,79 @@ class Icarus_Module_Post
         return (new Icarus_Module_Post($post))->doOutput();
     }
 
+    private function printThumbnail()
+    {
+        if ($this->hasThumbnail()) {
+?>
+    <div class="card-image">
+        <?php echo !$isContent ? ('<a href="' . $this->_post->permalink . '"') : '<span '; ?> class="image is-7by1">
+            <img class="thumbnail" src="<?php echo $this->getThumbnail(); ?>" alt="<?php $this->_post->title(); ?>">
+        <?php echo !$isContent ? '</a>' : '</span>' ?>
+    </div>
+<?php 
+        }
+    }
+
+    private function printCategory()
+    {
+        if ($this->_post->categories) {
+?>
+    <div class="level-item">
+        <?php 
+        $category = $this->_post->categories[0];
+        $directory = Typecho_Widget::widget('Widget_Metas_Category_List')->getAllParents($category['mid']);
+        $directory[] = $category;
+
+        if ($directory) {
+            $result = array();
+
+            foreach ($directory as $category) {
+                $result[] = '<a class="has-link-grey" href="' . $category['permalink'] . '">'
+                . $category['name'] . '</a>';
+            }
+
+            echo implode('&nbsp;/&nbsp;', $result);
+        }
+        ?>
+    </div>
+        <?php 
+        }
+    }
+
+    private function printTags()
+    {
+        if (!$this->_post->tags)
+            return;
+?>
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <?php $result = array();
+                    foreach ($this->_post->tags as $tag) {
+                        $result[] ='<span class="is-size-6 has-text-grey has-mr-7">#</span><a class="has-link-grey" href="' . $tag['permalink'] . '">'
+                        . $tag['name'] . '</a>';
+                    }
+                    echo implode(' ', $result);
+                    ?>
+                </div>
+            </div>
+        </div>
+<?php
+    }
+
+    private function printReadMore()
+    {
+?>
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="<?php $this->_post->permalink(); ?>"><?php _IcTp('article.more'); ?></a>
+                </div>
+            </div>
+        </div>
+<?php
+    }
+
     public function doOutput()
     {
         $isContent = $this->_post->is('single');
@@ -65,41 +138,13 @@ class Icarus_Module_Post
         $isPost = $this->_post->is('post');
 ?>
 <div class="card">
-    <?php if ($this->hasThumbnail()): ?>
-    <div class="card-image">
-        <?php echo !$isContent ? ('<a href="' . $this->_post->permalink . '"') : '<span '; ?> class="image is-7by1">
-            <img class="thumbnail" src="<?php echo $this->getThumbnail(); ?>" alt="<?php $this->_post->title(); ?>">
-        <?php echo !$isContent ? '</a>' : '</span>' ?>
-    </div>
-    <?php endif; ?>
+    <?php $this->printThumbnail(); ?>
     <div class="card-content article">
         <?php if (!$isPage): ?>
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
                 <time class="level-item has-text-grey" datetime="<?php $this->_post->date('c'); ?>"><?php $this->_post->date(); ?></time>
-                <?php if ($this->_post->categories): ?>
-                <div class="level-item">
-                <?php 
-                $category = $this->_post->categories[0];
-                $directory = Typecho_Widget::widget('Widget_Metas_Category_List')->getAllParents($category['mid']);
-                $directory[] = $category;
-        
-                if ($directory) {
-                    $result = array();
-        
-                    foreach ($directory as $category) {
-                        $result[] = '<a class="has-link-grey" href="' . $category['permalink'] . '">'
-                        . $category['name'] . '</a>';
-                    }
-        
-                    echo implode('&nbsp;/&nbsp;', $result);
-                }
-                ?>
-                </div>
-                <?php 
-                endif; 
-                // todo: read time
-                ?>
+                <?php $this->printCategory(); ?>
             </div>
         </div>
         <?php endif; ?>
@@ -119,32 +164,14 @@ class Icarus_Module_Post
         }
         ?>
         </div>
-        <?php if ($isContent && $this->_post->tags): ?>
-        <div class="level is-size-7 is-uppercase">
-            <div class="level-start">
-                <div class="level-item">
-                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <?php $result = array();
-                    foreach ($this->_post->tags as $tag) {
-                        $result[] ='<a class="has-link-grey" href="' . $tag['permalink'] . '">'
-                        . $tag['name'] . '</a>';
-                    }
-                    echo implode(' ', $result);
-                    ?>
-                </div>
-            </div>
-        </div>
-        <?php endif; ?>
-        <?php if (!$isContent): ?>
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="<?php $this->_post->permalink(); ?>"><?php _IcTp('article.more'); ?></a>
-                </div>
-            </div>
-        </div>
-        <?php endif; ?>
-        <?php Icarus_Module::show('Share'); ?>
+        <?php 
+        if ($isContent) {
+            $this->printTags();    
+        } else {
+            $this->printReadMore();
+        }
+        Icarus_Module::show('Share');
+        ?>
     </div>
 </div>
 <?php  

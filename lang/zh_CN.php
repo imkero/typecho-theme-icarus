@@ -49,7 +49,7 @@ return array(
                 'desc' => 'Favicon 图标的相对路径或 URL。',
             ),
             'extend' => array(
-                'title' => '&lt;head&gt;标签内追加内容',
+                'title' => '&lt;head&gt; 标签内追加内容',
             ),
         ),
         'navbar' => array(
@@ -218,7 +218,7 @@ return array(
         ),
         'recent_post' => array(
             'title' => '最新文章 Widget',
-            'desc' => '列出指定数目的最新文章。文章数目请在 <a href="./options-reading.php">阅读设置</a> 中指定。',
+            'desc' => '列出指定数目的最新文章。',
             'limit' => array(
                 'title' => '数目',
                 'desc' => '最多显示的文章数。留空或非正数则默认为显示5篇。',
@@ -283,8 +283,8 @@ return array(
             'desc' => '在代码块上提供一个「复制」按钮。',
         ),
         'gallery' => array(
-            'title' => 'Gallery 插件（施工中）',
-            'desc' => '利用 lightGallery 和 Justified Gallery 实现图集显示。<br />调用方式：使用下述标签包围多张图片作为一个图集进行显示。<code>[gallery][/gallery]</code>',
+            'title' => 'Gallery 插件',
+            'desc' => '利用 lightGallery 和 Justified Gallery 实现图集显示。<br />调用方式：使用下述标签包围多张图片作为一个图集进行显示。<code>[gallery]</code><code>[/gallery]</code>',
         ),
         'mathjax' => array(
             'title' => 'Mathjax 插件（施工中）',

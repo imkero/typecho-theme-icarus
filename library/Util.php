@@ -98,6 +98,8 @@ class Icarus_Util
      * 字符串命名风格转换
      * @param string $name 字符串
      * @return string
+     * 
+     * @link https://github.com/top-think/thinkphp/blob/109bf30254a38651c21837633d9293a4065c300b/ThinkPHP/Common/functions.php#L497
      */
     public static function parseName($name)
     {        

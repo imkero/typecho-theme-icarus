@@ -216,6 +216,18 @@ return array(
         'recent_post' => array(
             'title' => '最新文章 Widget',
             'desc' => '列出指定数目的最新文章。文章数目请在 <a href="./options-reading.php">阅读设置</a> 中指定。',
+            'limit' => array(
+                'title' => '数目',
+                'desc' => '最多显示的文章数。留空或非正数则默认为显示5篇。',
+            ),
+            'thumbnail' => array(
+                'title' => '缩略图',
+                'desc' => '在文章标题旁显示缩略图。',
+                'options' => array(
+                    '0' => '@general.disable',
+                    '1' => '@general.enable',
+                ),
+            ),
         ),
         'tag' => array(
             'title' => '标签 Widget',

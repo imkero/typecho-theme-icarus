@@ -5,11 +5,14 @@ class Icarus_Module_RecentPost
     public static function config($form)
     {
         Icarus_Aside::basicConfig($form, 'RecentPost', Icarus_Aside::ENABLE, 'right', '1');
+        
+        $form->packInput('RecentPost/limit', '5', 'w-20');
+        $form->packRadio('RecentPost/thumbnail', array('0', '1'), '1');
     }
 
     private static function getLimit()
     {
-        $limit = Icarus_Util::$options->postsListSize;
+        $limit = intval(Icarus_Config::get('recent_post_limit', 5));
         if ($limit <= 0)
             $limit = 5;
         return $limit;
@@ -20,7 +23,7 @@ class Icarus_Module_RecentPost
         $posts = Typecho_Widget::widget('Widget_Contents_Post_Recent', 'pageSize=' . self::getLimit());
         if ($posts->length == 0)
             return;
-        $thumbnailEnabled = !!Icarus_Config::get('article_thumbnail', true);
+        $thumbnailEnabled = !!Icarus_Config::get('recent_post_thumbnail', true);
 
 ?>
 <div class="card widget">

@@ -18,11 +18,28 @@ This theme project is under construction. May have bugs or lack of necessary fun
 * Single Page ✔
 * Widgets ✔
 * Plugins 🚧
+  * Mathjax 🚧
+  * Gallery 🚧
+  * Third party analytics 🚧
+  * Other ✔
 * Comments ❌
+  * Internal comment system ❌
+  * Third party comment system ❌
 * Archive ❌
-* Typecho feature adaptation 🚧
+  * Tags ❌
+  * Gneral archive ❌
+  * Monthly view archive ❌
+  * Category archive ❌
+* Typecho feature adaptation
+  * Config panel 🚧
+  * Post specific configuration (thumbnail and so on) ❌
+
+## Upcoming functions
+* Pjax support
+* ...
 
 ## Preview
+[Demo](https://blog.kenorizon.cn/)
 
 ![Icarus](http://ppoffice.github.io/hexo-theme-icarus/gallery/preview.png?1 "Icarus Preview")
 

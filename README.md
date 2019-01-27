@@ -17,21 +17,21 @@ This theme project is under construction. May have bugs or lack of necessary fun
 * Post ✔
 * Single Page ✔
 * Widgets ✔
-* Plugins 🚧
-  * Mathjax 🚧
-  * Gallery ✔
-  * Other ✔
+* Plugins ✔
 * Comments ❌
   * Internal comment system ❌
   * Third party comment system ❌
-* Archive ❌
+* Archive 🚧
   * Tags ❌
   * Gneral archive ❌
   * Monthly view archive ❌
   * Category archive ❌
+* Search ❌
+* 404 Page ❌
 * Typecho feature adaptation
   * Config panel ✔
   * Post specific configuration (thumbnail and so on) ✔
+
 
 ## Upcoming functions
 * Pjax support

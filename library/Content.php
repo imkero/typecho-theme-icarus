@@ -98,7 +98,7 @@ class Icarus_Content
             return substr($matches[0], 1, -1);
         } else {
             $tagName = $matches[2];
-            return call_user_func(array(__CLASS__, self::$tagHandler[$tagName]), $matches);
+            return call_user_func(array(__CLASS__, self::$shortcodeHandler[$tagName]), $matches);
         }
     }
 

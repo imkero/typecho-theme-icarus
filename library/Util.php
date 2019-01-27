@@ -105,4 +105,71 @@ class Icarus_Util
     {        
         return strtolower(trim(preg_replace("/[A-Z]/", "_\\0", $name), "_"));
     }
+
+    /**
+     * 修复因截断而不完整的html（只能处理截断前是完整状态的html）
+     * 
+     * 使用方法:
+     * <code>
+     * $input = '这是一段被截断的html文本<a href="#"';
+     * echo Typecho_Common::fixHtml($input);
+     * //output: 这是一段被截断的html文本
+     * </code>
+     *
+     * @access public
+     * @param string $string 需要修复处理的字符串
+     * @return string
+     */
+    public static function fixHtml($string)
+    {
+        $lastStartTagPos = strrpos($string, "<");
+
+        // any tag not found
+        if (FALSE === $lastStartTagPos) {
+            return $string;
+        }
+
+        // remove last unstarted tag like '<a href="#"'
+        if (FALSE === strpos($string, ">", $lastStartTagPos + 1)) {
+            $string = substr($string, 0, $lastStartTagPos);
+        }
+
+        // regex match start tags
+        preg_match_all("/<([_0-9a-zA-Z-\:]+)\s*([^>]*)>/is", $string, $startTags);
+        
+        // regex match end tags
+        preg_match_all("/<\/([_0-9a-zA-Z-\:]+)>/is", $string, $closeTags);
+
+        if (!empty($startTags[1]) && is_array($startTags[1])) {
+            // reverse start tags list
+            krsort($startTags[1]);
+
+            $closeTagsAvailable = !empty($closeTags[1]) && is_array($closeTags[1]);
+
+            foreach ($startTags[1] as $key => $tag) {
+                $attrLength = strlen($startTags[2][$key]);
+                
+                // self-closed tags
+                if ($attrLength > 0 && "/" == $startTags[2][$key][$attrLength - 1]) {
+                    continue;
+                }
+
+                // single tag white list
+                if (in_array($tag, array('img', 'br'))) {
+                    continue;
+                }
+
+                // decrease correspondent close tag's count
+                if ($closeTagsAvailable) {
+                    if (FALSE !== ($index = array_search($tag, $closeTags[1]))) {
+                        unset($closeTags[1][$index]);
+                        continue;
+                    }
+                }
+                $string .= "</{$tag}>";
+            }
+        }
+
+        return preg_replace("/\<br\s*[\/]?\>\s*\<\/p\>/is", '</p>', $string);
+    }
 }

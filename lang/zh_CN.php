@@ -77,13 +77,17 @@ return array(
         ),
         'post' => array(
             'title' => '文章 & 独立页面',
-            'toc' => array(
-                'title' => '文章目录开关',
+            'excerpt_preserve_tags' => array(
+                'title' => '摘要保留样式',
                 'options' => array(
-                    '0' => '@general.disable',
-                    '1' => '@general.enable',
+                    '0' => '不保留',
+                    '1' => '保留',
                 ),
-                'desc' => '是否显示文章目录（TOC），需要启用 TOC Widget。'
+                'desc' => '在文章列表中的摘要部分保留原文样式（段落、代码高亮等）',
+            ),
+            'excerpt_length' => array(
+                'title' => '摘要长度',
+                'desc' => '指定自动生成的摘要部分的最大长度。参数值为 <code>-1</code> 则不限制最大长度。<br />需要设置 <code>摘要保留样式</code> 为 <code>不保留</code>才能生效。<br />原文中已指定摘要部分时本参数将被忽略（即包含 <code>&lt;!--more--&gt;</code> 标签）',
             ),
         ),
         'search' => array(
@@ -284,7 +288,7 @@ return array(
         ),
         'gallery' => array(
             'title' => 'Gallery 插件',
-            'desc' => '利用 lightGallery 和 Justified Gallery 实现图集显示。<br />调用方式：使用下述标签包围多张图片作为一个图集进行显示。<code>[gallery]</code><code>[/gallery]</code>',
+            'desc' => '利用 lightGallery 提供单张图片的灯箱效果，以及 Justified Gallery 实现图集显示。<br />图集调用方式：使用下述标签包围多张图片作为一个图集进行显示。<code>[gallery]</code><code>[/gallery]</code>',
         ),
         'mathjax' => array(
             'title' => 'Mathjax 插件（施工中）',

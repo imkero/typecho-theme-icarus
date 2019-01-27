@@ -9,11 +9,6 @@ class Icarus_Module_Post
         $this->_post = $post;
     }
 
-    public static function config($form)
-    {
-        $form->packTitle('Post');
-    }
-
     private function getPrev()
     {
         $content = Typecho_Db::get()->fetchRow($this->_post->select()->where('table.contents.created < ?', $this->_post->created)

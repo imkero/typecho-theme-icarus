@@ -3,13 +3,14 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 class Icarus_Config
 {
     private $_form;
+    private $_titleList = array();
 
     const PREFIX = 'icarus_';
 
     public static function config($form)
     {
-        $form->showTitle(_IcT('setting.general.title'));
-        $form->makeHtml(sprintf(_IcT('setting.general.desc'), __TYPECHO_THEME_DIR__ . '/' . Icarus_Util::$options->theme));
+        $form->showTitle(_IcT('setting.general.title'), 'General');
+        $form->html(sprintf(_IcT('setting.general.desc'), __TYPECHO_THEME_DIR__ . '/' . Icarus_Util::$options->theme));
 
         $form->packInput('General/install_time', date('Y-m-d', Icarus_Util::getSiteInstallTime()), 'w-20');
     }
@@ -17,7 +18,109 @@ class Icarus_Config
     public function __construct($form)
     {
         $this->_form = $form;
-        $this->makeHtml('<style>form code{color: #e50833; background: #fff; padding: 2px 4px; border-radius: 3px;}.icarus-config-title{margin-top: 2em; margin-bottom: 0.2em; border-bottom: 1px solid #D9D9D6; padding-bottom: 0.2em;} .icarus-description{color: #999; font-size: .92857em;}</style>');
+        $style = <<<STYLESHEET
+<style>
+form code
+{
+    color: #e50833; 
+    background: #fff; 
+    padding: 2px 4px; 
+    border-radius: 3px;
+}
+.icarus-config-title
+{
+    margin-top: 2em; 
+    margin-bottom: 0.2em; 
+    border-bottom: 1px solid #D9D9D6; 
+    padding-bottom: 0.2em;
+}
+.icarus-description
+{
+    color: #999; 
+    font-size: .92857em;
+}
+#icarus-config-toc
+{
+    position: relative;
+    top: 0;
+    padding: 15px 0 10px 20px;
+    border: 2px solid #ccc;
+    background: #eee;
+}
+#icarus-config-toc.hide
+{
+    display: none;
+}
+#icarus-config-toc > ul
+{
+    padding-left: 0;
+    list-style: none;
+    max-height: 400px;
+    max-height: 75vh;
+    overflow-y: scroll;
+}
+#icarus-config-toc > ul > li
+{
+    margin: 3px 0;
+}
+#icarus-config-toc > ul > li > a
+{
+    display: block;
+    text-decoration: none;
+    color: #444;
+    padding: 1px 0 1px 8px;
+    border-left: 2px solid #aaa;
+}
+#icarus-config-toc > ul > li > a:hover
+{
+    border-left-color: #666;
+}
+#icarus-config-toc > h2
+{
+    margin: 0 0 .5em 0;
+}
+#icarus-save-btn
+{
+    position: absolute;
+    right: 10px;
+    top: 20px;
+}
+@media (max-width: 1200px)
+{
+    #icarus-config-toc
+    {
+        width: 20%;
+    }
+}
+@media (max-width: 768px)
+{
+    #icarus-config-toc
+    {
+        display: none;
+    }
+}
+
+#icarus-config-toc > ul::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+#icarus-config-toc > ul::-webkit-scrollbar-thumb {
+    background-color: rgba(50, 50, 50, .25);
+    border: 2px solid transparent;
+    background-clip: padding-box
+}
+
+#icarus-config-toc > ul::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(50, 50, 50, .5)
+}
+
+#icarus-config-toc > ul::-webkit-scrollbar-track {
+    background-color: rgba(50, 50, 50, 0)
+}
+</style>
+STYLESHEET;
+        $this->html($style);
     }
 
     private static function prefixKey($key)
@@ -56,36 +159,45 @@ class Icarus_Config
         return Icarus_Util::parseName($split[0]) . '_' . $split[1];
     }
 
-    public function makeHtml($html)
+    public function html($html)
     {
-        $layout = new Typecho_Widget_Helper_Layout();
-        $layout->setTagName(NULL);
+        $layout = new Typecho_Widget_Helper_Layout(NULL);
         $layout->html($html);
         $this->_form->addItem($layout);
     }
 
     public function showDesc($content)
     {
-        $layout = new Typecho_Widget_Helper_Layout();
-        $layout->setTagName('div');
+        $layout = new Typecho_Widget_Helper_Layout('div');
         $layout->html($content);
         $layout->class = 'icarus-description';
         $this->_form->addItem($layout);
     }
 
-    public function showTitle($title)
+    public function showTitle($title, $id = NULL)
     {
-        $layout = new Typecho_Widget_Helper_Layout();
-        $layout->setTagName('h2');
-        $layout->html($title);
+        static $titleCount = 0;
+        $titleCount++;
+
+        if (is_null($id)) {
+            $id = 'Section-' . $titleCount;
+        }
+
+        $this->_titleList[] = array($title, $id);
+
+        $layout = new Typecho_Widget_Helper_Layout('h2');
+        $layout->id = $id;
         $layout->class = 'icarus-config-title';
+        $layout->html($title);
+
         $this->_form->addItem($layout);
     }
 
     public function packTitle($name)
     {
         $langStr = self::cfgNameToLangKey($name);
-        $this->showTitle(_IcT($langStr . '.title'));
+        
+        $this->showTitle(_IcT($langStr . '.title'), $name);
         if (Icarus_I18n::has($langStr . '.desc'))
         {
             $this->showDesc(_IcT($langStr . '.desc'));
@@ -153,6 +265,72 @@ class Icarus_Config
             $optionsReal[$option] = _IcT($langStr . '.options.' . $option);
         }
         $this->makeRadio(self::cfgNameToCfgKey($name), _IcT($langStr . '.title'), self::optionalDesc($langStr), $optionsReal, $default);
+    }
+
+    public function toc()
+    {
+        $container = new Typecho_Widget_Helper_Layout('div');
+        $container->id = 'icarus-config-toc';
+        $container->class = 'col-mb-12 col-tb-2 hide';
+
+        $container->addItem((new Typecho_Widget_Helper_Layout('h2'))->html('目录'));
+        
+        $button = new Typecho_Widget_Helper_Layout('button');
+        $button->type = 'submit';
+        $button->class = 'btn primary btn-xs';
+        $button->id = 'icarus-save-btn';
+        $button->html(_t('保存设置'));
+
+        $container->addItem($button);
+
+        $ul = new Typecho_Widget_Helper_Layout('ul');
+        $container->addItem($ul);
+        foreach ($this->_titleList as $title)
+        {
+            $li = new Typecho_Widget_Helper_Layout('li');
+            $a = new Typecho_Widget_Helper_Layout('a');
+            $a->href = '#' . $title[1];
+            $a->html($title[0]);
+            $li->addItem($a);
+            $ul->addItem($li);
+        }
+
+        $script = new Typecho_Widget_Helper_Layout();
+        $script->setTagName('script');
+        $jsCode = <<<SCRIPT
+document.addEventListener('DOMContentLoaded', function () {
+    var toc = $('#icarus-config-toc');
+    var mainForm = $('.typecho-page-main>div[role="form"]');
+
+    toc.appendTo($('.typecho-page-main'));
+    toc.removeClass('hide');
+
+    mainForm.removeClass('col-tb-offset-2');
+    mainForm.addClass('col-tb-offset-1');
+
+
+    $(window).scroll(function() {
+        var toc = $('#icarus-config-toc');
+        if (!toc.is(':visible'))
+            return;
+        var currentScroll = $(window).scrollTop() - 100;
+        if (currentScroll >= 0) {
+            toc.css('top', currentScroll + 'px');
+        } else {
+            toc.css('top', '0');
+        }
+    });
+
+    $('#icarus-save-btn').on('click', function () {
+        $('.typecho-page-main>div[role="form"]>form button[type="submit"]').click();
+    });
+});
+
+SCRIPT;
+        $script->html($jsCode);
+
+        $this->_form->addItem($container);
+        $this->_form->addItem($script);
     }
 
     public static function get($key, $default = NULL)

@@ -2,6 +2,17 @@
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 class Icarus_Content
 {
+    private static $shortcodeHandler = array(
+        'gallery' => 'processGalleryCallback',
+    );
+
+    public static function config($form)
+    {
+        $form->packTitle('Post');
+        $form->packRadio('Post/excerpt_preserve_tags', array('0', '1'), '0');
+        $form->packInput('Post/excerpt_length', '100', 'w-20');
+    }
+
     /**
      * Retrieve the shortcode regular expression for searching.
      *
@@ -21,11 +32,7 @@ class Icarus_Content
      * 
      * @link https://github.com/WordPress/WordPress/blob/70bc51e46f18a15b2abf9161aa82635f059beb82/wp-includes/shortcodes.php#L230
      */
-    private static function getShortcodeRegex( $tagnames = null ) {
-        global $shortcode_tags;
-        if ( empty( $tagnames ) ) {
-            $tagnames = array_keys( $shortcode_tags );
-        }
+    private static function getShortcodeRegex( $tagnames ) {
         $tagregexp = join( '|', array_map( 'preg_quote', $tagnames ) );
         return
             '\\['                                // Opening bracket
@@ -60,44 +67,87 @@ class Icarus_Content
 
     private static function processGalleryCallback($matches)
     {
-        // escaping [[tagName]]
-        if ( $matches[1] == '[' && $matches[6] == ']' ) {
-            return substr($matches[0], 1, -1);
-        }
-
         return '<div class="justified-gallery">' . $matches[5] . '</div>';
     }
 
-    private static function processTag($content, $tagName, $callbackFuncName)
+    private static function processAllShortcodes($content)
     {
-        if (strpos($content, '[' . $tagName) !== FALSE){
-            $pattern = self::getShortcodeRegex(array($tagName));
-            $content = preg_replace_callback(
-                "/$pattern/", array(__CLASS__, $callbackFuncName),
-                $content
-            );
+        if (strpos($content, '[') === FALSE) {
+            return $content;
         }
-        return $content;
+        $pattern = self::getShortcodeRegex(array_keys(self::$shortcodeHandler));
+        return preg_replace_callback(
+            "/$pattern/", array(__CLASS__, 'processShortcodeDispatch'),
+            $content
+        );
+    }
+
+    private static function removeAllShortcodes($content)
+    {
+        if (strpos($content, '[') === FALSE) {
+            return $content;
+        }
+        $pattern = self::getShortcodeRegex(array_keys(self::$shortcodeHandler));
+        return preg_replace("/$pattern/", '', $content);
+    }
+
+    private static function processShortcodeDispatch($matches)
+    {
+        // escaping [[tagName]]
+        if ( $matches[1] == '[' && $matches[6] == ']' ) {
+            return substr($matches[0], 1, -1);
+        } else {
+            $tagName = $matches[2];
+            return call_user_func(array(__CLASS__, self::$tagHandler[$tagName]), $matches);
+        }
     }
 
     public static function getContent($post)
     {
         $content = $post->content;
-        $content = self::processTag($content, 'gallery', 'processGalleryCallback');
-        
-        return $content;
+        return self::processAllShortcodes($content);
     }
 
     public static function getExcerpt($post)
     {
-        // todo: (option) preserve style in excerpt
-        
-        // todo: (option) excerpt length & tail;
-        $length = 100;
-        $tail = '...';
+        // hidden post overrided, show the password form
+        if ($post->hidden) {
+            return $post->text;
+        }
 
-        // todo: remove special tag
+        $content = $post->pluginHandle('Widget_Abstract_Contents')->trigger($plugged)->excerpt($post->text, $post);
         
-        return Typecho_Common::subStr(strip_tags($post->excerpt), 0, $length, $tail);
+        if (!$plugged) {
+            $content = $post->isMarkdown ? $post->markdown($content)
+            : $post->autoP($content);
+        }
+        
+        if (FALSE !== ($excerptPos = strpos($content, '<!--more-->'))) {
+            $excerpt = substr($content, 0, $excerptPos);
+        } else {
+            $excerpt = $content;
+        }
+
+        // fixHtml func patched
+        $excerpt = Icarus_Util::fixHtml($post->pluginHandle('Widget_Abstract_Contents')->excerptEx($excerpt, $post));
+
+        // handle shortcode
+        $excerpt = self::removeAllShortcodes($excerpt);
+
+        // user config        
+        $truncateLength = intval(Icarus_Config::get('post_excerpt_length', 100));
+        $preserveTags = !!Icarus_Config::get('post_excerpt_preserve_tags', FALSE);
+        
+        // condition flags
+        $truncateRequired = $truncateLength > 0 && ($excerptPos === FALSE);
+
+        if (!$preserveTags || $truncateRequired) {
+            $excerpt = strip_tags($excerpt);
+            if ($truncateRequired) {
+                $excerpt = Typecho_Common::subStr($excerpt, 0, $truncateLength, '...');
+            }
+        }
+
+        return $excerpt;
     }
 }

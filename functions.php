@@ -30,6 +30,7 @@ function themeConfig($form)
     require __ICARUS_ROOT__ . 'library/Page.php';
     require __ICARUS_ROOT__ . 'library/Assets.php';
     require __ICARUS_ROOT__ . 'library/Config.php';
+    require __ICARUS_ROOT__ . 'library/Content.php';
 
     Icarus_Util::init(NULL);
     Icarus_I18n::init();
@@ -38,10 +39,13 @@ function themeConfig($form)
     
     Icarus_Config::config($iForm);
     Icarus_Page::config($iForm);
+    Icarus_Content::config($iForm);
     Icarus_Aside::config($iForm);
     Icarus_Module::config($iForm);
     Icarus_Plugin::config($iForm);
     Icarus_Assets::config($iForm);
+
+    $iForm->toc();
 }
 
 // Icarus Translation 

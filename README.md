@@ -19,8 +19,7 @@ This theme project is under construction. May have bugs or lack of necessary fun
 * Widgets ✔
 * Plugins 🚧
   * Mathjax 🚧
-  * Gallery 🚧
-  * Third party analytics 🚧
+  * Gallery ✔
   * Other ✔
 * Comments ❌
   * Internal comment system ❌
@@ -31,8 +30,8 @@ This theme project is under construction. May have bugs or lack of necessary fun
   * Monthly view archive ❌
   * Category archive ❌
 * Typecho feature adaptation
-  * Config panel 🚧
-  * Post specific configuration (thumbnail and so on) ❌
+  * Config panel ✔
+  * Post specific configuration (thumbnail and so on) ✔
 
 ## Upcoming functions
 * Pjax support

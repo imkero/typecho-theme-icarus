@@ -48,6 +48,32 @@ function themeConfig($form)
     $iForm->toc();
 }
 
+/**
+ * fix duplicated themeFields() calls made by
+ * admin/custom-fields.php
+ */
+function themeFieldsInit()
+{
+    static $inited = FALSE;
+    if (!$inited)
+    {
+        require __ICARUS_ROOT__ . 'library/Util.php';
+        require __ICARUS_ROOT__ . 'library/I18n.php';
+        require __ICARUS_ROOT__ . 'library/Content.php';
+        
+        Icarus_Util::init(NULL);
+        Icarus_I18n::init();
+
+        $inited = TRUE;
+    }
+}
+
+function themeFields($form)
+{
+    themeFieldsInit();
+    Icarus_Content::fieldsConfig($form);
+}
+
 // Icarus Translation 
 function _IcT($key)
 {

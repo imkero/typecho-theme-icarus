@@ -67,21 +67,6 @@ class Icarus_Util
         }
         return $avatar;
     }
-    public static function hasThumbnail($post)
-    {
-        // dummy
-        return FALSE;
-    }
-
-    public static function getThumbnail($post)
-    {
-        if (self::hasThumbnail($post)) {
-            // dummy
-            return 'http://ppoffice.github.io/hexo-theme-icarus/gallery/preview.png';
-        } else {
-            return Icarus_Assets::getUrlForAssets('img/thumbnail.svg');
-        }
-    }
 
     public static function getSiteInstallTime()
     {
@@ -171,5 +156,18 @@ class Icarus_Util
         }
 
         return preg_replace("/\<br\s*[\/]?\>\s*\<\/p\>/is", '</p>', $string);
+    }
+
+    public static function isEmpty($value)
+    {
+        $exist = !is_null($value);
+        if ($exist)
+        {
+            if (is_array($value))
+                $exist = count($value) > 0;
+            else if (is_string($value))
+                $exist = strlen(trim($value)) > 0;
+        }
+        return !$exist;
     }
 }

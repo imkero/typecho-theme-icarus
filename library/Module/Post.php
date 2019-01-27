@@ -40,12 +40,12 @@ class Icarus_Module_Post
 
     private function hasThumbnail()
     {
-        return Icarus_Util::hasThumbnail($this->_post);
+        return Icarus_Content::hasThumbnail($this->_post);
     }
 
     private function getThumbnail()
     {
-        return Icarus_Util::getThumbnail($this->_post);
+        return Icarus_Content::getThumbnail($this->_post);
     }
 
     public static function output($post)
@@ -53,7 +53,7 @@ class Icarus_Module_Post
         return (new Icarus_Module_Post($post))->doOutput();
     }
 
-    private function printThumbnail()
+    private function printThumbnail($isContent)
     {
         if ($this->hasThumbnail()) {
 ?>
@@ -134,7 +134,7 @@ class Icarus_Module_Post
         $isPost = $this->_post->is('post');
 ?>
 <div class="card">
-    <?php $this->printThumbnail(); ?>
+    <?php $this->printThumbnail($isContent); ?>
     <div class="card-content article">
         <?php if (!$isPage): ?>
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">

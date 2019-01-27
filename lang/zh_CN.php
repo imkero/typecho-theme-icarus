@@ -303,4 +303,10 @@ return array(
             'desc' => '在页面顶部显示一个加载进度条。',
         ),
     ),
+    'fields' => array(
+        'thumbnail' => array(
+            'title' => '缩略图 URL',
+            'desc' => '文章缩略图的 URL。缩略图会显示在文章列表、文章正文页以及最新文章 Widget 中。',
+        ),
+    ),
 );

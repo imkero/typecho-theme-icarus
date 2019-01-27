@@ -36,7 +36,7 @@ class Icarus_Module_RecentPost
     <?php if ($thumbnailEnabled): ?>
     <a href="<?php $posts->permalink(); ?>" class="media-left">
         <p class="image is-64x64">
-            <img class="thumbnail" src="<?php echo Icarus_Util::getThumbnail($posts); ?>" alt="<?php $posts->title(); ?>">
+            <img class="thumbnail" src="<?php echo Icarus_Content::getThumbnail($posts); ?>" alt="<?php $posts->title(); ?>">
         </p>
     </a>
     <?php endif; ?>

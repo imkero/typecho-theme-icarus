@@ -150,4 +150,27 @@ class Icarus_Content
 
         return $excerpt;
     }
+
+    public static function hasThumbnail($post)
+    {
+        return !Icarus_Util::isEmpty($post->fields->thumbnail);
+    }
+
+    public static function getThumbnail($post)
+    {
+        return self::hasThumbnail($post)
+            ? $post->fields->thumbnail 
+            : Icarus_Assets::getUrlForAssets('img/thumbnail.svg');
+    }
+
+    public static function fieldsConfig($form)
+    {
+        $thumbnail = new Typecho_Widget_Helper_Form_Element_Text(
+            'thumbnail', NULL, NULL, 
+            _IcT('fields.thumbnail.title'), 
+            _IcT('fields.thumbnail.desc')
+        );
+        $thumbnail->input->class = 'w-100';
+        $form->addItem($thumbnail);
+    }
 }

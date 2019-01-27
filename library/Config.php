@@ -9,15 +9,6 @@ class Icarus_Config
 
     public static function config($form)
     {
-        $form->showTitle(_IcT('setting.general.title'), 'General');
-        $form->html(sprintf(_IcT('setting.general.desc'), __TYPECHO_THEME_DIR__ . '/' . Icarus_Util::$options->theme));
-
-        $form->packInput('General/install_time', date('Y-m-d', Icarus_Util::getSiteInstallTime()), 'w-20');
-    }
-
-    public function __construct($form)
-    {
-        $this->_form = $form;
         $style = <<<STYLESHEET
 <style>
 form code
@@ -120,7 +111,17 @@ form code
 }
 </style>
 STYLESHEET;
-        $this->html($style);
+        $form->html($style);
+
+        $form->showTitle(_IcT('setting.general.title'), 'General');
+        $form->html(sprintf(_IcT('setting.general.desc'), __TYPECHO_THEME_DIR__ . '/' . Icarus_Util::$options->theme));
+
+        $form->packInput('General/install_time', date('Y-m-d', Icarus_Util::getSiteInstallTime()), 'w-20');
+    }
+
+    public function __construct($form)
+    {
+        $this->_form = $form;
     }
 
     private static function prefixKey($key)
@@ -355,14 +356,7 @@ SCRIPT;
     {
         $key = self::prefixKey($key);
         $value = Icarus_Util::$options->$key;
-        $exist = !is_null($value);
-        if ($exist)
-        {
-            if (is_array($value))
-                $exist = count($value) > 0;
-            else if (is_string($value))
-                $exist = strlen(trim($value)) != 0;
-        }
+        $exist = !Icarus_Util::isEmpty($value);
         if ($exist)
             $result = $value;
         return $exist;

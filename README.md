@@ -22,11 +22,12 @@ This theme project is under construction. May have bugs or lack of necessary fun
   * Internal comment system ❌
   * Third party comment system ❌
 * Archive 🚧
-  * Tags ❌
-  * Gneral archive ❌
-  * Monthly view archive ❌
+  * General archive ✔
+  * Date view archive ✔
+  * Tags archive ❌
   * Category archive ❌
 * Search ❌
+* TOC ❌
 * 404 Page ❌
 * Typecho feature adaptation
   * Config panel ✔

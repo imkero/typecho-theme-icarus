@@ -6,7 +6,7 @@ class Icarus_Module_Navbar
     {
         $form->packTitle('Navbar');
 
-        $form->packTextarea('Navbar/menu', "首页,/\n归档,/archive.html");
+        $form->packTextarea('Navbar/menu', "首页,/\n归档,/archives.html\n分类,/categories.html\n关于,/about.html");
         $form->packTextarea('Navbar/icons', "Download on GitHub,fab fa-github,http://github.com/ppoffice/hexo-theme-icarus");
     }
 

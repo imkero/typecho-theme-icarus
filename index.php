@@ -12,8 +12,8 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 
 $this->need('component/header.php');
 
-Icarus_Module::load('Post');
-$post = new Icarus_Module_Post($this);
+Icarus_Module::load('Single');
+$post = new Icarus_Module_Single($this);
 while ($this->next()) 
 {
 	$post->doOutput();

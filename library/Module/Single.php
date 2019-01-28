@@ -1,6 +1,6 @@
 <?php
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
-class Icarus_Module_Post
+class Icarus_Module_Single
 {
     private $_post;
 
@@ -50,7 +50,7 @@ class Icarus_Module_Post
 
     public static function output($post)
     {
-        return (new Icarus_Module_Post($post))->doOutput();
+        return (new Icarus_Module_Single($post))->doOutput();
     }
 
     private function printThumbnail($isContent)

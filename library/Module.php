@@ -3,7 +3,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 class Icarus_Module
 {
     private static $_moduleList = array(
-        'Post', 
+        'Single', 
         'Navbar', 
         'Profile', 
         'Archive', 

@@ -10,6 +10,15 @@ return array(
         'archives' => '归档',
         'tags' => '标签',
         'toc' => '文章目录',
+        'year_tpl' => '%d年',
+        'month_tpl' => '%d月',
+        'author' => '作者',
+    ),
+    'title' => array(
+        'category' => '分类 %s 下的文章',
+        'search' => '包含关键字 %s 的文章',
+        'tag' => '标签 %s 下的文章',
+        'author' => '%s 发布的文章',
     ),
     'search' => array(
         'title' => '搜索',
@@ -76,7 +85,7 @@ return array(
             ),
         ),
         'post' => array(
-            'title' => '文章 & 独立页面',
+            'title' => '文章',
             'excerpt_preserve_tags' => array(
                 'title' => '摘要保留样式',
                 'options' => array(

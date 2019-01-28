@@ -27,7 +27,6 @@ class Icarus_Module_Navbar
 
     public static function output()
     {
-        Icarus_Module::load('Post');
 ?>
 <nav class="navbar navbar-main">
     <div class="container">
@@ -61,7 +60,7 @@ class Icarus_Module_Navbar
                 </a>
                 <?php endforeach; ?>
             <?php endif; ?>
-            <?php if (Icarus_Module::enabled('toc') && (Icarus_Page::is('archive') || Icarus_Page::is('single'))): ?>
+            <?php if (Icarus_Module::enabled('Toc') && Icarus_Page::is('single')): ?>
                 <a class="navbar-item is-hidden-tablet catalogue" title="<?php _IcTp('general.catalog'); ?>" href="javascript:;">
                     <i class="fas fa-list-ul"></i>
                 </a>

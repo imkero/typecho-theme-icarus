@@ -2,6 +2,8 @@
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 class Icarus_Content
 {
+    private static $fieldsInfoOutputed = FALSE;
+
     private static $shortcodeHandler = array(
         'gallery' => 'processGalleryCallback',
     );
@@ -172,5 +174,74 @@ class Icarus_Content
         );
         $thumbnail->input->class = 'w-100';
         $form->addItem($thumbnail);
+
+        if (defined('__ICARUS_WIDGET_CLASS__') && __ICARUS_WIDGET_CLASS__ == 'Widget_Contents_Page_Edit')
+        {
+            self::fieldsInfoForPage();
+        }
+    }
+
+    private static function fieldsInfoForPage()
+    {
+        if (!self::$fieldsInfoOutputed)
+        {
+            self::$fieldsInfoOutputed = TRUE;
+?>
+<style>
+#icarus-page-info {
+    margin: 1em 0;
+    padding: 10px 15px;
+    background: #FFF;
+}
+#icarus-page-info.fold .description {
+    display: none;
+}
+#icarus-page-info .typecho-label {
+    margin: 0;
+}
+#icarus-page-info .typecho-label a {
+    display: block;
+    color: #444;
+}
+#icarus-page-info .typecho-label a:hover {
+    color: #467B96;
+    text-decoration: none;
+}
+</style>
+<section id="icarus-page-info" class="typecho-post-option fold">
+    <label id="icarus-page-info-expand" class="typecho-label">
+        <a href="#"><i class="i-caret-right"></i> <?php _IcTp('page_special.title'); ?></a>
+    </label>
+    <div class="description">
+        <?php _IcTp('page_special.desc.archives'); ?>
+        <?php _IcTp('page_special.desc.categories'); ?>
+        <?php _IcTp('page_special.desc.tags'); ?>
+    </div>
+</section>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    $('#icarus-page-info-expand').click(function() {
+        var btn = $('i', this);
+        if (btn.hasClass('i-caret-right')) {
+            btn.removeClass('i-caret-right').addClass('i-caret-down');
+        } else {
+            btn.removeClass('i-caret-down').addClass('i-caret-right');
+        }
+        $(this).parent().toggleClass('fold');
+        return false;
+    });
+    $('.icarus-autofill-slug').click(function() {
+        $('#slug').val($(this).text());
+        $('#title').val($(this).attr('data-title'));
+        $('#slug').trigger('input');
+    });
+    if (!$('#custom-field').hasClass('fold'))
+    {
+        $('#custom-field i.i-caret-right').removeClass('i-caret-right').addClass('i-caret-down');
+    }
+});
+</script>
+<?php
+        }
     }
 }

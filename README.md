@@ -18,14 +18,10 @@ This theme project is under construction. May have bugs or lack of necessary fun
 * Single Page ✔
 * Widgets ✔
 * Plugins ✔
+* Archive ✔
 * Comments ❌
   * Internal comment system ❌
   * Third party comment system ❌
-* Archive 🚧
-  * General archive ✔
-  * Date view archive ✔
-  * Tags archive ❌
-  * Category archive ❌
 * Search ❌
 * TOC ❌
 * 404 Page ❌

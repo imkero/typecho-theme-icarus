@@ -320,4 +320,12 @@ return array(
             'desc' => '文章缩略图的 URL。缩略图会显示在文章列表、文章正文页以及最新文章 Widget 中。',
         ),
     ),
+    'page_special' => array(
+        'title' => 'Icarus 内置页面说明',
+        'desc' => array(
+            'archives' => '<p>归档页面展示要求：新建一个缩略名为 <code><a href="javascript:;" class="icarus-autofill-slug" data-title="归档">archives</a></code> 的独立页面。</p>',
+            'categories' => '<p>分类页面展示要求：新建一个缩略名为 <code><a href="javascript:;" class="icarus-autofill-slug" data-title="分类">categories</a></code> 的独立页面。</p>',
+            'tags' => '<p>标签页面展示要求：新建一个缩略名为 <code><a href="javascript:;" class="icarus-autofill-slug" data-title="标签">tags</a></code> 的独立页面。</p>',
+        ),
+    ),
 );

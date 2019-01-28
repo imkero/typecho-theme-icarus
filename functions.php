@@ -2,6 +2,11 @@
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 define('__ICARUS_ROOT__', dirname(__FILE__) . '/');
 
+if (isset($this))
+{
+    define('__ICARUS_WIDGET_CLASS__', get_class($this));
+}
+
 function themeInit($widget)
 {
     require __ICARUS_ROOT__ . 'library/Util.php';

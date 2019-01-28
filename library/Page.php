@@ -10,6 +10,7 @@ class Icarus_Page
             'search' => _IcT('title.search'),
             'tag' => _IcT('title.tag'),
             'author' => _IcT('title.author'),
+            'date' => _IcT('title.date')
         ), '', ' - ');
         Icarus_Util::$options->title();
     }

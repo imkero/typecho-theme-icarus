@@ -170,4 +170,9 @@ class Icarus_Util
         }
         return !$exist;
     }
+
+    public static function urlFor($type, $param)
+    {
+        return Typecho_Common::url(Typecho_Router::url($type, $param), self::$options->index);
+    }
 }

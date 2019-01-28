@@ -427,3 +427,12 @@ pre>code:hover>.copy {
 .gist .file {
   all: initial;
 }
+
+/* ---------------------------------
+ *        Other Modifications
+ * --------------------------------- */
+.breadcrumb li a[href="#"] {
+  color: #363636;
+  cursor: default;
+  pointer-events: none;
+}

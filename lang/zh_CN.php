@@ -15,6 +15,36 @@ return array(
         'author' => '作者',
         'search' => '搜索',
     ),
+    'empty' => array(
+        'category' => array(
+            'title' => '这个分类下还没有文章 ;-)',
+            'desc' => 'Empty category',
+            'jump' => '查看其他分类',
+        ),
+        'tag' => array(
+            'title' => '这个标签下还没有文章',
+            'desc' => 'Empty Tag',
+            'jump' => '查看其他标签',
+        ),
+        'search' => array(
+            'title' => '找不到与这个关键词相关的文章',
+            'desc' => 'Empty Search Result',
+            'jump' => '再次搜索',
+        ),
+        'author' => array(
+            'title' => '这位作者还没有文章',
+            'desc' => 'Empty Tag',
+        ),
+        'date' => array(
+            'title' => '这一段时间内没有文章发布',
+            'desc' => 'Empty Archive',
+            'jump' => '查看归档',
+        ),
+    ),
+    '404' => array(
+        'title' => '404 Not found.',
+        'desc' => '页面未找到',
+    ),
     'title' => array(
         'category' => '分类 %s 下的文章',
         'search' => '包含关键字 %s 的文章',
@@ -24,6 +54,7 @@ return array(
     ),
     'search' => array(
         'title' => '搜索',
+        'placeholder' => '输入关键字搜索',
     ),
     'article' => array(
         'more' => '阅读更多',

@@ -99,9 +99,73 @@ switch ($this->getArchiveType())
 <?php
 Icarus_Module::load('Single');
 $post = new Icarus_Module_Single($this);
-while ($this->next()) 
-{
-	$post->doOutput();
+if ($this->have()) {
+    while ($this->next()) 
+    {
+        $post->doOutput();
+    }
+} else {
+    switch ($this->getArchiveType())
+    {
+        case 'category':
+        case 'date':
+        case 'author':
+        case 'search':
+        case 'tag':
+            $title = _IcT('empty.' . $this->getArchiveType() . '.title');
+            $desc = _IcT('empty.' . $this->getArchiveType() . '.desc');
+            $jump = _IcT('empty.' . $this->getArchiveType() . '.jump');
+            break;
+        default:
+            $title = _IcT('404.title');
+            $desc = _IcT('404.desc');
+            $jump = NULL;
+            break;
+    }
+    switch ($this->getArchiveType())
+    {
+        case 'category':
+            $jumpTarget = Icarus_Util::urlFor('page', array('slug' => 'categories'));
+            break;
+        case 'date':
+            $jumpTarget = Icarus_Util::urlFor('page', array('slug' => 'archives'));
+            break;
+        case 'search':
+            $jumpTarget = '#';
+?>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    (function ($) {
+        $('#icarus-jump-guide').click(function () {
+            $('.searchbox').toggleClass('show');
+        });
+    })(jQuery);
+});
+</script>
+<?php
+            break;
+        case 'tag':
+            $jumpTarget = Icarus_Util::urlFor('page', array('slug' => 'tags'));
+            break;
+    }
+?>
+<div class="card">
+    <div class="card-content">
+        <p class="title"><?php echo $title; ?></p>
+        <p class="subtitle"><?php echo $desc; ?></p>
+    </div>
+    <div class="card-footer">
+        <?php if (!empty($jump)): ?>
+        <p class="card-footer-item">
+            <span><a href="<?php echo $jumpTarget; ?>" id="icarus-jump-guide"><?php echo $jump; ?></a></span>
+        </p>
+        <?php endif; ?>
+        <p class="card-footer-item">
+            <span><a href="<?php Icarus_Util::$options->index(); ?>">回到首页</a></span>
+        </p>
+    </div>
+</div>
+<?php
 }
 
 Icarus_Module::show('Paginator', $this);

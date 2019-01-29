@@ -24,17 +24,10 @@ class Icarus_Aside
     public static $asideLeft = NULL;
     public static $asideRight = NULL;
 
-    private static $_columnCount = 1; // 1 or 2 or 3
-    
     public static function init()
     {
-        self::$_columnCount = 1;
-        
         self::$asideLeft = new self(self::LEFT);
         self::$asideRight = new self(self::RIGHT);
-
-        self::$_columnCount += self::$asideLeft->count() > 0;
-        self::$_columnCount += self::$asideRight->count() > 0;
     }
 
     public static function config($form)
@@ -90,7 +83,10 @@ class Icarus_Aside
 
     public static function getColumnCount()
     {
-        return self::$_columnCount;
+        $count = 1;
+        $count += self::$asideLeft->count() > 0;
+        $count += self::$asideRight->count() > 0;
+        return $count;
     }
 
     public function clear()

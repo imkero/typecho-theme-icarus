@@ -53,6 +53,8 @@
         </div>
     </footer>
 <?php
+Icarus_Module::show('Search');
+
 Icarus_Assets::cdn('js', 'jquery', '3.3.1', 'dist/jquery.min.js');
 
 Icarus_Plugin::footerAll();

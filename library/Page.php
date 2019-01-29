@@ -32,7 +32,12 @@ class Icarus_Page
         {
             echo '<link rel="icon" href="', Icarus_Assets::getUrlForAssets($faviconUrl),'" />', PHP_EOL;
         });
+
+        Icarus_Module::load('Search');
+        Icarus_Module_Search::header();
+
         echo Icarus_Config::get('head_extend');
+
         // todo: open graph
     }
 

@@ -201,6 +201,8 @@ if ($isPost):
 <?php
     endif;
 endif; 
-Icarus_Module::show('Comments');
+if ($isContent) {
+    Icarus_Module::show('Comments', $this->_post);
+}
     }
 }

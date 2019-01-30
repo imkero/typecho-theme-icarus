@@ -14,6 +14,7 @@ return array(
         'month_tpl' => '%d月',
         'author' => '作者',
         'search' => '搜索',
+        'comments' => '评论',
     ),
     'empty' => array(
         'category' => array(
@@ -343,6 +344,17 @@ return array(
         'progressbar' => array(
             'title' => '进度条插件',
             'desc' => '在页面顶部显示一个加载进度条。',
+        ),
+        'comments' => array(
+            'title' => '评论',
+            'desc' => '文章、独立页面评论的相关设置',
+            'type' => array(
+                'title' => '评论系统',
+                'desc' => '决定使用何种评论系统提供评论功能。',
+                'options' => array(
+                    'internal' => '内置评论',
+                )
+            )
         ),
     ),
     'fields' => array(

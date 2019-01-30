@@ -207,7 +207,7 @@ STYLESHEET;
 
     public function makeInput($name, $title, $desc, $default = NULL, $classAppend = NULL)
     {
-        $input = new Typecho_Widget_Helper_Form_Element_Text(
+        $input = new Icarus_Typecho_Widget_Helper_Form_Element_Text(
             self::prefixKey($name), NULL, $default, 
             $title, 
             $desc
@@ -235,7 +235,7 @@ STYLESHEET;
 
     public function makeTextarea($name, $title, $desc, $default = NULL)
     {
-        $this->_form->addInput(new Typecho_Widget_Helper_Form_Element_Textarea(
+        $this->_form->addInput(new Icarus_Typecho_Widget_Helper_Form_Element_Textarea(
             self::prefixKey($name), NULL, $default, 
             $title, 
             $desc
@@ -250,7 +250,7 @@ STYLESHEET;
 
     public function makeRadio($name, $title, $desc, array $options, $default = NULL)
     {
-        $this->_form->addInput(new Typecho_Widget_Helper_Form_Element_Radio(
+        $this->_form->addInput(new Icarus_Typecho_Widget_Helper_Form_Element_Radio(
             self::prefixKey($name), $options, $default, 
             $title, 
             $desc
@@ -388,5 +388,38 @@ SCRIPT;
             $date = new DateTime();
         }
         return $date->format('Y');
+    }
+}
+
+class Icarus_Typecho_Widget_Helper_Form_Element_Text extends Typecho_Widget_Helper_Form_Element_Text
+{
+    public function value($value)
+    {
+        if (!is_null($value))
+            return parent::value($value);
+        else
+            return $this;
+    }
+}
+
+class Icarus_Typecho_Widget_Helper_Form_Element_Textarea extends Typecho_Widget_Helper_Form_Element_Textarea
+{
+    public function value($value)
+    {
+        if (!is_null($value))
+            return parent::value($value);
+        else
+            return $this;
+    }
+}
+
+class Icarus_Typecho_Widget_Helper_Form_Element_Radio extends Typecho_Widget_Helper_Form_Element_Radio
+{
+    public function value($value)
+    {
+        if (!is_null($value))
+            return parent::value($value);
+        else
+            return $this;
     }
 }

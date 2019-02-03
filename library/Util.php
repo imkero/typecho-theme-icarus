@@ -93,61 +93,51 @@ class Icarus_Util
     }
 
     /**
-     * 修复因截断而不完整的html（只能处理截断前是完整状态的html）
-     * 
+     * 自闭合html修复函数
      * 使用方法:
      * <code>
      * $input = '这是一段被截断的html文本<a href="#"';
      * echo Typecho_Common::fixHtml($input);
      * //output: 这是一段被截断的html文本
      * </code>
+     * 
+     * Typecho 17.10.30 版 fixHtml 函数不能正确处理 <br> 等自闭合标签
+     * Commit c056f6c895f440b1d72fc1415878fb7541fc249f 修复了此问题
      *
      * @access public
      * @param string $string 需要修复处理的字符串
      * @return string
+     * 
+     * @link https://github.com/typecho/typecho/blob/c056f6c895f440b1d72fc1415878fb7541fc249f/var/Typecho/Common.php#L519
      */
     public static function fixHtml($string)
     {
-        $lastStartTagPos = strrpos($string, "<");
-
-        // any tag not found
-        if (FALSE === $lastStartTagPos) {
+        //关闭自闭合标签
+        $startPos = strrpos($string, "<");
+        if (false == $startPos) {
             return $string;
         }
-
-        // remove last unstarted tag like '<a href="#"'
-        if (FALSE === strpos($string, ">", $lastStartTagPos + 1)) {
-            $string = substr($string, 0, $lastStartTagPos);
+        $trimString = substr($string, $startPos);
+        if (false === strpos($trimString, ">")) {
+            $string = substr($string, 0, $startPos);
         }
-
-        // regex match start tags
+        //非自闭合html标签列表
         preg_match_all("/<([_0-9a-zA-Z-\:]+)\s*([^>]*)>/is", $string, $startTags);
-        
-        // regex match end tags
         preg_match_all("/<\/([_0-9a-zA-Z-\:]+)>/is", $string, $closeTags);
-
         if (!empty($startTags[1]) && is_array($startTags[1])) {
-            // reverse start tags list
             krsort($startTags[1]);
-
-            $closeTagsAvailable = !empty($closeTags[1]) && is_array($closeTags[1]);
-
+            $closeTagsIsArray = is_array($closeTags[1]);
             foreach ($startTags[1] as $key => $tag) {
                 $attrLength = strlen($startTags[2][$key]);
-                
-                // self-closed tags
-                if ($attrLength > 0 && "/" == $startTags[2][$key][$attrLength - 1]) {
+                if ($attrLength > 0 && "/" == trim($startTags[2][$key][$attrLength - 1])) {
                     continue;
                 }
-
-                // single tag white list
-                if (in_array($tag, array('img', 'br'))) {
+                // 白名单
+                if (preg_match("/^(area|base|br|col|embed|hr|img|input|keygen|link|meta|param|source|track|wbr)$/i", $tag)) {
                     continue;
                 }
-
-                // decrease correspondent close tag's count
-                if ($closeTagsAvailable) {
-                    if (FALSE !== ($index = array_search($tag, $closeTags[1]))) {
+                if (!empty($closeTags[1]) && $closeTagsIsArray) {
+                    if (false !== ($index = array_search($tag, $closeTags[1]))) {
                         unset($closeTags[1][$index]);
                         continue;
                     }
@@ -155,8 +145,7 @@ class Icarus_Util
                 $string .= "</{$tag}>";
             }
         }
-
-        return preg_replace("/\<br\s*[\/]?\>\s*\<\/p\>/is", '</p>', $string);
+        return preg_replace("/\<br\s*\/\>\s*\<\/p\>/is", '</p>', $string);
     }
 
     public static function isEmpty($value)

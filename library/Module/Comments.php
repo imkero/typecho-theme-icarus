@@ -21,7 +21,7 @@ class Icarus_Module_Comments
         }
     }
 
-    private static function printCommentAuthor($comment, $autoLink = NULL, $noFollow = NULL)
+    public static function printCommentAuthor($comment, $autoLink = NULL, $noFollow = NULL)
     {
         $autoLink = (NULL === $autoLink) ? Icarus_Util::$options->commentsShowUrl : $autoLink;
         $noFollow = (NULL === $noFollow) ? Icarus_Util::$options->commentsUrlNofollow : $noFollow;
@@ -146,7 +146,7 @@ function threadedComments($comments, $options)
     <div class="media-content" id="<?php $comments->theId(); ?>">
         <div class="content">
             <div class="comment-header">
-                <span class="comment-author"><?php $comments->author(); ?></span>
+                <span class="comment-author"><?php Icarus_Module_Comments::printCommentAuthor($comments); ?></span>
                 <?php if ($comments->authorId && $comments->authorId == $comments->ownerId): ?>
                 <span class="tag is-info"><?php _IcTp('comments.is_author'); ?></span>
                 <?php endif; ?>

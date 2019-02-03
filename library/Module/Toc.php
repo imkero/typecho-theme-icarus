@@ -18,7 +18,7 @@ class Icarus_Module_Toc
             <h3 class="menu-label">
                 <?php _IcTp('general.toc'); ?>
             </h3>
-
+            
         </div>
     </div>
 </div>

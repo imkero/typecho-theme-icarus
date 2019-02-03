@@ -15,6 +15,7 @@ return array(
         'author' => '作者',
         'search' => '搜索',
         'comments' => '评论',
+        'logout' => '登出',
     ),
     'empty' => array(
         'category' => array(
@@ -75,6 +76,34 @@ return array(
     ),
     'back_to_top' => array(
         'title' => '返回顶部',
+    ),
+    'comments' => array(
+        'do_comment_title' => '添加新评论',
+        'do_comment' => '发表评论',
+        'logined' => '登录身份：',
+        'disabled' => '评论已关闭',
+        'is_author' => '作者',
+        'is_waiting' => '待审核',
+        'num' => array(
+            '0' => '暂无',
+            '1' => '1 条',
+            'more' => '%d 条',
+        ),
+        'input' => array(
+            'name' => '昵称',
+            'email' => '邮箱（可选）',
+            'email_required' => '邮箱',
+            'url' => '链接（可选）',
+            'url_required' => '链接',
+            'text' => '',
+        ),
+        'guide' => array(
+            'name' => '填写您的昵称或姓名，将和您的评论一同显示。',
+            'email' => '可选，保密。填写您的邮箱地址，用于显示 Gravatar 头像以及接收通知。',
+            'email_required' => '必填，保密。填写您的邮箱地址，用于显示 Gravatar 头像以及接收通知。',
+            'url' => '可选。可以填写您的博客或主页的链接。',
+            'url_required' => '请填写您的博客或主页的链接。',
+        ),
     ),
     'setting' => array(
         'general' => array(
@@ -353,9 +382,47 @@ return array(
                 'desc' => '决定使用何种评论系统提供评论功能。',
                 'options' => array(
                     'internal' => '内置评论',
-                )
-            )
+                ),
+            ),
+            'default_avatar' => array(
+                'title' => '评论默认头像',
+                'desc' => '指定当评论者没有设定 Gravatar 头像时显示的默认头像。<a href="https://cn.gravatar.com/site/implement/images/#default-image" rel="noopener noreferrer nofollow" target="_blank">参考</a>',
+            ),
         ),
+        'assets' => array(
+            'title' => '资源与 CDN',
+            'desc' => '合理配置主题所需的资源文件的加载路径以提高页面加载速度。',
+            'theme_assets_base' => array(
+                'title' => '主题资源 CDN',
+                'desc' => '留空则默认为主题目录下的 assets 目录。设置本设置项后请将主题目录下的 assets 目录内的文件复制到 CDN 的对应位置。',
+            ),
+            'public_assets' => array(
+                'title' => '公共资源 CDN',
+                'options' => array(
+                    'jsdelivr' => 'JsDelivr',
+                ),
+            ),
+            'public_icon' => array(
+                'title' => '公共图标资源 CDN',
+                'options' => array(
+                    'fontawesome' => 'FontAwesome',
+                    'jsdelivr' => 'JsDelivr',
+                ),
+            ),
+            'public_font' => array(
+                'title' => '公共字体资源 CDN',
+                'options' => array(
+                    'google' => 'Google Fonts',
+                ),
+            ),
+            'public_font' => array(
+                'title' => '公共 Gravatar CDN',
+                'options' => array(
+                    'v2ex' => 'V2EX',
+                ),
+            ),
+        ),
+        'cfg_version_notice' => 'Icarus 主题已更新至版本 %s，请点击保存设置按钮使新的设置项生效。',
     ),
     'fields' => array(
         'thumbnail' => array(

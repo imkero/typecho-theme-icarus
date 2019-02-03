@@ -1,6 +1,7 @@
 <?php
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 define('__ICARUS_ROOT__', dirname(__FILE__) . '/');
+define('__ICARUS_VERSION__', '0.9.3');
 
 if (isset($this))
 {
@@ -9,20 +10,26 @@ if (isset($this))
 
 function themeInit($widget)
 {
-    require __ICARUS_ROOT__ . 'library/Util.php';
-    require __ICARUS_ROOT__ . 'library/I18n.php';
-    require __ICARUS_ROOT__ . 'library/Module.php';
-    require __ICARUS_ROOT__ . 'library/Aside.php';
-    require __ICARUS_ROOT__ . 'library/Plugin.php';
-    require __ICARUS_ROOT__ . 'library/Page.php';
-    require __ICARUS_ROOT__ . 'library/Assets.php';
-    require __ICARUS_ROOT__ . 'library/Config.php';
-    require __ICARUS_ROOT__ . 'library/Content.php';
+    static $inited = FALSE;
+    if (!$inited)
+    {
+        $inited = TRUE;
 
-    Icarus_Util::init($widget);
-    Icarus_I18n::init();
-    Icarus_Assets::init();
-    Icarus_Aside::init();
+        require __ICARUS_ROOT__ . 'library/Util.php';
+        require __ICARUS_ROOT__ . 'library/I18n.php';
+        require __ICARUS_ROOT__ . 'library/Module.php';
+        require __ICARUS_ROOT__ . 'library/Aside.php';
+        require __ICARUS_ROOT__ . 'library/Plugin.php';
+        require __ICARUS_ROOT__ . 'library/Page.php';
+        require __ICARUS_ROOT__ . 'library/Assets.php';
+        require __ICARUS_ROOT__ . 'library/Config.php';
+        require __ICARUS_ROOT__ . 'library/Content.php';
+    
+        Icarus_Util::init($widget);
+        Icarus_I18n::init();
+        Icarus_Assets::init();
+        Icarus_Aside::init();
+    }
 }
 
 function themeConfig($form)

@@ -10,7 +10,7 @@ $this->need('component/header.php');
 
 <div class="card">
     <div class="card-content">
-        <p class="title"><?php _IcTp('404.title'); ?></p>
+        <p class="title has-text-weight-normal"><?php _IcTp('404.title'); ?></p>
         <p class="subtitle"><?php _IcTp('404.desc'); ?></p>
     </div>
     <div class="card-footer">

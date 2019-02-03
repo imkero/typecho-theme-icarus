@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', function () {
 ?>
 <div class="card">
     <div class="card-content">
-        <p class="title"><?php echo $title; ?></p>
+        <p class="title has-text-weight-normal"><?php echo $title; ?></p>
         <p class="subtitle"><?php echo $desc; ?></p>
     </div>
     <div class="card-footer">

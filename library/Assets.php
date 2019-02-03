@@ -10,55 +10,76 @@ class Icarus_Assets
                 'highlight.js' => 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@{version}/{file}'
             ),
         ),
-        'font' => array(
-            'google' => array(
-                'font' => 'https://fonts.googleapis.com/{type}?family={fontname}'
-            )
-        ),
         'icon' => array(
-            'fontawesome' => array(
-                'icon' => 'https://use.fontawesome.com/releases/v5.4.1/css/all.css'
-            ),
-            'jsdelivr' => array(
-                'icon' => 'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.4.1/css/all.min.css'
-            ),
+            'fontawesome' => 'https://use.fontawesome.com/releases/v5.4.1/css/all.css',
+            'jsdelivr' => 'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.4.1/css/all.min.css',
+        ),
+        'font' => array(
+            'google' => 'https://fonts.googleapis.com/{type}?family={fontname}',
+        ),
+        'gravatar' => array(
+            'v2ex' => 'https://cdn.v2ex.com/gravatar',
         ),
     );
     private static $_assetsCdnUrl = array();
+
+    const DEFAULT_ASSETS_CDN = 'jsdelivr';
+    const DEFAULT_ICON_CDN = 'fontawesome';
+    const DEFAULT_FONT_CDN = 'google';
+    const DEFAULT_GRAVATAR_CDN = 'v2ex';
+
+    public static function config($form)
+    {
+        $form->packTitle('Assets');
+        $form->packInput('Assets/theme_assets_base', '');
+        $form->packRadio('Assets/public_assets', array_keys(self::$_cdnProviders['assets']), self::DEFAULT_ASSETS_CDN);
+        $form->packRadio('Assets/public_icon', array_keys(self::$_cdnProviders['icon']), self::DEFAULT_ICON_CDN);
+        $form->packRadio('Assets/public_font', array_keys(self::$_cdnProviders['font']), self::DEFAULT_FONT_CDN);
+        $form->packRadio('Assets/public_gravatar', array_keys(self::$_cdnProviders['gravatar']), self::DEFAULT_GRAVATAR_CDN);
+    }
+
     public static function init()
     {
         self::$_assetsBaseUrl = Icarus_Config::get(
-            'assets_baseUrl',
+            'assets_theme_assets_base',
             Typecho_Common::url('assets', Icarus_Util::$options->themeUrl)
         );  
 
-        // dummy
-        self::loadAssetsCDNConfig('jsdelivr', 'assets');
-        self::loadAssetsCDNConfig('google', 'font');
-        self::loadAssetsCDNConfig('fontawesome', 'icon');
-
-
-        self::loadAssetsCustomConfig('assets');
-        self::loadAssetsCustomConfig('font');
-        self::loadAssetsCustomConfig('icon');
+        self::loadAssetsCDNConfig(
+            'assets', 
+            Icarus_Config::get('assets_public_assets'), 
+            self::DEFAULT_ASSETS_CDN
+        );
+        self::loadAssetsCDNConfig(
+            'icon', 
+            Icarus_Config::get('assets_public_icon'), 
+            self::DEFAULT_ICON_CDN
+        );
+        self::loadAssetsCDNConfig(
+            'font', 
+            Icarus_Config::get('assets_public_font'), 
+            self::DEFAULT_FONT_CDN
+        );
+        self::loadAssetsCDNConfig(
+            'gravatar', 
+            Icarus_Config::get('assets_public_gravatar'), 
+            self::DEFAULT_GRAVATAR_CDN
+        );
     }
 
-    private static function loadAssetsCDNConfig($cdnName, $type)
+    private static function loadAssetsCDNConfig($type, $cdnName, $defaultCDNName)
     {
         if (!array_key_exists($type, self::$_cdnProviders))
             return;
 
         $cdn = self::$_cdnProviders[$type];
 
-        if (!array_key_exists($cdnName, $cdn))
-            return;
+        if (is_null($cdnName) || !array_key_exists($cdnName, $cdn))
+            $cdnName = $defaultCDNName;
 
-        self::$_assetsCdnUrl = array_merge(self::$_assetsCdnUrl, $cdn[$cdnName]);
-    }
-
-    private static function loadAssetsCustomConfig($type)
-    {
-
+        self::$_assetsCdnUrl = array_merge(
+            self::$_assetsCdnUrl, 
+            is_array($cdn[$cdnName]) ? $cdn[$cdnName] : array($type => $cdn[$cdnName]));
     }
 
     public static function getUrlForAssets($path)
@@ -70,7 +91,7 @@ class Icarus_Assets
 
     public static function printCssTag($cssUrl)
     {
-        echo '<link rel="stylesheet" href="', $cssUrl, '" />', PHP_EOL;
+        echo '<link rel="stylesheet" href="', $cssUrl, '" >', PHP_EOL;
     }
 
     public static function printJsTag($jsUrl, $defer = FALSE, $async = FALSE)
@@ -123,6 +144,13 @@ class Icarus_Assets
         return self::$_assetsCdnUrl['icon'];
     }
 
+    public static function getGravatarUrl()
+    {
+        if (!array_key_exists('gravatar', self::$_assetsCdnUrl))
+            return;
+        return self::$_assetsCdnUrl['gravatar'];
+    }
+
     public static function cdn($cssJs, $type)
     {
         $args = func_get_args();
@@ -157,18 +185,13 @@ class Icarus_Assets
         {
             return;
         }
-        if ($cssJs == 'js') // js tag
+        if ($cssJs == 'js')
         {
             self::printJsTag($url, $defer, $async);
         }
-        else // css tag
+        else
         {
             self::printCssTag($url);
         }
-    }
-
-    public static function config($form)
-    {
-
     }
 }

@@ -436,3 +436,77 @@ pre>code:hover>.copy {
   cursor: default;
   pointer-events: none;
 }
+
+.card-content>.respond {
+  margin-top: 1rem;
+  padding-top: 1rem;
+}
+
+.comment-header {
+  margin-bottom: .3em;
+}
+
+.comment-header .tag {
+  height: auto;
+  padding-left: .5em;
+  margin-left: .4em;
+  padding-right: .5em;
+  font-weight: bold;
+}
+
+.comment-author {
+  font-weight: bold;
+}
+
+.comment-content {
+  margin-bottom: .3em;
+}
+
+.comment-meta {
+  font-size: 0.875em;
+}
+
+#cancel-comment-reply-link {
+  align-items: center;
+  border-radius: 2px;
+  border: 1px solid #dbdbdb;
+  background-color: #fff;
+  color: #363636;
+  display: inline-flex;
+  font-size: .75rem;
+  height: 2em;
+  justify-content: center;
+  line-height: 1.5;
+  padding-left: .75em;
+  padding-right: .75em;
+  white-space: nowrap;
+}
+
+#cancel-comment-reply-link:focus:not(:active) {
+  box-shadow: 0 0 0 0.125em rgba(50,115,220,.25);
+}
+
+#cancel-comment-reply-link:active {
+  border-color: #4a4a4a;
+  color: #363636;
+}
+
+#cancel-comment-reply-link:hover {
+  border-color: #b5b5b5;
+  color: #363636;
+}
+
+.media .respond {
+  border-top: 1px solid rgba(219, 219, 219, 0.5);
+  padding-top: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.media .respond .media {
+  border-top: none;
+  padding-top: 0;
+}
+
+.comment-container .pagination {
+  margin: 1rem 0;
+}

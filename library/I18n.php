@@ -56,7 +56,7 @@ class Icarus_I18n
     {
         if ($this->hasTranslation($key)) {
             $translation = $this->_data[$key];
-            if ($translation[0] == '@')
+            if (strlen($translation) > 0 && $translation[0] == '@')
                 return $this->getTranslation(substr($translation, 1));
             else
                 return $translation;

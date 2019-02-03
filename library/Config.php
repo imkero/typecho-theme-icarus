@@ -9,6 +9,14 @@ class Icarus_Config
 
     public static function config($form)
     {
+        if (!self::cfgVersionMatch())
+        {
+            Typecho_Widget::widget('Widget_Notice')->set(sprintf(_IcT('setting.cfg_version_notice'), __ICARUS_VERSION__), 'notice');
+        }
+
+        $verInfo = new Icarus_Form_VersionField();
+        $form->_form->addInput($verInfo);
+
         $style = <<<STYLESHEET
 <style>
 form code
@@ -124,7 +132,7 @@ STYLESHEET;
         $this->_form = $form;
     }
 
-    private static function prefixKey($key)
+    public static function prefixKey($key)
     {
         return self::PREFIX . $key;
     }
@@ -389,6 +397,11 @@ SCRIPT;
         }
         return $date->format('Y');
     }
+
+    public static function cfgVersionMatch()
+    {
+        return Icarus_Config::get('config_version') === __ICARUS_VERSION__;
+    }
 }
 
 class Icarus_Typecho_Widget_Helper_Form_Element_Text extends Typecho_Widget_Helper_Form_Element_Text
@@ -421,5 +434,18 @@ class Icarus_Typecho_Widget_Helper_Form_Element_Radio extends Typecho_Widget_Hel
             return parent::value($value);
         else
             return $this;
+    }
+}
+
+class Icarus_Form_VersionField extends Typecho_Widget_Helper_Form_Element_Hidden
+{
+    public function __construct()
+    {
+        parent::__construct(Icarus_Config::prefixKey('config_version'), NULL, __ICARUS_VERSION__);
+    }
+
+    public function value($value)
+    {
+        return parent::value(__ICARUS_VERSION__);
     }
 }

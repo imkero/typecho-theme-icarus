@@ -1,5 +1,6 @@
 <?php
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
+
 class Icarus_Util
 {
     public static $options;
@@ -52,9 +53,9 @@ class Icarus_Util
         return $result;
     }
 
-    public static function getAvatar($email, $size, $default = null)
+    public static function getAvatar($email, $size)
     {
-        return self::getGravatar($email, Icarus_Config::get('gravatar_cdn', 'https://cdn.v2ex.com/gravatar'), $size, $default);
+        return self::getGravatar($email, Icarus_Assets::getGravatarUrl(), $size, Icarus_Config::get('comments_default_avatar'));
     }
 
     public static function getGravatar($email, $host, $size, $default = null)
@@ -63,7 +64,7 @@ class Icarus_Util
         $hash = md5(strtolower($email));
         $avatar = $host . '/' . $hash . '?s=' . $size . '&r=' . $rating;
         if (!empty($default)) {
-            $avatar .= '&d=' . $default;
+            $avatar .= '&d=' . urlencode($default);
         }
         return $avatar;
     }

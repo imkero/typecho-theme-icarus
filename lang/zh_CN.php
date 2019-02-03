@@ -415,7 +415,7 @@ return array(
                     'google' => 'Google Fonts',
                 ),
             ),
-            'public_font' => array(
+            'public_gravatar' => array(
                 'title' => '公共 Gravatar CDN',
                 'options' => array(
                     'v2ex' => 'V2EX',

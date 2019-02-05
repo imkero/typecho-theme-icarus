@@ -36,7 +36,7 @@ class Icarus_Module_Toc
         if (!isset(self::$_toc[$index]))
             return;
 
-        if (!isset(self::$_toc[$index]['id']) && empty(self::$_toc[$index]['children']))
+        if (empty(self::$_toc[$index]['children']))
             return;
 ?>
 <ul class="menu-list">

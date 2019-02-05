@@ -60,11 +60,11 @@
         function stickyTocPos() {
             if ($(window).scrollTop() > tocOffsetTop)
             {
-                $("#toc").addClass("toc-fixed");
+                $tocFixed.addClass("toc-fixed");
             }
             else
             {
-                $("#toc").removeClass("toc-fixed");
+                $tocFixed.removeClass("toc-fixed");
             }
         }
 

@@ -1,7 +1,7 @@
 <?php
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 define('__ICARUS_ROOT__', dirname(__FILE__) . '/');
-define('__ICARUS_VERSION__', '0.9.3');
+define('__ICARUS_VERSION__', '0.9.4');
 
 if (isset($this))
 {

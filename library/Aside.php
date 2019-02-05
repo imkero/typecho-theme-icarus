@@ -155,16 +155,7 @@ class Icarus_Aside
 foreach ($this->_widgets as $widgetName) {
     Icarus_Module::show($widgetName);
 }
-if ($this->_position == self::LEFT): 
 ?>
-    <div class="column-right-shadow is-hidden-widescreen <?php $this->printStickyClassByPos(self::RIGHT); ?>">
-<?php
-foreach (self::$asideRight->_widgets as $widgetName) {
-    Icarus_Module::show($widgetName);
-}
-?>
-    </div>
-<?php endif; ?>
 </aside>
 <?php
     }

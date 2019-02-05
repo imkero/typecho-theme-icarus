@@ -510,3 +510,33 @@ pre>code:hover>.copy {
 .comment-container .pagination-list {
   margin: 1rem 0;
 }
+
+.toc-fixed {
+  position: fixed;
+  top: 25px;
+  max-width: 20%;
+}
+
+.toc-fixed .menu > .menu-list{
+  max-height: 70vh;
+  overflow-y: overlay;
+  overflow-x: hidden;
+}
+
+.toc-fixed .menu > .menu-list::-webkit-scrollbar {
+  width: 6px;
+  height: 10px;
+}
+
+.toc-fixed .menu > .menu-list::-webkit-scrollbar-thumb {
+  background-color: rgb(200, 200, 200);
+  background-clip: padding-box;
+}
+
+.toc-fixed .menu > .menu-list::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(160, 160, 160)
+}
+
+.toc-fixed .menu > .menu-list::-webkit-scrollbar-track {
+  background-color: rgb(238, 238, 238)
+}

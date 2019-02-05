@@ -57,7 +57,7 @@
     if ($tocFixed.length > 0) {
         var tocOffsetTop = Number($tocFixed.offset().top) - 50;
 
-        function stickyToc() {
+        function stickyTocPos() {
             if ($(window).scrollTop() > tocOffsetTop)
             {
                 $("#toc").addClass("toc-fixed");
@@ -68,8 +68,17 @@
             }
         }
 
-        stickyToc();
-        $(window).scroll(stickyToc);
+        function stickyTocWidth() {
+            var $toc = $("#toc");
+            var width = $toc.parent().width();
+            $toc.width(width);
+        }
+
+        stickyTocPos();
+        stickyTocWidth();
+
+        $(window).scroll(stickyTocPos);
+        $(window).resize(stickyTocWidth);
     }
 
     const MD5 = (function () {
@@ -79,8 +88,8 @@
 
     $('#mail').blur(function() {
         var email = $(this).val();
-        
         if (email == "") return;
+
         var avatarUrl = $('#comment-form-avatar').attr('data-avatar-url-tpl');
         avatarUrl = avatarUrl
             .replace('eae80291164847328a4a0742d9d5b5e2', MD5(email))

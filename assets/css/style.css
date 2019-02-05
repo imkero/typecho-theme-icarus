@@ -514,7 +514,6 @@ pre>code:hover>.copy {
 .toc-fixed {
   position: fixed;
   top: 25px;
-  max-width: 20%;
 }
 
 .toc-fixed .menu > .menu-list{

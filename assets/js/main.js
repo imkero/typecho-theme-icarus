@@ -55,7 +55,7 @@
 
     var $tocFixed = $("#toc.toc-fixed-enabled");
     if ($tocFixed.length > 0) {
-        var tocOffsetTop = Number($tocFixed.offset().top) - 50;
+        var tocOffsetTop = Number($tocFixed.offset().top) - 25;
 
         function stickyTocPos() {
             if ($(window).scrollTop() > tocOffsetTop)

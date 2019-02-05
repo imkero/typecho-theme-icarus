@@ -36,7 +36,7 @@
 
     var $toc = $('#toc');
     if ($toc.length > 0) {
-    var $mask = $('<div>');
+        var $mask = $('<div>');
         $mask.attr('id', 'toc-mask');
 
         $('body').append($mask);
@@ -49,6 +49,8 @@
         $toc.on('click', toggleToc);
         $mask.on('click', toggleToc);
         $('.navbar-main .catalogue').on('click', toggleToc);
+    } else {
+        $('.navbar-main .catalogue').hide();
     }
 
     const MD5 = (function () {

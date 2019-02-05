@@ -24,7 +24,7 @@ This theme project is under construction. May have bugs or lack of necessary fun
 * Comments 🚧
   * Internal comment system ✔
   * Third party comment system ❌
-* TOC 🚧
+* TOC ✔
 * Typecho feature adaptation
   * Config panel ✔
   * Post specific configuration (thumbnail and so on) ✔

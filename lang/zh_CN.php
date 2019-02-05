@@ -275,6 +275,32 @@ return array(
                     '1' => '@general.enable',
                 ),
             ),
+            'non_post_hide_widget' => array(
+                'title' => '于非文章页面隐藏 Widget',
+                'desc' => '通过指定在非文章页面隐藏部分 Widget 使得首页与文章页呈现不同的排版。',
+                'options' => array(
+                    'Profile' => '@setting.profile.title', 
+                    'Category' => '@setting.category.title', 
+                    'Link' => '@setting.link.title', 
+                    'RecentPost' => '@setting.recent_post.title', 
+                    'Archive' => '@setting.archive.title', 
+                    'Tag' => '@setting.tag.title', 
+                    'Toc' => '@setting.toc.title'
+                ),
+            ),
+            'post_hide_widget' => array(
+                'title' => '于文章页面隐藏 Widget',
+                'desc' => '通过指定在文章页面隐藏部分 Widget 使得首页与文章页呈现不同的排版。',
+                'options' => array(
+                    'Profile' => '@setting.profile.title', 
+                    'Category' => '@setting.category.title', 
+                    'Link' => '@setting.link.title', 
+                    'RecentPost' => '@setting.recent_post.title', 
+                    'Archive' => '@setting.archive.title', 
+                    'Tag' => '@setting.tag.title', 
+                    'Toc' => '@setting.toc.title'
+                ),
+            ),
         ),
         'archive' => array(
             'title' => '归档 Widget',

@@ -39,6 +39,9 @@ class Icarus_Aside
 
         $form->packRadio('Aside/left_post_hide', array('0', '1'), '0');
         $form->packRadio('Aside/right_post_hide', array('0', '1'), '0');
+
+        $form->packCheckbox('Aside/non_post_hide_widget', self::$_asideWidgets);
+        $form->packCheckbox('Aside/post_hide_widget', self::$_asideWidgets);
     }
 
     public function __construct($position)
@@ -61,9 +64,14 @@ class Icarus_Aside
             }
         }
         $seqMap = array();
+        $hiddenWidgets = Icarus_Util::$widget->is('single') ? Icarus_Config::get('aside_post_hide_widget') : Icarus_Config::get('aside_non_post_hide_widget');
+        
+        if (!is_array($hiddenWidgets))
+            $hiddenWidgets = array();
+        
         foreach (self::$_asideWidgets as $widgetName)
         {
-            if (Icarus_Module::enabled($widgetName) && self::getWidgetPosition($widgetName) == $position)
+            if (Icarus_Module::enabled($widgetName) && self::getWidgetPosition($widgetName) == $position && !in_array($widgetName, $hiddenWidgets))
             {
                 $this->_widgets[] = $widgetName;
                 $seqMap[$widgetName] = self::getWidgetSeq($widgetName);

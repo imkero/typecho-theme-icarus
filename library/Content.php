@@ -107,7 +107,13 @@ class Icarus_Content
     public static function getContent($post)
     {
         $content = $post->content;
-        return self::processAllShortcodes($content);
+        $content = self::processAllShortcodes($content);
+        if (Icarus_Module::enabled('Toc'))
+        {
+            Icarus_Module::load('Toc');
+            $content = Icarus_Module_Toc::generate($content);
+        }
+        return $content;
     }
 
     public static function getExcerpt($post)

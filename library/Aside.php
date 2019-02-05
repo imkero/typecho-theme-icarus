@@ -47,7 +47,7 @@ class Icarus_Aside
     public function __construct($position)
     {
         $this->_position = $position;
-        if (Icarus_Util::$widget->is('single'))
+        if (Icarus_Util::$widget->is('post'))
         {
             switch ($position)
             {
@@ -64,7 +64,7 @@ class Icarus_Aside
             }
         }
         $seqMap = array();
-        $hiddenWidgets = Icarus_Util::$widget->is('single') ? Icarus_Config::get('aside_post_hide_widget') : Icarus_Config::get('aside_non_post_hide_widget');
+        $hiddenWidgets = Icarus_Util::$widget->is('post') ? Icarus_Config::get('aside_post_hide_widget') : Icarus_Config::get('aside_non_post_hide_widget');
         
         if (!is_array($hiddenWidgets))
             $hiddenWidgets = array();

@@ -6,6 +6,7 @@ class Icarus_Content
 
     private static $shortcodeHandler = array(
         'gallery' => 'processGalleryCallback',
+        'ruby' => 'processRubyCallback',
     );
 
     public static function config($form)
@@ -72,6 +73,35 @@ class Icarus_Content
         return '<div class="justified-gallery">' . $matches[5] . '</div>';
     }
 
+    private static function processRubyCallback($matches)
+    {
+        $attr = self::parseShortcodeAttrs($matches[3], 'title');
+        if (isset($attr['title']))
+            return '<ruby>' . $matches[5] . '<rp> (</rp><rt>' . $attr['title'] . '</rt><rp>) </rp></ruby>';
+        else
+            return $matches[5];
+    }
+
+    private static function parseShortcodeAttrs($attrContent, $attrName)
+    {
+        if (is_array($attrName))
+        {
+            $attrRegexp = join('|', array_map('preg_quote', $attrName));;
+        }
+        else
+        {
+            $attrRegexp = preg_quote($attrName);
+            $attrName = array($attrName);
+        }
+        preg_match_all('/(' . $attrRegexp . ')="([^"]*?)"/i', $attrContent, $matches, PREG_SET_ORDER);
+        $result = array();
+        foreach ($matches as $match)
+        {
+            $result[$match[1]] = $match[2];
+        }
+        return $result;
+    }
+
     private static function processAllShortcodes($content)
     {
         if (strpos($content, '[') === FALSE) {
@@ -90,7 +120,7 @@ class Icarus_Content
             return $content;
         }
         $pattern = self::getShortcodeRegex(array_keys(self::$shortcodeHandler));
-        return preg_replace("/$pattern/", '', $content);
+        return preg_replace("/$pattern/", '\5', $content);
     }
 
     private static function processShortcodeDispatch($matches)

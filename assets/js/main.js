@@ -69,9 +69,19 @@
         $('#comment-form-avatar').attr('src', avatarUrl);
     });
 
+    const $scrollHandle = $("html, body");
+
     $('#toc .menu-list a').each(function (){
-        $(this).click(function (){
-            $("html, body").animate({ scrollTop: $($(this).attr('href')).offset().top }, 500);
+        $(this).click(function (event){
+            const href = $(this).attr('href');
+            $scrollHandle.animate(
+                { scrollTop: $(href).offset().top }, 
+                500,
+                function () {
+                    window.location.hash = href;
+                }
+            );
+            event.preventDefault();
         });        
     });
 })(jQuery);

@@ -215,7 +215,7 @@ STYLESHEET;
 
     public function makeInput($name, $title, $desc, $default = NULL, $classAppend = NULL)
     {
-        $input = new Icarus_Typecho_Widget_Helper_Form_Element_Text(
+        $input = new Icarus_Form_Element_Text(
             self::prefixKey($name), NULL, $default, 
             $title, 
             $desc
@@ -243,7 +243,7 @@ STYLESHEET;
 
     public function makeTextarea($name, $title, $desc, $default = NULL)
     {
-        $this->_form->addInput(new Icarus_Typecho_Widget_Helper_Form_Element_Textarea(
+        $this->_form->addInput(new Icarus_Form_Element_Textarea(
             self::prefixKey($name), NULL, $default, 
             $title, 
             $desc
@@ -258,7 +258,7 @@ STYLESHEET;
 
     public function makeRadio($name, $title, $desc, array $options, $default = NULL)
     {
-        $this->_form->addInput(new Icarus_Typecho_Widget_Helper_Form_Element_Radio(
+        $this->_form->addInput(new Icarus_Form_Element_Radio(
             self::prefixKey($name), $options, $default, 
             $title, 
             $desc
@@ -276,16 +276,16 @@ STYLESHEET;
         $this->makeRadio(self::cfgNameToCfgKey($name), _IcT($langStr . '.title'), self::optionalDesc($langStr), $optionsReal, $default);
     }
 
-    public function makeCheckbox($name, $title, $desc, array $options, $default = NULL)
+    public function makeCheckbox($name, $title, $desc, array $options)
     {
-        $this->_form->addInput(new Icarus_Typecho_Widget_Helper_Form_Element_Checkbox(
-            self::prefixKey($name), $options, $default, 
+        $this->_form->addInput(new Icarus_Form_Element_Checkbox(
+            self::prefixKey($name), $options, NULL, 
             $title, 
             $desc
         ));
     }
 
-    public function packCheckbox($name, array $options, $default = NULL)
+    public function packCheckbox($name, array $options)
     {
         $langStr = self::cfgNameToLangKey($name);
         $optionsReal = array();
@@ -293,7 +293,7 @@ STYLESHEET;
         {
             $optionsReal[$option] = _IcT($langStr . '.options.' . $option);
         }
-        $this->makeCheckbox(self::cfgNameToCfgKey($name), _IcT($langStr . '.title'), self::optionalDesc($langStr), $optionsReal, $default);
+        $this->makeCheckbox(self::cfgNameToCfgKey($name), _IcT($langStr . '.title'), self::optionalDesc($langStr), $optionsReal);
     }
 
     public function toc()
@@ -424,7 +424,7 @@ SCRIPT;
     }
 }
 
-class Icarus_Typecho_Widget_Helper_Form_Element_Text extends Typecho_Widget_Helper_Form_Element_Text
+class Icarus_Form_Element_Text extends Typecho_Widget_Helper_Form_Element_Text
 {
     public function value($value)
     {
@@ -435,7 +435,7 @@ class Icarus_Typecho_Widget_Helper_Form_Element_Text extends Typecho_Widget_Help
     }
 }
 
-class Icarus_Typecho_Widget_Helper_Form_Element_Textarea extends Typecho_Widget_Helper_Form_Element_Textarea
+class Icarus_Form_Element_Textarea extends Typecho_Widget_Helper_Form_Element_Textarea
 {
     public function value($value)
     {
@@ -446,7 +446,7 @@ class Icarus_Typecho_Widget_Helper_Form_Element_Textarea extends Typecho_Widget_
     }
 }
 
-class Icarus_Typecho_Widget_Helper_Form_Element_Radio extends Typecho_Widget_Helper_Form_Element_Radio
+class Icarus_Form_Element_Radio extends Typecho_Widget_Helper_Form_Element_Radio
 {
     public function value($value)
     {
@@ -457,15 +457,8 @@ class Icarus_Typecho_Widget_Helper_Form_Element_Radio extends Typecho_Widget_Hel
     }
 }
 
-class Icarus_Typecho_Widget_Helper_Form_Element_Checkbox extends Typecho_Widget_Helper_Form_Element_Checkbox
+class Icarus_Form_Element_Checkbox extends Typecho_Widget_Helper_Form_Element_Checkbox
 {
-    public function value($value)
-    {
-        if (!is_null($value))
-            return parent::value($value);
-        else
-            return $this;
-    }
 }
 
 class Icarus_Form_VersionField extends Typecho_Widget_Helper_Form_Element_Hidden

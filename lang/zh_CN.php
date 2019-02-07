@@ -344,14 +344,6 @@ return array(
         'toc' => array(
             'title' => 'TOC Widget',
             'desc' => 'Table of Contents：文章目录',
-            'fixed' => array(
-                'title' => '固定',
-                'desc' => '将文章目录固定使其一直可见。请将本Widget的顺序设定在同一侧的最后位置。',
-                'options' => array(
-                    '0' => '@general.disable',
-                    '1' => '@general.enable',
-                ),
-            ),
         ),
         'footer' => array(
             'title' => '页脚',

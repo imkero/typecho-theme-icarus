@@ -7,8 +7,6 @@ class Icarus_Module_Toc
     public static function config($form)
     {
         Icarus_Aside::basicConfig($form, 'Toc', Icarus_Aside::ENABLE, 'right', '0');
-        
-        $form->packRadio('Toc/fixed', array('0', '1'), '0');
     }
 
     public static function output()
@@ -18,7 +16,7 @@ class Icarus_Module_Toc
         if (!is_array(self::$_toc) || count(self::$_toc) <= 1)
             return;
 ?>
-<div class="card widget<?php if (Icarus_Config::get('toc_fixed')) echo ' toc-fixed-enabled'; ?>" id="toc">
+<div class="card widget" id="toc">
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">

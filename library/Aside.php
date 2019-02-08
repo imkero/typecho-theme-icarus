@@ -116,23 +116,23 @@ class Icarus_Aside
     {
         switch (self::getColumnCount()) {
             case 2:
-                echo 'is-4-tablet is-4-desktop is-4-widescreen';
+                echo ' is-4-tablet is-4-desktop is-4-widescreen';
                 break;
             case 3:
-                echo 'is-4-tablet is-4-desktop is-3-widescreen';
+                echo ' is-4-tablet is-4-desktop is-3-widescreen';
                 break;
         }
     }
     public function printVisibilityClass()
     {
-        if (self::getColumnCount() === 3 && $this->_position == self::RIGHT) {
-            echo 'is-hidden-touch is-hidden-desktop-only';
-        }
+        //if (self::getColumnCount() === 3 && $this->_position == self::RIGHT) {
+        //    echo ' is-hidden-touch is-hidden-desktop-only';
+        //}
     }
 
     public function printOrderClass()
     {
-        echo ($this->_position == self::RIGHT) ? 'has-order-3' : 'has-order-1';
+        echo ($this->_position == self::RIGHT) ? ' has-order-3' : ' has-order-1';
     }
 
     public function printStickyClass()
@@ -142,14 +142,14 @@ class Icarus_Aside
 
     public function printPosition()
     {
-        echo ($this->_position == self::RIGHT) ? 'right' : 'left';
+        echo ($this->_position == self::RIGHT) ? ' column-right' : ' column-left';
     }
 
     public static function printStickyClassByPos($position)
     {
         if (Icarus_Config::get(($position == self::RIGHT) ? 'aside_right_sticky' : 'aside_left_sticky', false))
         {
-            echo 'is-sticky';
+            echo ' is-sticky';
         }
     }
 
@@ -158,7 +158,7 @@ class Icarus_Aside
         if ($this->count() == 0) 
             return;
 ?>
-<aside class="column <?php $this->printSideColumnClass() ?> <?php $this->printVisibilityClass(); ?> <?php $this->printOrderClass(); ?> column-<?php $this->printPosition(); ?> <?php $this->printStickyClass(); ?>">
+<aside class="column<?php $this->printSideColumnClass() ?><?php $this->printVisibilityClass(); ?><?php $this->printOrderClass(); ?><?php $this->printPosition(); ?><?php $this->printStickyClass(); ?>">
 <?php
 foreach ($this->_widgets as $widgetName) {
     Icarus_Module::show($widgetName);

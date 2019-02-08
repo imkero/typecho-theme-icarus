@@ -34,6 +34,27 @@
     adjustNavbar();
     $(window).resize(adjustNavbar);
 
+    if ($('aside.column').length == 2)
+    {
+        var movedToLeft = false;
+        $('.column-right>.card').addClass('card-on-right');
+        function adjustColumn() {
+            if ($(window).outerWidth() < 1280) {
+                if (!movedToLeft) {
+                    movedToLeft = true;
+                    $('.column-right>.card').appendTo($('.column-left'));
+                }
+            } else {
+                if (movedToLeft) {
+                    movedToLeft = false;
+                    $('.column-left>.card.card-on-right').appendTo($('.column-right'));
+                }
+            }
+        }
+        adjustColumn();
+        $(window).resize(adjustColumn);
+    }
+
     var $toc = $('#toc');
     if ($toc.length > 0) {
         var $mask = $('<div>');

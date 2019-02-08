@@ -238,6 +238,31 @@ img.thumbnail {
 .donate:last-child:not(:first-child) .qrcode {
   right: -0.75rem;
 }
+
+#toc{
+  max-height: calc(100vh - 5rem);
+  overflow-y: overlay;
+  overflow-x: hidden;
+}
+
+#toc::-webkit-scrollbar {
+  width: 6px;
+  height: 10px;
+}
+
+#toc::-webkit-scrollbar-thumb {
+  background-color: rgb(200, 200, 200);
+  background-clip: padding-box;
+}
+
+#toc::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(160, 160, 160)
+}
+
+#toc::-webkit-scrollbar-track {
+  background-color: rgb(238, 238, 238)
+}
+
 @media screen and (max-width: 768px) {
   #toc {
     display: none;
@@ -513,31 +538,3 @@ pre>code:hover>.copy {
   margin: 1rem 0;
 }
 
-.toc-fixed {
-  position: fixed;
-  top: 25px;
-}
-
-.toc-fixed .menu > .menu-list{
-  max-height: 60vh;
-  overflow-y: overlay;
-  overflow-x: hidden;
-}
-
-.toc-fixed .menu > .menu-list::-webkit-scrollbar {
-  width: 6px;
-  height: 10px;
-}
-
-.toc-fixed .menu > .menu-list::-webkit-scrollbar-thumb {
-  background-color: rgb(200, 200, 200);
-  background-clip: padding-box;
-}
-
-.toc-fixed .menu > .menu-list::-webkit-scrollbar-thumb:hover {
-  background-color: rgb(160, 160, 160)
-}
-
-.toc-fixed .menu > .menu-list::-webkit-scrollbar-track {
-  background-color: rgb(238, 238, 238)
-}

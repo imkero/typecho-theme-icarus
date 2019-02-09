@@ -161,6 +161,10 @@ return array(
                 'title' => '摘要长度',
                 'desc' => '指定自动生成的摘要部分的最大长度。参数值为 <code>-1</code> 则不限制最大长度。<br />需要设置 <code>摘要保留样式</code> 为 <code>不保留</code>才能生效。<br />原文中已指定摘要部分时本参数将被忽略（即包含 <code>&lt;!--more--&gt;</code> 标签）',
             ),
+            'content_extend' => array(
+                'title' => '文章末尾追加内容',
+                'desc' => '在文章末尾追加指定内容。支持以下变量替换 <code>{author}</code> <code>{title}</code> <code>{url}</code> <code>{date}</code>',
+            ),
         ),
         'search' => array(
             'title' => '搜索',
@@ -454,6 +458,10 @@ return array(
         'thumbnail' => array(
             'title' => '缩略图 URL',
             'desc' => '文章缩略图的 URL。缩略图会显示在文章列表、文章正文页以及最新文章 Widget 中。',
+        ),
+        'excerpt' => array(
+            'title' => '自定义文章摘要',
+            'desc' => '填写此文本框则使用其中内容作为本文章的摘要。（支持 Markdown 解析）',
         ),
     ),
     'page_special' => array(

@@ -14,6 +14,7 @@ class Icarus_Content
         $form->packTitle('Post');
         $form->packRadio('Post/excerpt_preserve_tags', array('0', '1'), '0');
         $form->packInput('Post/excerpt_length', '100', 'w-20');
+        $form->packTextarea('Post/content_extend', '');
     }
 
     /**
@@ -143,6 +144,24 @@ class Icarus_Content
             Icarus_Module::load('Toc');
             $content = Icarus_Module_Toc::generate($content);
         }
+        if (Icarus_Config::tryGet('post_content_extend', $extendTpl))
+        {
+            $content .= str_replace(
+                array(
+                    '{title}',
+                    '{author}',
+                    '{url}',
+                    '{date}',
+                ),
+                array(
+                    $post->title,
+                    $post->author->screenName,
+                    $post->permalink,
+                    $post->date->format(Icarus_Util::$options->postDateFormat),
+                ),
+                $extendTpl
+            );
+        }
         return $content;
     }
 
@@ -153,32 +172,47 @@ class Icarus_Content
             return $post->text;
         }
 
-        $content = $post->pluginHandle('Widget_Abstract_Contents')->trigger($plugged)->excerpt($post->text, $post);
-        
-        if (!$plugged) {
-            $content = $post->isMarkdown ? $post->markdown($content)
-            : $post->autoP($content);
-        }
-        
-        if (FALSE !== ($excerptPos = strpos($content, '<!--more-->'))) {
-            $excerpt = substr($content, 0, $excerptPos);
-        } else {
-            $excerpt = $content;
-        }
-
-        // fixHtml func patched
-        $excerpt = Icarus_Util::fixHtml($post->pluginHandle('Widget_Abstract_Contents')->excerptEx($excerpt, $post));
-
-        // handle shortcode
-        $excerpt = self::removeAllShortcodes($excerpt);
-
         // user config        
         $truncateLength = intval(Icarus_Config::get('post_excerpt_length', 100));
-        $preserveTags = !!Icarus_Config::get('post_excerpt_preserve_tags', FALSE);
-        
-        // condition flags
-        $truncateRequired = $truncateLength > 0 && ($excerptPos === FALSE);
 
+        $preserveTags = !!Icarus_Config::get('post_excerpt_preserve_tags', FALSE);
+
+        if (!Icarus_Util::isEmpty($post->fields->custom_excerpt)) {
+            // custom excerpt support
+
+            $excerpt = $post->markdown($post->fields->custom_excerpt);
+            $truncateRequired = FALSE;
+        } else {
+            // original excerpt process
+
+            $content = $post->pluginHandle('Widget_Abstract_Contents')
+                            ->trigger($plugged)
+                            ->excerpt($post->text, $post);
+            
+            if (!$plugged) {
+                $content = $post->isMarkdown ? $post->markdown($content)
+                : $post->autoP($content);
+            }
+
+            if (FALSE !== ($excerptPos = strpos($content, '<!--more-->'))) {
+                $excerpt = substr($content, 0, $excerptPos);
+            } else {
+                $excerpt = $content;
+            }
+
+            // fixHtml func patched
+            $excerpt = Icarus_Util::fixHtml(
+                $post->pluginHandle('Widget_Abstract_Contents')
+                     ->excerptEx($excerpt, $post)
+                );
+    
+            // handle shortcode
+            $excerpt = self::removeAllShortcodes($excerpt);
+    
+            // condition flags
+            $truncateRequired = $truncateLength > 0 && ($excerptPos === FALSE);
+        }
+        
         if (!$preserveTags || $truncateRequired) {
             $excerpt = strip_tags($excerpt);
             if ($truncateRequired) {
@@ -210,6 +244,14 @@ class Icarus_Content
         );
         $thumbnail->input->class = 'w-100';
         $form->addItem($thumbnail);
+
+        $excerpt = new Typecho_Widget_Helper_Form_Element_Textarea(
+            'custom_excerpt', NULL, NULL, 
+            _IcT('fields.excerpt.title'), 
+            _IcT('fields.excerpt.desc')
+        );
+        $excerpt->input->class = 'w-100';
+        $form->addItem($excerpt);
 
         if (defined('__ICARUS_WIDGET_CLASS__') && __ICARUS_WIDGET_CLASS__ == 'Widget_Contents_Page_Edit')
         {

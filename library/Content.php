@@ -144,7 +144,7 @@ class Icarus_Content
             Icarus_Module::load('Toc');
             $content = Icarus_Module_Toc::generate($content);
         }
-        if (Icarus_Config::tryGet('post_content_extend', $extendTpl))
+        if (Icarus_Config::tryGet('post_content_extend', $extendTpl) && $post->is('post'))
         {
             $content .= str_replace(
                 array(

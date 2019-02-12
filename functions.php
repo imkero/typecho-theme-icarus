@@ -53,9 +53,9 @@ function themeConfig($form)
     Icarus_Page::config($iForm);
     Icarus_Content::config($iForm);
     Icarus_Aside::config($iForm);
+    Icarus_Assets::config($iForm);
     Icarus_Module::config($iForm);
     Icarus_Plugin::config($iForm);
-    Icarus_Assets::config($iForm);
 
     $iForm->toc();
 }

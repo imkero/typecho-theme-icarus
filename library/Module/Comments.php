@@ -6,17 +6,23 @@ class Icarus_Module_Comments
     {
         $form->packTitle('Comments');
 
-        $form->packRadio('Comments/type', array('internal'), 'internal');
+        $form->packRadio('Comments/type', array('internal', 'custom'), 'internal');
         $form->packInput('Comments/default_avatar', 'identicon');
+        
+        $form->packTextarea('Comments/custom_content', '');
+
     }
 
     public static function output($widget)
     {
         switch (Icarus_Config::get('comments_type'))
         {
-            case "internal":
+            case 'internal':
             default:
                 self::outputInternal($widget);
+                break;
+            case 'custom':
+                self::outputCustom($widget);
                 break;
         }
     }
@@ -131,6 +137,18 @@ class Icarus_Module_Comments
 </div>
 <?php
     endif;
+    }
+
+    private static function outputCustom($widget)
+    {
+        $identifier = $widget->getArchiveType() . '-' . $widget->getArchiveSlug();
+?>
+<div class="card">
+    <div class="card-content comment-container">
+        <?php echo str_replace('{identifier}', $identifier, Icarus_Config::get('comments_custom_content', '')); ?>
+    </div>
+</div>
+<?php
     }
 }
 

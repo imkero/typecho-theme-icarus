@@ -412,11 +412,16 @@ return array(
                 'desc' => '决定使用何种评论系统提供评论功能。',
                 'options' => array(
                     'internal' => '内置评论',
+                    'custom' => '自定义',
                 ),
             ),
             'default_avatar' => array(
                 'title' => '评论默认头像',
                 'desc' => '指定当评论者没有设定 Gravatar 头像时显示的默认头像。<a href="https://cn.gravatar.com/site/implement/images/#default-image" rel="noopener noreferrer nofollow" target="_blank">参考</a>',
+            ),
+            'custom_content' => array(
+                'title' => '自定义评论区代码',
+                'desc' => '设定评论系统为 自定义 时，请将评论区相关代码填入此文本框内，<code>{identifier}</code> 将被替换为当前页面的标识符。',
             ),
         ),
         'assets' => array(

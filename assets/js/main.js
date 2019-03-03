@@ -11,10 +11,8 @@
 
     if (typeof(moment) === 'function') {
         moment.locale($('html').attr('lang'));
-        $('.article-meta time').each(function () {
-            $(this).text(moment($(this).attr('datetime')).fromNow());
-        });
-        $('.comment-meta time').each(function () {
+        $('.article-meta time, .comment-meta time').each(function () {
+            $(this).attr('title', $(this).text());
             $(this).text(moment($(this).attr('datetime')).fromNow());
         });
     }

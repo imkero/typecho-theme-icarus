@@ -2,9 +2,24 @@
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 class Icarus_Page
 {
+    public static function init()
+    {
+        self::descMetaPatch();
+    }
+
+    private static function descMetaPatch()
+    {
+        $widget = Icarus_Util::$widget;
+        if ($widget->is('single')) {
+            if (!Icarus_Util::isEmpty($widget->fields->custom_excerpt)) {
+                $excerpt = strip_tags($widget->markdown($widget->fields->custom_excerpt));
+                $widget->setDescription($excerpt);
+            }
+        }
+    }
+
     public static function printPageTitle()
     {
-        // todo: i18n
         Icarus_Util::$widget->archiveTitle(array(
             'category' => _IcT('title.category'),
             'search' => _IcT('title.search'),
@@ -14,7 +29,7 @@ class Icarus_Page
         ), '', ' - ');
         Icarus_Util::$options->title();
     }
-    
+
     public static function printHtmlLang()
     {
         $lang = Icarus_Util::$options->lang;
@@ -28,14 +43,16 @@ class Icarus_Page
 
     public static function printHeader()
     {
-        Icarus_Config::callback('head_favicon', function ($faviconUrl)
-        {
-            echo '<link rel="icon" href="', Icarus_Assets::getUrlForAssets($faviconUrl),'" />', PHP_EOL;
+        // favicon
+        Icarus_Config::callback('head_favicon', function ($faviconUrl) {
+            echo '<link rel="icon" href="', Icarus_Assets::getUrlForAssets($faviconUrl), '" />', PHP_EOL;
         });
-
+        
+        // search
         Icarus_Module::load('Search');
         Icarus_Module_Search::header();
 
+        // custom head content
         echo Icarus_Config::get('head_extend');
 
         // todo: open graph
@@ -88,11 +105,9 @@ class Icarus_Page
     public static function getFooterLinks()
     {
         $result = Icarus_Util::parseMultilineData(Icarus_Config::get('footer_links'), 3);
-        if (!empty($result))
-        {
-            foreach ($result as $k => $link)
-            {
-                $result[$k][1] = empty($link[1]) ? NULL : explode('|', $link[1]);
+        if (!empty($result)) {
+            foreach ($result as $k => $link) {
+                $result[$k][1] = empty($link[1]) ? null : explode('|', $link[1]);
             }
         }
         return $result;

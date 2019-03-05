@@ -29,6 +29,7 @@ function themeInit($widget)
         Icarus_I18n::init();
         Icarus_Assets::init();
         Icarus_Aside::init();
+        Icarus_Page::init();
     }
 }
 

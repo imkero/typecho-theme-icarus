@@ -1,11 +1,9 @@
 <p align="center">
 <img height="48" src="http://ppoffice.github.io/hexo-theme-icarus/images/logo.svg">
 <br> 
-一个简洁、精致、现代的 Typecho 主题。
-<br> 
-A simple, delicate, and modern theme.
+一个简洁、精致、现代的 Typecho 主题。| A simple, delicate, and modern theme.
 <br>
-本主题为 <a href="https://github.com/ppoffice">Ruipeng Zhang</a>的 Hexo 主题 <a href="https://github.com/ppoffice/hexo-theme-icarus/">Icarus</a> 的Typecho 转置版本。
+本主题为 <a href="https://github.com/ppoffice">Ruipeng Zhang</a> 的 Hexo 主题 <a href="https://github.com/ppoffice/hexo-theme-icarus/">Icarus</a> 的Typecho 转置版本。
 </p>
 
 ## 预览 Preview

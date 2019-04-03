@@ -1,9 +1,9 @@
 <p align="center">
 <img height="48" src="http://ppoffice.github.io/hexo-theme-icarus/images/logo.svg">
 <br> 
-一个简洁、精致、现代的 Typecho 主题。| A simple, delicate, and modern theme.
+A simple, delicate, and modern theme | 一个简洁、精致、现代的 Typecho 主题
 <br>
-本主题为 <a href="https://github.com/ppoffice">Ruipeng Zhang</a> 的 Hexo 主题 <a href="https://github.com/ppoffice/hexo-theme-icarus/">Icarus</a> 的Typecho 转置版本。
+本主题为 <a href="https://github.com/ppoffice">Ruipeng Zhang</a> 的 Hexo 主题 <a href="https://github.com/ppoffice/hexo-theme-icarus/">Icarus</a> 的 Typecho 转置版本。
 </p>
 
 ## 预览 Preview
@@ -62,10 +62,10 @@
 
 ### 外部功能支持
 以下功能通过开源组件提供支持。
-* 代码高亮：[highlight.js](https://highlightjs.org/) 提供支持。可在设置中指定代码高亮使用的样式主题。
-* 人性化时间转换：[Moment.js](https://momentjs.com/) 提供支持。将文章发布时间、评论发表时间转换为更易读的表达形式。
-* 图片展示优化：[lightgallery](https://sachinchoolur.github.io/lightGallery/)提供图片灯箱展示支持。[Justified Gallery](https://miromannino.github.io/Justified-Gallery/) 提供图集展示支持。
-* 数学公式渲染：[Mathjax](https://www.mathjax.org/) 提供支持。
+- 代码高亮：[highlight.js](https://highlightjs.org/) 提供支持。可在设置中指定代码高亮使用的样式主题。
+- 人性化时间转换：[Moment.js](https://momentjs.com/) 提供支持。将文章发布时间、评论发表时间转换为更易读的表达形式。
+- 图片展示优化：[lightgallery](https://sachinchoolur.github.io/lightGallery/) 提供图片灯箱展示支持。[Justified Gallery](https://miromannino.github.io/Justified-Gallery/) 提供图集展示支持。
+- 数学公式渲染：[Mathjax](https://www.mathjax.org/) 提供支持。
 
 ### 完善的主题设置页面
 本主题设置项较多，设置页面按功能进行了划分，并提供了相应的描述。悬浮在右侧的目录可点击跳转到指定设置项。
@@ -74,6 +74,6 @@
 暂只提供了 JsDelivr CDN 支持。将来会追加其他 CDN 选项。
 
 ### 页头 / 页脚 / 导航栏 / 评论区自定义
-* 自定义第三方评论系统支持（需要自行填入第三方评论系统的调用代码）。
-* 页头、页脚、head标签自定义内容追加支持。
-* 导航栏、Social Icons、页脚 Icons 可自定义。
+- 自定义第三方评论系统支持（需要自行填入第三方评论系统的调用代码）。
+- 页头、页脚、head标签自定义内容追加支持。
+- 导航栏、Social Icons、页脚 Icons 可自定义。

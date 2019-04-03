@@ -59,7 +59,7 @@ return array(
         'placeholder' => '输入关键字搜索',
     ),
     'article' => array(
-        'more' => '阅读更多',
+        'more' => '阅读全文',
     ),
     'profile' => array(
         'follow' => '关注我',

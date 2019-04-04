@@ -68,6 +68,16 @@ class Icarus_Aside
         
         if (!is_array($hiddenWidgets))
             $hiddenWidgets = array();
+
+        // categories / tags page patch
+        if (Icarus_Util::$widget->is('page', 'categories') && !in_array('Category', $hiddenWidgets))
+        {
+            $hiddenWidgets[] = 'Category';
+        }
+        if (Icarus_Util::$widget->is('page', 'tags') && !in_array('Tag', $hiddenWidgets))
+        {
+            $hiddenWidgets[] = 'Tag';
+        }
         
         foreach (self::$_asideWidgets as $widgetName)
         {
@@ -91,10 +101,8 @@ class Icarus_Aside
 
     public static function getColumnCount()
     {
-        $count = 1;
-        $count += self::$asideLeft->count() > 0;
-        $count += self::$asideRight->count() > 0;
-        return $count;
+        return 1 + (self::$asideLeft->count() > 0) 
+                 + (self::$asideRight->count() > 0);
     }
 
     public function clear()

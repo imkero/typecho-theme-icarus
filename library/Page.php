@@ -97,7 +97,7 @@ class Icarus_Page
 
         $form->packTitle('Footer');
 
-        $form->packTextarea('Footer/links', '');
+        $form->packTextarea('Footer/links', 'Attribution-NonCommercial 4.0 International (CC BY-NC 4.0),fab fa-creative-commons|fab fa-creative-commons-by|fab fa-creative-commons-nc,https://creativecommons.org/licenses/by-nc/4.0/');
         $form->packTextarea('Footer/content_left', '');
         $form->packTextarea('Footer/scripts', '');
     }

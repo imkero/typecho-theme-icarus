@@ -1,9 +1,9 @@
 <p align="center">
 <img height="48" src="http://ppoffice.github.io/hexo-theme-icarus/images/logo.svg">
 <br> 
-A simple, delicate, and modern theme | 一个简洁、精致、现代的 Typecho 主题
+A simple, delicate and modern theme | 一个简洁、精致、现代的 Typecho 主题
 <br>
-本主题为 <a href="https://github.com/ppoffice">Ruipeng Zhang</a> 的 Hexo 主题 <a href="https://github.com/ppoffice/hexo-theme-icarus/">Icarus</a> 的 Typecho 转置版本。
+本主题为 <a href="https://github.com/ppoffice">Ruipeng Zhang</a> 的 Hexo 主题 <a href="https://github.com/ppoffice/hexo-theme-icarus/">Icarus</a> 的 Typecho 移植版本。
 </p>
 
 ## 预览 Preview
@@ -51,7 +51,7 @@ A simple, delicate, and modern theme | 一个简洁、精致、现代的 Typecho
 #### 单栏 / 双栏 / 三栏切换
 主题默认为三栏布局。若要切换为双栏，则需要在设置中将一侧的 Widget 关闭或移动到另一侧。若要切换为单栏，则需要关闭全部 Widget。
 
-#### 首页 /文章页侧边栏独立设置
+#### 首页 / 文章页侧边栏独立设置
 通过设定在首页、文章页分别**隐藏**何种 Widget，可以为首页、文章页设定不同的侧边栏布局。
 
 ### 多国语言支持

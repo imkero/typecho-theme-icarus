@@ -298,7 +298,7 @@ class Icarus_Content
 </section>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    $('#icarus-page-info-expand').click(function() {
+    var expandCallback = function () {
         var btn = $('i', this);
         if (btn.hasClass('i-caret-right')) {
             btn.removeClass('i-caret-right').addClass('i-caret-down');
@@ -307,15 +307,25 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         $(this).parent().toggleClass('fold');
         return false;
-    });
+    };
+    $('#icarus-page-info-expand').click(expandCallback);
+    
     $('.icarus-autofill-slug').click(function() {
         $('#slug').val($(this).text());
         $('#title').val($(this).attr('data-title'));
         $('#slug').trigger('input');
     });
-    if (!$('#custom-field').hasClass('fold'))
-    {
+    
+    if (!$('#custom-field').hasClass('fold')) {
         $('#custom-field i.i-caret-right').removeClass('i-caret-right').addClass('i-caret-down');
+    }
+
+    if (window.location.hash == '#icarus') {
+        $('#icarus-page-info-expand').click();
+        expandCallback.call(document.getElementById('custom-field-expand'));
+        setTimeout(function (){
+            $('#icarus-page-info').effect('highlight', {color : '#FFF6BF', duration: 1000});
+        }, 200);
     }
 });
 </script>

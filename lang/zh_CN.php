@@ -108,7 +108,14 @@ return array(
     'setting' => array(
         'general' => array(
             'title' => '基本',
-            'desc' => '<p><b>注意事项</b></p><ul><li>资源文件的相对路径是指相对于 <code> %s/assets/</code> 目录的相对路径。</li><li>更换主题会导致本主题的设置项丢失。</li></ul>',
+            'desc' => '
+<p><b>注意事项</b></p>
+<ul class="icaurs-general-desc-list">
+<li>资源文件的相对路径是指相对于 <code> %s/assets/</code> 目录的相对路径。</li>
+<li>更换主题会导致本主题的设置项丢失。</li>
+<li><b>归档页面</b>、<b>分类页面</b>和<b>标签页面</b>，需要手动<a href="%s">创建相应的独立页面</a>才能显示。</li>
+</ul>
+',
             'install_time' => array(
                 'title' => '站点建立日期',
                 'desc' => '用于计算站点运行时间，显示 Copyright 年份等。格式：2018-12-31',
@@ -134,6 +141,7 @@ return array(
                 'title' => '图标',
                 'desc' => '导航栏右上角图标链接。一行一个，格式：<code>链接文字,链接图标,链接URL</code><br />链接图标请参考 <a href="https://fontawesome.com/icons?d=gallery&m=free" rel="noopener noreferrer" target="_blank">Font Awesome Icons</a>',
             ),
+            'default_value' => "首页,%s\n归档,%s\n分类,%s",
         ),
         'logo' => array(
             'title' => 'Logo',
@@ -222,11 +230,11 @@ return array(
             ),
             'author_title' => array(
                 'title' => '作者头衔',
-                'desc' => '实际上是作者昵称的下一行。留空则不显示。',
+                'desc' => '位置上是作者昵称的下一行。留空则不显示。',
             ),
             'location' => array(
                 'title' => '作者坐标',
-                'desc' => '实际上是作者头衔的下一行。留空则不显示。',
+                'desc' => '位置上是作者头衔的下一行。留空则不显示。',
             ),
             'avatar' => array(
                 'title' => '头像 URL',
@@ -248,7 +256,7 @@ return array(
         'aside' => array(
             'title' => '侧边栏',
             'left_sticky' => array(
-                'title' => '左边栏固定',
+                'title' => '固定左边栏',
                 'desc' => '固定左边栏，使其不随页面滚动。',
                 'options' => array(
                     '0' => '@general.disable',
@@ -256,7 +264,7 @@ return array(
                 ),
             ),
             'right_sticky' => array(
-                'title' => '右边栏固定',
+                'title' => '固定右边栏',
                 'desc' => '固定右边栏，使其不随页面滚动。',
                 'options' => array(
                     '0' => '@general.disable',
@@ -264,7 +272,7 @@ return array(
                 ),
             ),
             'left_post_hide' => array(
-                'title' => '左边栏文章页隐藏',
+                'title' => '文章页隐藏左边栏',
                 'desc' => '在文章和独立页面隐藏左边栏。',
                 'options' => array(
                     '0' => '@general.disable',
@@ -272,7 +280,7 @@ return array(
                 ),
             ),
             'right_post_hide' => array(
-                'title' => '右边栏文章页隐藏',
+                'title' => '文章页隐藏右边栏',
                 'desc' => '在文章和独立页面隐藏右边栏。',
                 'options' => array(
                     '0' => '@general.disable',
@@ -280,8 +288,8 @@ return array(
                 ),
             ),
             'non_post_hide_widget' => array(
-                'title' => '于非文章页面隐藏 Widget',
-                'desc' => '通过指定在非文章页面隐藏部分 Widget 使得首页与文章页呈现不同的排版。',
+                'title' => '非文章页面隐藏 Widget',
+                'desc' => '指定在首页和独立页面隐藏部分 Widget。',
                 'options' => array(
                     'Profile' => '@setting.profile.title', 
                     'Category' => '@setting.category.title', 
@@ -293,8 +301,8 @@ return array(
                 ),
             ),
             'post_hide_widget' => array(
-                'title' => '于文章页面隐藏 Widget',
-                'desc' => '通过指定在文章页面隐藏部分 Widget 使得首页与文章页呈现不同的排版。',
+                'title' => '文章页面隐藏 Widget',
+                'desc' => '指定在文章页面隐藏部分 Widget。',
                 'options' => array(
                     'Profile' => '@setting.profile.title', 
                     'Category' => '@setting.category.title', 
@@ -472,9 +480,9 @@ return array(
     'page_special' => array(
         'title' => 'Icarus 内置页面说明',
         'desc' => array(
-            'archives' => '<p>归档页面展示要求：新建一个缩略名为 <code><a href="javascript:;" class="icarus-autofill-slug" data-title="归档">archives</a></code> 的独立页面。</p>',
-            'categories' => '<p>分类页面展示要求：新建一个缩略名为 <code><a href="javascript:;" class="icarus-autofill-slug" data-title="分类">categories</a></code> 的独立页面。</p>',
-            'tags' => '<p>标签页面展示要求：新建一个缩略名为 <code><a href="javascript:;" class="icarus-autofill-slug" data-title="标签">tags</a></code> 的独立页面。</p>',
+            'archives' => '<p>归档页面展示要求：新建一个缩略名为 <code><a href="javascript:;" class="icarus-autofill-slug" data-title="归档" title="点击自动填入">archives</a></code> 的独立页面。</p>',
+            'categories' => '<p>分类页面展示要求：新建一个缩略名为 <code><a href="javascript:;" class="icarus-autofill-slug" data-title="分类" title="点击自动填入">categories</a></code> 的独立页面。</p>',
+            'tags' => '<p>标签页面展示要求：新建一个缩略名为 <code><a href="javascript:;" class="icarus-autofill-slug" data-title="标签" title="点击自动填入">tags</a></code> 的独立页面。</p>',
         ),
     ),
 );

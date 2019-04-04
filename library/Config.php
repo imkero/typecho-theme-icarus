@@ -38,6 +38,10 @@ form code
     color: #999; 
     font-size: .92857em;
 }
+.icaurs-general-desc-list
+{
+    line-height: 1.8em;
+}
 #icarus-config-toc
 {
     position: relative;
@@ -122,7 +126,11 @@ STYLESHEET;
         $form->html($style);
 
         $form->showTitle(_IcT('setting.general.title'), 'General');
-        $form->html(sprintf(_IcT('setting.general.desc'), __TYPECHO_THEME_DIR__ . '/' . Icarus_Util::$options->theme));
+        $form->html(sprintf(
+            _IcT('setting.general.desc'), 
+            __TYPECHO_THEME_DIR__ . '/' . Icarus_Util::$options->theme, // theme dir
+            Typecho_Common::url('write-page.php#icarus', Icarus_Util::$options->adminUrl) // create page link
+        ));
 
         $form->packInput('General/install_time', date('Y-m-d', Icarus_Util::getSiteInstallTime()), 'w-20');
     }
@@ -420,7 +428,7 @@ SCRIPT;
 
     public static function cfgVersionMatch()
     {
-        return Icarus_Config::get('config_version') === __ICARUS_VERSION__;
+        return Icarus_Config::get('config_version') === __ICARUS_CFG_VERSION__;
     }
 }
 
@@ -465,11 +473,11 @@ class Icarus_Form_VersionField extends Typecho_Widget_Helper_Form_Element_Hidden
 {
     public function __construct()
     {
-        parent::__construct(Icarus_Config::prefixKey('config_version'), NULL, __ICARUS_VERSION__);
+        parent::__construct(Icarus_Config::prefixKey('config_version'), NULL, __ICARUS_CFG_VERSION__);
     }
 
     public function value($value)
     {
-        return parent::value(__ICARUS_VERSION__);
+        return parent::value(__ICARUS_CFG_VERSION__);
     }
 }

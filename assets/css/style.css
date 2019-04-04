@@ -418,14 +418,14 @@ img.thumbnail {
   font-size: 0.9em;
   font-family: "Source Code Pro", "Consolas", monospace, "Microsoft YaHei";
 }
-.content code {
-  background: rgba(135, 131, 120, 0.1);
+.content pre code {
+  background: transparent;
+}
+.content code:not(.content pre code) {
   color: #EB5757;
+  background: rgba(135, 131, 120, 0.1);
   border-radius: 3px;
   padding: 0.2em 0.4em;
-}
-.content pre code {
-  color: initial;
 }
 .content blockquote footer strong + cite {
   margin-left: 0.5em;

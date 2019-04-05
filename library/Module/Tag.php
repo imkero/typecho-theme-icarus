@@ -17,9 +17,12 @@ class Icarus_Module_Tag
         return $limit;
     }
 
-    public static function output()
+    public static function output($showAll = FALSE)
     {
-        $tags = Typecho_Widget::widget('Widget_Metas_Tag_Cloud', 'limit=' . self::getLimit());
+        $tags = Typecho_Widget::widget(
+            'Widget_Metas_Tag_Cloud', 
+            $showAll ? NULL : ('limit=' . self::getLimit())
+        );
 ?>
 <div class="card widget">
     <div class="card-content">

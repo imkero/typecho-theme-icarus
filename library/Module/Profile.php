@@ -89,7 +89,7 @@ class Icarus_Module_Profile
                         <?php _IcTp('profile.run_days'); ?>
                     </p>
                     <p class="title has-text-weight-normal">
-                        <?php echo Icarus_Config::getSiteRunDays(); ?>
+                        <?php echo Icarus_Util::getSiteRunDays(); ?>
                     </p>
                 </div>
             </div>

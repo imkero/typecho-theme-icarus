@@ -12,11 +12,6 @@ class Icarus_Util
         self::$widget = $typechoWidget;
     }
 
-    public static function request()
-    {
-        return self::$widget->request;
-    }
-
     public static function stat()
     {
         return Typecho_Widget::widget('Widget_Stat');
@@ -78,6 +73,34 @@ class Icarus_Util
             $time = @filemtime($typechoCfgFile);
         }
         return $time === FALSE ? time() : $time;
+    }
+
+    public static function getSiteRunDays()
+    {
+        if (Icarus_Config::tryGet('general_install_time', $installTime))
+        {
+            $date = DateTime::createFromFormat('Y-m-d', $installTime);
+        }
+        else
+        {
+            $date = new DateTime();
+        }
+        $curDate = new DateTime();
+        $interval = $date->diff($curDate);
+        return $interval->format('%a');
+    }
+
+    public static function getSiteInstallYear()
+    {
+        if (Icarus_Config::tryGet('general_install_time', $installTime))
+        {
+            $date = DateTime::createFromFormat('Y-m-d', $installTime);
+        }
+        else
+        {
+            $date = new DateTime();
+        }
+        return $date->format('Y');
     }
 
     /**
@@ -164,5 +187,11 @@ class Icarus_Util
     public static function urlFor($type, $param)
     {
         return Typecho_Common::url(Typecho_Router::url($type, $param), self::$options->index);
+    }
+
+    public static function jsonResponse($data)
+    {
+        header('Content-Type: application/json');
+        echo json_encode($data);
     }
 }

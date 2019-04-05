@@ -112,7 +112,7 @@ return array(
 <p><b>注意事项</b></p>
 <ul class="icaurs-general-desc-list">
 <li>资源文件的相对路径是指相对于 <code> %s/assets/</code> 目录的相对路径。</li>
-<li>更换主题会导致本主题的设置项丢失。</li>
+<li>更换主题会导致本主题的设置项丢失，如有需要请使用<b>主题设置备份</b>功能。</li>
 <li><b>归档页面</b>、<b>分类页面</b>和<b>标签页面</b>，需要手动<a href="%s">创建相应的独立页面</a>才能显示。</li>
 </ul>
 ',
@@ -466,6 +466,33 @@ return array(
             ),
         ),
         'cfg_version_notice' => 'Icarus 主题已更新至版本 %s，请点击保存设置按钮使新的设置项生效。',
+        'backup' => array(
+            'status' => array(
+                '0' => '备份状态：不存在',
+                '1' => '备份状态：存在',
+            ),
+            'action' => array(
+                'save' => '备份设置',
+                'delete' => '删除备份',
+                'restore' => '恢复备份',
+            ),
+            'result' => array(
+                'save' => array(
+                    '0' => '备份设置成功',
+                    '1' => '备份设置失败：写入备份失败',
+                ),
+                'delete' => array(
+                    '0' => '删除备份成功',
+                    '1' => '删除备份失败：备份不存在',
+                    '2' => '删除备份失败：未知错误',
+                ),
+                'restore' => array(
+                    '0' => '恢复备份成功',
+                    '1' => '恢复备份失败：备份不存在',
+                    '2' => '恢复备份失败：写入设置时出错',
+                ),
+            ),
+        ),
     ),
     'fields' => array(
         'thumbnail' => array(

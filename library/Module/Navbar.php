@@ -29,7 +29,7 @@ class Icarus_Module_Navbar
 
     private static function isCurLink($uri)
     {
-        return Icarus_Util::request()->getRequestUri() == $uri;
+        return Typecho_Request::getInstance()->getRequestUri() == $uri;
     }
 
     public static function output()

@@ -45,9 +45,13 @@ function themeConfig($form)
     require __ICARUS_ROOT__ . 'library/Assets.php';
     require __ICARUS_ROOT__ . 'library/Config.php';
     require __ICARUS_ROOT__ . 'library/Content.php';
+    require __ICARUS_ROOT__ . 'library/Ajax.php';
+    require __ICARUS_ROOT__ . 'library/Backup.php';
 
     Icarus_Util::init(NULL);
     Icarus_I18n::init();
+
+    Icarus_Ajax::handle();
 
     $iForm = new Icarus_Config($form);
     

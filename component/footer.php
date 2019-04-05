@@ -20,7 +20,7 @@
                     </a>
                     <p class="is-size-7">
                     &copy; <?php 
-                    $installYear = Icarus_Config::getSiteInstallYear();
+                    $installYear = Icarus_Util::getSiteInstallYear();
                     $curYear = date('Y');
                     if ($installYear != $curYear)
                         echo $installYear, '&nbsp;-&nbsp;';

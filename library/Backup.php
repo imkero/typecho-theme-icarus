@@ -18,7 +18,7 @@ class Icarus_Backup
     public static function save()
     {
         $db = Typecho_Db::get();
-        
+
         if (self::exist()) {
             $sql = $db->update('table.options')
                 ->where('name = ?', self::THEME_BACKUP_FIELD)
@@ -35,14 +35,11 @@ class Icarus_Backup
         }
 
         try {
-            if ($db->query($sql) != NULL) {
-                return 0;
-            } else {
-                return 1;
-            }
+            $db->query($sql);
         } catch (Typecho_Db_Query_Exception $exception) {
             return 1;
         }
+        return 0;
     }
 
     public static function delete()

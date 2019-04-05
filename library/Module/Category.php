@@ -7,15 +7,21 @@ class Icarus_Module_Category
         Icarus_Aside::basicConfig($form, 'Category', Icarus_Aside::ENABLE, 'left', '3');
     }
 
-    public static function output()
+    public static function output($showAll = FALSE)
     {
 ?>
 <div class="card widget">
     <div class="card-content">
         <div class="menu">
-        <h3 class="menu-label">
-            <?php _IcTp('general.categories'); ?>
-        </h3>
+        <?php if ($showAll): ?>
+            <h1 class="is-size-4 has-mb-6">
+                <?php _IcTp('general.categories'); ?>
+            </h1>
+        <?php else: ?>
+            <h3 class="menu-label">
+                <?php _IcTp('general.categories'); ?>
+            </h3>
+        <?php endif; ?>
 <?php 
 Typecho_Widget::widget('Widget_Metas_Category_List')->listCategories('wrapTag=ul&wrapClass=menu-list');
 ?>        

@@ -27,9 +27,15 @@ class Icarus_Module_Tag
 <div class="card widget">
     <div class="card-content">
         <div class="menu">
+        <?php if ($showAll): ?>
+            <h1 class="is-size-4 has-mb-6">
+                <?php _IcTp('general.tags'); ?>
+            </h1>
+        <?php else: ?>
             <h3 class="menu-label">
                 <?php _IcTp('general.tags'); ?>
             </h3>
+        <?php endif; ?>
             <div class="field is-grouped is-grouped-multiline">
 <?php while ($tags->next()): ?>
                 <div class="control">

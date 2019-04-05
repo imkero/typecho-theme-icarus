@@ -66,7 +66,7 @@ return array(
         'run_days' => '天数',
     ),
     'archive' => array(
-        'date_format' => 'Y年 n月',
+        'date_format' => 'Y&\t\h\i\n\sp;年&\t\h\i\n\sp;n&\t\h\i\n\sp;月',
     ),
     'link' => array(
         'title' => '链接',

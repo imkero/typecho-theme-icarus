@@ -30,7 +30,12 @@ $tpl = <<<TPL
     </a>
 </li>
 TPL;
-Typecho_Widget::widget('Widget_Contents_Post_Date', 'type=month&format=' . _IcT('archive.date_format'))->parse($tpl);
+Typecho_Widget::widget(
+    'Widget_Contents_Post_Date', 
+    array(
+        'type' => 'month',
+        'format' => _IcT('archive.date_format')
+    ))->parse($tpl);
 ?>        
         </ul>
         </div>

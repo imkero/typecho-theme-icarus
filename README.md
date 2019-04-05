@@ -12,6 +12,7 @@ A simple, delicate and modern theme | 一个简洁、精致、现代的 Typecho 
 
 - Typecho Demo: [KeNorizon's Blog](https://blog.kenorizon.cn/)
 - Hexo Demo (Original Theme): [hexo-theme-icarus](https://blog.zhangruipeng.me/hexo-theme-icarus/)
+- [图片预览](https://github.com/KeNorizon/typecho-theme-icarus/wiki/%E5%9B%BE%E7%89%87%E9%A2%84%E8%A7%88)
 
 ## 安装 Installation
 
@@ -33,10 +34,10 @@ A simple, delicate and modern theme | 一个简洁、精致、现代的 Typecho 
 ## 特性 Feature
 
 ### 基于 Bulma 的外观
-本主题使用基于 Flexbox 的 [Bulma CSS 框架](https://bulma.io/)提供其外观。
+本主题使用基于 Flexbox 的 [Bulma CSS 框架](https://bulma.io/) 提供其外观。
 
 ### 常用 Widget 支持
-本主题中的 Widget 指侧边栏中的各个栏目。支持 Widget 包括：
+本主题中的 Widget 指侧边栏中的各个小部件。支持 Widget 包括：
 - 简介：显示包括头像、昵称、社交网络链接、博客信息等。
 - 归档：按月份列出归档页面链接。
 - 链接：用于放置一些链接。
@@ -44,7 +45,7 @@ A simple, delicate and modern theme | 一个简洁、精致、现代的 Typecho 
 - TOC：显示文章目录（只在文章页面显示）。
 
 ### Widget 自由布局
-本主题为上述各个 Widget 提供独立的开关、顺序和位置的设置项/依靠这些设置项，可以调整站点的总体外观。三个设置项的说明如下：
+侧边栏 Widget 显示哪些、显示的顺序和左右位置均可自由设定，可以据此调整站点的总体外观。各个 Widget 通用的三个设置项说明如下：
 
 - **开关**：通过设定开关以决定 Widget 是否显示。
 - **顺序**：通过顺序数值的大小决定 Widget 排列的顺序。

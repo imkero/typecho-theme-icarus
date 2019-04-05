@@ -27,6 +27,10 @@ class Icarus_Module_Paginator
             ),
             $content
         );
+        if (empty($content))
+        {
+            return;
+        }   
 ?>
 <div class="card card-transparent">
     <nav class="pagination is-centered" role="navigation" aria-label="pagination">

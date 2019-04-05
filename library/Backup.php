@@ -18,6 +18,7 @@ class Icarus_Backup
     public static function save()
     {
         $db = Typecho_Db::get();
+        
         if (self::exist()) {
             $sql = $db->update('table.options')
                 ->where('name = ?', self::THEME_BACKUP_FIELD)
@@ -32,6 +33,7 @@ class Icarus_Backup
                     'user'  =>  0
                 ));
         }
+
         try {
             if ($db->query($sql) != NULL) {
                 return 0;
@@ -46,12 +48,14 @@ class Icarus_Backup
     public static function delete()
     {
         $db = Typecho_Db::get();
+
         if (self::exist()) {
             $sql = $db->delete('table.options')
                 ->where('name = ?', self::THEME_BACKUP_FIELD);
         } else {
             return 1;
         }
+
         try {
             if ($db->query($sql) > 0) {
                 return 0;
@@ -66,6 +70,7 @@ class Icarus_Backup
     public static function restore()
     { 
         $db = Typecho_Db::get();
+        
         if (self::exist()) {
             $sql = $db->update('table.options')
                 ->where('name = ?', 'theme:' . Icarus_Util::$options->theme)
@@ -75,14 +80,12 @@ class Icarus_Backup
         } else {
             return 1;
         }
+
         try {
-            if ($db->query($sql) > 0) {
-                return 0;
-            } else {
-                return 2;
-            }
+            $db->query($sql);
         } catch (Typecho_Db_Query_Exception $exception) {
             return 2;
         }
+        return 0;
     }
 }

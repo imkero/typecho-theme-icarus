@@ -547,15 +547,19 @@ pre>code:hover>.copy {
 }
 
 .article-item.article-item-tiny .title{
-  font-size: 1.75rem !important;
-  margin-top: .75rem;
-  margin-bottom: .75rem;
+  margin-bottom: .5rem;
 }
 
 .article-item.article-item-tiny .article-meta{
-  font-size: .95rem !important;
+  margin-bottom: 0 !important;
 }
 
-.article-item.article-item-tiny .content{
-  display: none;
+@media screen and (min-width: 769px) {
+  .article-item.article-item-tiny .title{
+    font-size: 1.75rem !important;
+  }
+
+  .article-item.article-item-tiny .article-meta{
+    font-size: .95rem !important;
+  }
 }

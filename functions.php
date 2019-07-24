@@ -2,7 +2,7 @@
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 define('__ICARUS_ROOT__', dirname(__FILE__) . '/');
 define('__ICARUS_VERSION__', '1.1.1');
-define('__ICARUS_CFG_VERSION__', '2');
+define('__ICARUS_CFG_VERSION__', '3');
 
 if (isset($this))
 {

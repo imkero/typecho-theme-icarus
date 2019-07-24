@@ -132,43 +132,107 @@ class Icarus_Module_Single
         $isContent = $this->_post->is('single');
         $isPage = $this->_post->is('page');
         $isPost = $this->_post->is('post');
+        
+        if (!$isContent)
+        {
+            $this->doOutputList();
+        }
+        else if ($isPage)
+        {
+            $this->doOutputPage();
+        }
+        else
+        {
+            $this->doOutputPost();
+        }
+    }
+
+    public function doOutputList()
+    {
+        $isContent = $this->_post->is('single');
+        $isPage = $this->_post->is('page');
+        $isPost = $this->_post->is('post');
 ?>
 <div class="card">
-    <?php $this->printThumbnail($isContent); ?>
-    <div class="card-content article <?php echo $isContent ? 'article-single' : 'article-item'; ?> <?php if (!$isContent && !!Icarus_Config::get('post_tiny_item', FALSE)) echo 'article-item-tiny'; ?>">
-        <?php if (!$isPage): ?>
+    <?php $this->printThumbnail(FALSE); ?>
+    <?php if (!!Icarus_Config::get('post_tiny_item', FALSE)): ?>
+    <div class="card-content article article-item article-item-tiny">
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            <a class="has-link-black-ter" href="<?php $this->_post->permalink(); ?>"><?php $this->_post->title(); ?></a>
+        </h1>
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="<?php $this->_post->date('c'); ?>"><?php $this->_post->date(); ?></time>
+                <?php $this->printCategory(); ?>
+            </div>
+            <?php $this->printReadMore(); ?>
+        </div>
+    </div>
+    <?php else: ?>
+    <div class="card-content article article-item">
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
                 <time class="level-item has-text-grey" datetime="<?php $this->_post->date('c'); ?>"><?php $this->_post->date(); ?></time>
                 <?php $this->printCategory(); ?>
             </div>
         </div>
-        <?php endif; ?>
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            <?php if ($isContent): ?>
-                <?php $this->_post->title(); ?>
-            <?php else: ?>
-                <a class="has-link-black-ter" href="<?php $this->_post->permalink(); ?>"><?php $this->_post->title(); ?></a>
-            <?php endif; ?>
+            <a class="has-link-black-ter" href="<?php $this->_post->permalink(); ?>"><?php $this->_post->title(); ?></a>
+        </h1>
+        <div class="content">
+            <?php echo Icarus_Content::getExcerpt($this->_post); ?>
+        </div>
+        <?php $this->printReadMore(); ?>
+    </div>
+    <?php endif; ?>
+</div>
+<?php  
+    }
+
+    public function doOutputPage()
+    {
+?>
+<div class="card">
+    <?php $this->printThumbnail(TRUE); ?>
+    <div class="card-content article article-single">
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            <?php $this->_post->title(); ?>
         </h1>
         <div class="content">
         <?php 
-        if ($isContent) {
             echo Icarus_Content::getContent($this->_post); 
-        } else {
-            if (!Icarus_Config::get('post_tiny_item', FALSE)) {
-                echo Icarus_Content::getExcerpt($this->_post); 
-            }
-        }
+        ?>
+        </div>
+        <?php $this->printTags(); ?>
+    </div>
+</div>
+<?php  
+        Icarus_Module::show('Donate');
+        Icarus_Module::show('Comments', $this->_post);
+    }
+
+    public function doOutputPost()
+    {
+?>
+<div class="card">
+    <?php $this->printThumbnail(TRUE); ?>
+    <div class="card-content article article-single">
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="<?php $this->_post->date('c'); ?>"><?php $this->_post->date(); ?></time>
+                <?php $this->printCategory(); ?>
+            </div>
+        </div>
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            <?php $this->_post->title(); ?>
+        </h1>
+        <div class="content">
+        <?php 
+            echo Icarus_Content::getContent($this->_post); 
         ?>
         </div>
         <?php 
-        if ($isContent) {
             $this->printTags();    
-        } else {
-            $this->printReadMore();
-        }
-        Icarus_Module::show('Share');
         ?>
     </div>
 </div>
@@ -203,8 +267,6 @@ if ($isPost):
 <?php
     endif;
 endif; 
-if ($isContent) {
-    Icarus_Module::show('Comments', $this->_post);
-}
+Icarus_Module::show('Comments', $this->_post);
     }
 }

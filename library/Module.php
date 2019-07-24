@@ -12,7 +12,6 @@ class Icarus_Module
         'RecentPost', 
         'Tag', 
         'Toc', 
-        'Share', 
         'Search', 
         'Comments', 
         'Donate', 

@@ -546,3 +546,16 @@ pre>code:hover>.copy {
   margin: 1rem 0;
 }
 
+.article-item.article-item-tiny .title{
+  font-size: 1.75rem !important;
+  margin-top: .75rem;
+  margin-bottom: .75rem;
+}
+
+.article-item.article-item-tiny .article-meta{
+  font-size: .95rem !important;
+}
+
+.article-item.article-item-tiny .content{
+  display: none;
+}

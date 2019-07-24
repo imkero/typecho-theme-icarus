@@ -169,7 +169,7 @@ return array(
                 'title' => '摘要长度',
                 'desc' => '指定自动生成的摘要部分的最大长度。参数值为 <code>-1</code> 则不限制最大长度。<br />需要设置 <code>摘要保留样式</code> 为 <code>不保留</code>才能生效。<br />原文中已指定摘要部分时本参数将被忽略（即包含 <code>&lt;!--more--&gt;</code> 标签）',
             ),
-            'hide_excerpt' => array(
+            'tiny_item' => array(
                 'title' => '简洁文章条目',
                 'options' => array(
                     '0' => '不启用',

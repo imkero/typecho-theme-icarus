@@ -135,7 +135,7 @@ class Icarus_Module_Single
 ?>
 <div class="card">
     <?php $this->printThumbnail($isContent); ?>
-    <div class="card-content article">
+    <div class="card-content article <?php echo $isContent ? 'article-single' : 'article-item'; ?> <?php if (!$isContent && !!Icarus_Config::get('post_tiny_item', FALSE)) echo 'article-item-tiny'; ?>">
         <?php if (!$isPage): ?>
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
@@ -156,7 +156,7 @@ class Icarus_Module_Single
         if ($isContent) {
             echo Icarus_Content::getContent($this->_post); 
         } else {
-            if (!Icarus_Config::get('post_hide_excerpt', FALSE)) {
+            if (!Icarus_Config::get('post_tiny_item', FALSE)) {
                 echo Icarus_Content::getExcerpt($this->_post); 
             }
         }

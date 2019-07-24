@@ -169,6 +169,14 @@ return array(
                 'title' => '摘要长度',
                 'desc' => '指定自动生成的摘要部分的最大长度。参数值为 <code>-1</code> 则不限制最大长度。<br />需要设置 <code>摘要保留样式</code> 为 <code>不保留</code>才能生效。<br />原文中已指定摘要部分时本参数将被忽略（即包含 <code>&lt;!--more--&gt;</code> 标签）',
             ),
+            'hide_excerpt' => array(
+                'title' => '简洁文章条目',
+                'options' => array(
+                    '0' => '不启用',
+                    '1' => '启用',
+                ),
+                'desc' => '使用简洁风格的文章条目展示（隐藏摘要）。',
+            ),
             'content_extend' => array(
                 'title' => '文章末尾追加内容',
                 'desc' => '在文章末尾追加指定内容。支持以下变量替换 <code>{author}</code> <code>{title}</code> <code>{url}</code> <code>{date}</code>',
@@ -443,6 +451,8 @@ return array(
                 'title' => '公共资源 CDN',
                 'options' => array(
                     'jsdelivr' => 'JsDelivr',
+                    'cdnjs' => 'cdnjs',
+                    'loli' => 'loli.net',
                 ),
             ),
             'public_icon' => array(
@@ -450,18 +460,23 @@ return array(
                 'options' => array(
                     'fontawesome' => 'FontAwesome',
                     'jsdelivr' => 'JsDelivr',
+                    'cdnjs' => 'cdnjs',
+                    'loli' => 'loli.net',
                 ),
             ),
             'public_font' => array(
                 'title' => '公共字体资源 CDN',
                 'options' => array(
                     'google' => 'Google Fonts',
+                    'loli' => 'loli.net',
                 ),
             ),
             'public_gravatar' => array(
                 'title' => '公共 Gravatar CDN',
                 'options' => array(
                     'v2ex' => 'V2EX',
+                    'gravatar' => 'Gravatar',
+                    'loli' => 'loli.net',
                 ),
             ),
         ),

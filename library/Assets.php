@@ -7,18 +7,42 @@ class Icarus_Assets
         'assets' => array(
             'jsdelivr' => array(
                 '_tpl' => 'https://cdn.jsdelivr.net/npm/{package}@{version}/{file}',
-                'highlight.js' => 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@{version}/{file}'
+                '_alias' => array(
+                    'pace' => 'pace-js',
+                    'clipboard.js' => 'clipboard',
+                    'moment.js' => 'moment',
+                    'outdated-browser' => 'outdatedbrowser'
+                ),
+                'highlight.js' => 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@{version}/build/{file}',
+                'lightgallery' => 'https://cdn.jsdelivr.net/npm/{package}@{version}/dist/{file}',
+                'justifiedGallery' => 'https://cdn.jsdelivr.net/npm/{package}@{version}/dist/{file}',
+                'clipboard' => 'https://cdn.jsdelivr.net/npm/{package}@{version}/dist/{file}',
+                'jquery' => 'https://cdn.jsdelivr.net/npm/{package}@{version}/dist/{file}',
+                'mathjax' => 'https://cdn.jsdelivr.net/npm/{package}@{version}/unpacked/{file}',
+                'outdatedbrowser' => 'https://cdn.jsdelivr.net/npm/{package}@{version}/outdatedbrowser/{file}',
+                'moment' => 'https://cdn.jsdelivr.net/npm/{package}@{version}/min/{file}',
+            ),
+            'cdnjs' => array(
+                '_tpl' => 'https://cdnjs.cloudflare.com/ajax/libs/{package}/{version}/{file}',
+            ),
+            'loli' => array(
+                '_tpl' => 'https://cdnjs.loli.net/ajax/libs/{package}/{version}/{file}',
             ),
         ),
         'icon' => array(
             'fontawesome' => 'https://use.fontawesome.com/releases/v5.4.1/css/all.css',
             'jsdelivr' => 'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.4.1/css/all.min.css',
+            'cdnjs' => 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.4.1/css/all.min.css', 
+            'loli' => 'https://cdnjs.loli.net/ajax/libs/font-awesome/5.4.1/css/all.min.css',
         ),
         'font' => array(
             'google' => 'https://fonts.googleapis.com/{type}?family={fontname}',
+            'loli' => 'https://fonts.loli.net/{type}?family={fontname}',
         ),
         'gravatar' => array(
+            'gravatar' => 'https://secure.gravatar.com/avatar',
             'v2ex' => 'https://cdn.v2ex.com/gravatar',
+            'loli' => 'https://gravatar.loli.net/avatar',
         ),
     );
     private static $_assetsCdnUrl = array();
@@ -26,7 +50,7 @@ class Icarus_Assets
     const DEFAULT_ASSETS_CDN = 'jsdelivr';
     const DEFAULT_ICON_CDN = 'fontawesome';
     const DEFAULT_FONT_CDN = 'google';
-    const DEFAULT_GRAVATAR_CDN = 'v2ex';
+    const DEFAULT_GRAVATAR_CDN = 'gravatar';
 
     public static function config($form)
     {
@@ -119,6 +143,12 @@ class Icarus_Assets
 
     public static function getCdnUrl($name, $version, $file)
     {
+        if (array_key_exists('_alias', self::$_assetsCdnUrl)) {
+            $alias = self::$_assetsCdnUrl['_alias'];
+            if (array_key_exists($name, $alias)) {
+                $name = $alias[$name];
+            }
+        }
         if (array_key_exists($name, self::$_assetsCdnUrl)) {
             $cdnUrl = self::$_assetsCdnUrl[$name];
         } else if (array_key_exists('_tpl', self::$_assetsCdnUrl)) {

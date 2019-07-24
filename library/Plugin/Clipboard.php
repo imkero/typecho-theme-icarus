@@ -9,7 +9,7 @@ class Icarus_Plugin_Clipboard
 
     public static function footer()
     {
-        Icarus_Assets::cdn('js+defer', 'clipboard', '2.0.4', 'dist/clipboard.min.js');
+        Icarus_Assets::cdn('js+defer', 'clipboard.js', '2.0.4', 'clipboard.min.js');
         Icarus_Assets::printThemeJs('clipboard.js', TRUE);
     }
 }

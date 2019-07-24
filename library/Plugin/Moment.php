@@ -9,6 +9,6 @@ class Icarus_Plugin_Moment
 
     public static function footer()
     {
-        Icarus_Assets::cdn('js+defer', 'moment', '2.22.2', 'min/moment-with-locales.min.js');
+        Icarus_Assets::cdn('js+defer', 'moment.js', '2.22.2', 'moment-with-locales.min.js');
     }
 }

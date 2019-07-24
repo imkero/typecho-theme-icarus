@@ -9,12 +9,12 @@ class Icarus_Plugin_OutdatedBrowser
 
     public static function header()
     {
-        Icarus_Assets::cdn('css', 'outdatedbrowser', '1.1.5', 'outdatedbrowser/outdatedbrowser.min.css');
+        Icarus_Assets::cdn('css', 'outdated-browser', '1.1.5', 'outdatedbrowser.min.css');
     }
 
     public static function footer()
     {
-        Icarus_Assets::cdn('js+defer', 'outdatedbrowser', '1.1.5', 'outdatedbrowser/outdatedbrowser.min.js');
+        Icarus_Assets::cdn('js+defer', 'outdated-browser', '1.1.5', 'outdatedbrowser.min.js');
 ?>
 <div id="outdated"></div>
 <script>

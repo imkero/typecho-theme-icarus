@@ -156,7 +156,9 @@ class Icarus_Module_Single
         if ($isContent) {
             echo Icarus_Content::getContent($this->_post); 
         } else {
-            echo Icarus_Content::getExcerpt($this->_post); 
+            if (!Icarus_Config::get('post_hide_excerpt', FALSE)) {
+                echo Icarus_Content::getExcerpt($this->_post); 
+            }
         }
         ?>
         </div>

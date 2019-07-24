@@ -14,6 +14,7 @@ class Icarus_Content
         $form->packTitle('Post');
         $form->packRadio('Post/excerpt_preserve_tags', array('0', '1'), '0');
         $form->packInput('Post/excerpt_length', '100', 'w-20');
+        $form->packRadio('Post/hide_excerpt', array('0', '1'), '0');
         $form->packTextarea('Post/content_extend', '');
     }
 

@@ -7,7 +7,7 @@ class Icarus_Module_Paginator
         ob_start();
         $widget->pageNav('&laquo;', '&raquo;', 3, '...', array(
             'wrapTag' => 'ul',
-            'wrapClass' => 'pagination-list is-hidden-mobile',
+            'wrapClass' => 'pagination-list',
             'currentClass' => 'is-current',
             'prevClass' => '',
             'nextClass' => ''

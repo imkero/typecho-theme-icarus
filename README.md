@@ -76,7 +76,18 @@ A simple, delicate and modern theme | 一个简洁、精致、现代的 Typecho 
 提供了主题设置的备份功能，避免切换主题导致的设置项丢失。
 
 ### 可选的主题资源 CDN
-暂只提供了 JsDelivr CDN 支持。将来会追加其他 CDN 选项。
+主题提供以下可选公共 CDN
+#### 前端公共库
+- [JsDelivr](https://www.jsdelivr.com/)
+- [cdnjs](https://cdnjs.com/)
+- [cdnjs.loli.net](https://css.loli.net/)
+#### 字体
+- [Google Fonts](https://fonts.google.com/)
+- [fonts.loli.net](https://css.loli.net/)
+#### Gravatar
+- [Gravatar](https://en.gravatar.com/)
+- [V2EX Gravatar CDN](https://cdn.v2ex.com/)
+- [gravatar.loli.net](https://css.loli.net/)
 
 ### 页头 / 页脚 / 导航栏 / 评论区自定义
 - 自定义第三方评论系统支持（需要自行填入第三方评论系统的调用代码）。

@@ -1,5 +1,5 @@
 <p align="center">
-<img height="48" src="https://ppoffice.github.io/hexo-theme-icarus/images/logo.svg">
+<img height="48" src="https://raw.githubusercontent.com/keroliang/typecho-theme-icarus/master/assets/img/logo.svg">
 <br> 
 A simple, delicate and modern theme | 一个简洁、精致、现代的 Typecho 主题
 <br>
@@ -10,7 +10,6 @@ A simple, delicate and modern theme | 一个简洁、精致、现代的 Typecho 
 
 ![Icarus Preview](https://user-images.githubusercontent.com/32296555/55554465-6ca20d00-5715-11e9-852d-3072f1571854.png)
 
-- Typecho Demo: [KeNorizon's Blog](https://blog.kenorizon.cn/)
 - Hexo Demo (Original Theme): [hexo-theme-icarus](https://blog.zhangruipeng.me/hexo-theme-icarus/)
 - [图片预览](https://github.com/KeNorizon/typecho-theme-icarus/wiki/%E5%9B%BE%E7%89%87%E9%A2%84%E8%A7%88)
 
